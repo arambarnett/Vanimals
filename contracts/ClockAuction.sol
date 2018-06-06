@@ -1,7 +1,7 @@
 pragma solidity ^0.4.11;
 
-import "./Pausable";
-import "./ClockAuctionBase";
+import './Pausable.sol';
+import './ClockAuctionBase.sol';
 
 /// @title Clock auction for non-fungible tokens.
 /// @notice We omit a fallback function to prevent accidental sends to this contract.

@@ -1,6 +1,6 @@
 pragma solidity ^0.4.11;
 
-import "./KittyAuction.sol";
+import './KittyAuction.sol';
 
 /// @title all functions related to creating kittens
 contract KittyMinting is KittyAuction {

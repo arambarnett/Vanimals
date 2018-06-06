@@ -1,6 +1,6 @@
 pragma solidity ^0.4.11;
 
-import "./KittyMinting.sol";
+import './KittyMinting.sol';
 
 /// @title CryptoKitties: Collectible, breedable, and oh-so-adorable cats on the Ethereum blockchain.
 /// @author Axiom Zen (https://www.axiomzen.co)

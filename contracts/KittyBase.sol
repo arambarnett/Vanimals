@@ -1,6 +1,8 @@
 pragma solidity ^0.4.11;
 
 import './KittyAccessControl.sol';
+import './SaleClockAuction.sol';
+import './SiringClockAuction.sol';
 
 
 /// @title Base contract for CryptoKitties. Holds all common structs, events and base variables.

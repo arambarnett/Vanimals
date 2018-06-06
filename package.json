@@ -1,0 +1,24 @@
+{
+  "name": "vanimals",
+  "version": "1.0.0",
+  "description": "Vanimals - Digital Companions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "scripts/compile.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arambarnett/Vanimals.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arambarnett/Vanimals/issues"
+  },
+  "homepage": "https://github.com/arambarnett/Vanimals#readme",
+  "dependencies": {
+    "ethers": "3.0.19",
+    "solc": "0.4.24"
+  }
+}
