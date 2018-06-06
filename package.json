@@ -4,8 +4,8 @@
   "description": "Vanimals - Digital Companions",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "scripts/compile.js"
+    "compile": "scripts/compile.js",
+    "deploy": "scripts/deploy.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,10 @@
   },
   "homepage": "https://github.com/arambarnett/Vanimals#readme",
   "dependencies": {
+    "command-line-args": "5.0.2",
+    "dotenv": "6.0.0",
     "ethers": "3.0.19",
+    "prompt-async": "0.9.9",
     "solc": "0.4.24"
   }
 }
