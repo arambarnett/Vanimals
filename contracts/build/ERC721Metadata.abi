@@ -1,0 +1,1 @@
+[{"constant":true,"inputs":[{"name":"_tokenId","type":"uint256"},{"name":"","type":"string"}],"name":"getMetadata","outputs":[{"name":"buffer","type":"bytes32[4]"},{"name":"count","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}]
