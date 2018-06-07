@@ -20,7 +20,7 @@ const schema = [
 		type: String,
 		defaultValue: 'contracts/build/KittyCore.bytecode'
 	},
-	{ name: 'gasLimit', alias: 'l', type: Number, defaultValue: 4000000 },
+	{ name: 'gasLimit', alias: 'l', type: Number, defaultValue: 5000000 },
 	{ name: 'gasPrice', alias: 'p', type: Number, defaultValue: 1000000000 }
 ];
 
@@ -37,7 +37,7 @@ Object.assign(transaction, { gasPrice: args.gasPrice, gasLimit: args.gasLimit })
 
 console.log(
 	`Deploying this contract could cost up to ${ethers.utils.formatEther(
-		transaction.gasLimit * transaction.gasPrice
+		ethers.utils.bigNumberify(transaction.gasLimit).mul(transaction.gasPrice)
 	)} ETH.\nAre you sure you want to proceed?\nType 'yes' to continue\n`
 );
 

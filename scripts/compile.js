@@ -22,7 +22,7 @@ function findImports(path) {
 const contract = fs.readFileSync(args.contract).toString();
 const input = { 'contract.sol': contract };
 
-const output = solc.compile({ sources: input }, 0, findImports);
+const output = solc.compile({ sources: input }, 1, findImports);
 
 console.log(JSON.stringify(output.errors, null, 2));
 
