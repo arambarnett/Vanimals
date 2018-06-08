@@ -1,0 +1,6 @@
+package.json
+package-lock.json
+scripts/prime.js
+build/
+node_modules/
+website/

@@ -1,29 +1,33 @@
 {
-  "name": "vanimals",
-  "version": "1.0.0",
-  "description": "Vanimals - Digital Companions",
-  "main": "index.js",
-  "scripts": {
-    "compile": "./node_modules/truffle/build/cli.bundled.js compile",
-    "migrate": "./node_modules/truffle/build/cli.bundled.js migrate",
-    "develop": "./node_modules/truffle/build/cli.bundled.js develop"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/arambarnett/Vanimals.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/arambarnett/Vanimals/issues"
-  },
-  "homepage": "https://github.com/arambarnett/Vanimals#readme",
-  "dependencies": {
-    "command-line-args": "5.0.2",
-    "dotenv": "6.0.0",
-    "ethers": "3.0.19",
-    "prompt-async": "0.9.9",
-    "solc": "0.4.24",
-    "truffle": "4.1.11"
-  }
+	"name": "vanimals",
+	"version": "1.0.0",
+	"description": "Vanimals - Digital Companions",
+	"main": "index.js",
+	"engines": {
+		"node": "9.4.0",
+		"npm": "5.6.0"
+	},
+	"scripts": {
+		"compile": "./node_modules/truffle/build/cli.bundled.js compile",
+		"migrate": "./node_modules/truffle/build/cli.bundled.js migrate",
+		"develop": "./node_modules/truffle/build/cli.bundled.js develop",
+		"truffle": "./node_modules/truffle/build/cli.bundled.js",
+		"format": "node_modules/prettier/bin-prettier.js --write \"**/*.js\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/arambarnett/Vanimals.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/arambarnett/Vanimals/issues"
+	},
+	"homepage": "https://github.com/arambarnett/Vanimals#readme",
+	"dependencies": {
+		"dotenv": "6.0.0",
+		"prettier": "1.13.4",
+		"truffle": "4.1.11",
+		"truffle-hdwallet-provider": "0.0.5"
+	}
 }
