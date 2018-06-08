@@ -4,8 +4,9 @@
   "description": "Vanimals - Digital Companions",
   "main": "index.js",
   "scripts": {
-    "compile": "scripts/compile.js",
-    "deploy": "scripts/deploy.js"
+    "compile": "./node_modules/truffle/build/cli.bundled.js compile",
+    "migrate": "./node_modules/truffle/build/cli.bundled.js migrate",
+    "develop": "./node_modules/truffle/build/cli.bundled.js develop"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
     "dotenv": "6.0.0",
     "ethers": "3.0.19",
     "prompt-async": "0.9.9",
-    "solc": "0.4.24"
+    "solc": "0.4.24",
+    "truffle": "4.1.11"
   }
 }
