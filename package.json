@@ -9,6 +9,7 @@
 	},
 	"scripts": {
 		"compile": "./node_modules/truffle/build/cli.bundled.js compile",
+		"test": "./node_modules/truffle/build/cli.bundled.js test",
 		"migrate": "./node_modules/truffle/build/cli.bundled.js migrate",
 		"develop": "./node_modules/truffle/build/cli.bundled.js develop",
 		"truffle": "./node_modules/truffle/build/cli.bundled.js",
