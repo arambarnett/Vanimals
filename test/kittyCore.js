@@ -1,4 +1,6 @@
 const KittyCore = artifacts.require('KittyCore');
+const SiringAuction = artifacts.require('./SiringClockAuction');
+const SaleAuction = artifacts.require('./SaleClockAuction');
 
 contract('KittyCore', async accounts => {
 	it('should start with correct ceoAddress', async () => {
@@ -117,7 +119,7 @@ contract('KittyCore', async accounts => {
 		const instance = await KittyCore.deployed();
 		const response = await instance.saleAuction();
 
-		assert.equal(response, '0x0000000000000000000000000000000000000000');
+		assert.equal(response, SaleAuction.address);
 	});
 
 	it('should start with correct secondsPerBlock', async () => {
@@ -131,7 +133,7 @@ contract('KittyCore', async accounts => {
 		const instance = await KittyCore.deployed();
 		const response = await instance.siringAuction();
 
-		assert.equal(response, '0x0000000000000000000000000000000000000000');
+		assert.equal(response, SiringAuction.address);
 	});
 
 	it('should start with correct symbol', async () => {
