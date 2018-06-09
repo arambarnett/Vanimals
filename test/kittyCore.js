@@ -24,7 +24,7 @@ contract('KittyCore', async accounts => {
 		const instance = await KittyCore.deployed();
 		const response = await instance.cfoAddress();
 
-		assert.equal(response, '0x0000000000000000000000000000000000000000');
+		assert.equal(response, accounts[0]);
 	});
 
 	it('should start with correct autoBirthFee', async () => {
@@ -273,7 +273,7 @@ contract('KittyCore', async accounts => {
 	it('should createGen0Auction correctly', async () => {
 		const instance = await KittyCore.deployed();
 
-		await instance.createGen0Auction(1)
+		await instance.createGen0Auction(1);
 		await instance.createGen0Auction(1);
 	});
 
@@ -322,7 +322,7 @@ contract('KittyCore', async accounts => {
 	it('should bid correctly', async () => {
 		const instance = await SaleAuction.deployed();
 		await instance.bid(1, { from: accounts[1], value: ethUnit.toWei(10, 'finney') });
-		await instance.bid(2, { from: accounts[1], value: ethUnit.toWei(10, 'finney') }); 
+		await instance.bid(2, { from: accounts[1], value: ethUnit.toWei(10, 'finney') });
 	});
 
 	it('should gen0SaleCount correctly', async () => {
@@ -395,5 +395,39 @@ contract('KittyCore', async accounts => {
 		const response = await instance.tokensOfOwner(accounts[1]);
 
 		assert.equal(response.length, 3);
+	});
+
+	it('should transfer correctly', async () => {
+		const instance = await KittyCore.deployed();
+		await instance.transfer(accounts[2], 1, { from: accounts[1] });
+
+		const response = await instance.ownerOf(1);
+
+		assert.equal(response, accounts[2]);
+	});
+
+	it('should createSaleAuction correctly', async () => {
+		const instance = await KittyCore.deployed();
+		const saleContract = await SaleAuction.deployed();
+
+		const price = ethUnit.toWei(1, 'ether').toString();
+		await instance.createSaleAuction(2, price, price, 60, { from: accounts[1] });
+		await saleContract.bid(2, { from: accounts[2], value: ethUnit.toWei(1, 'ether') });
+
+		const response = await instance.ownerOf(2);
+
+		assert.equal(response, accounts[2]);
+	});
+
+	it('should withdrawBalance correctly', async () => {
+		const instance = await KittyCore.deployed();
+		const saleContract = await SaleAuction.deployed();
+		await saleContract.withdrawBalance();
+		await instance.withdrawBalance();
+	});
+
+	it('should createPromoKitty correctly', async () => {
+		const instance = await KittyCore.deployed();
+		await instance.createPromoKitty(12, accounts[4]);
 	});
 });

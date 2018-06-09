@@ -6,6 +6,7 @@ const KittyCore = artifacts.require('./KittyCore');
 module.exports = async (deployer, network, accounts) => {
 	const instance = await KittyCore.deployed();
 
+	await instance.setCFO(accounts[0]);
 	await instance.setSaleAuctionAddress(SaleAuction.address);
 	await instance.setSiringAuctionAddress(SiringAuction.address);
 	await instance.setGeneScienceAddress(GeneScience.address);
