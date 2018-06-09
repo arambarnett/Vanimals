@@ -11,7 +11,7 @@
 		"compile": "./node_modules/truffle/build/cli.bundled.js compile",
 		"test": "./node_modules/truffle/build/cli.bundled.js test",
 		"migrate": "./node_modules/truffle/build/cli.bundled.js migrate",
-		"develop": "./node_modules/truffle/build/cli.bundled.js develop",
+		"develop": "scripts/develop.sh",
 		"truffle": "./node_modules/truffle/build/cli.bundled.js",
 		"format": "node_modules/prettier/bin-prettier.js --write \"**/*.js\""
 	},
@@ -27,6 +27,8 @@
 	"homepage": "https://github.com/arambarnett/Vanimals#readme",
 	"dependencies": {
 		"dotenv": "6.0.0",
+		"ethjs-unit": "0.1.6",
+		"nodemon": "1.17.5",
 		"prettier": "1.13.4",
 		"truffle": "4.1.11",
 		"truffle-hdwallet-provider": "0.0.5"

@@ -1,6 +1,9 @@
 const KittyCore = artifacts.require('KittyCore');
 const SiringAuction = artifacts.require('./SiringClockAuction');
 const SaleAuction = artifacts.require('./SaleClockAuction');
+const GeneScience = artifacts.require('./GeneScience');
+
+const ethUnit = require('ethjs-unit');
 
 contract('KittyCore', async accounts => {
 	it('should start with correct ceoAddress', async () => {
@@ -28,7 +31,7 @@ contract('KittyCore', async accounts => {
 		const instance = await KittyCore.deployed();
 		const response = await instance.autoBirthFee();
 
-		assert.equal(response.valueOf(), 2000000000000000); // 2 Finney
+		assert.equal(response.valueOf(), ethUnit.toWei(2, 'finney'));
 	});
 
 	it('should start with correct erc721Metadata', async () => {
@@ -56,7 +59,7 @@ contract('KittyCore', async accounts => {
 		const instance = await KittyCore.deployed();
 		const response = await instance.GEN0_STARTING_PRICE();
 
-		assert.equal(response.valueOf(), 10000000000000000); // 10 Finney
+		assert.equal(response.valueOf(), ethUnit.toWei(10, 'finney'));
 	});
 
 	it('should start with correct gen0CreatedCount', async () => {
@@ -70,7 +73,7 @@ contract('KittyCore', async accounts => {
 		const instance = await KittyCore.deployed();
 		const response = await instance.geneScience();
 
-		assert.equal(response, '0x0000000000000000000000000000000000000000');
+		assert.equal(response, GeneScience.address);
 	});
 
 	it('should start with correct name', async () => {
@@ -197,23 +200,21 @@ contract('KittyCore', async accounts => {
 		assert.equal(response, accounts[0]);
 	});
 
-	/*
 	it('should setGeneScienceAddress correctly', async () => {
 		const instance = await KittyCore.deployed();
-		await instance.setGeneScienceAddress();
+		await instance.setGeneScienceAddress(GeneScience.address);
 		let response = await instance.geneScience();
 
-		assert.equal(response, false);
+		assert.equal(response, GeneScience.address);
 	});
 
 	it('should setMetadataAddress correctly', async () => {
 		const instance = await KittyCore.deployed();
-		await instance.setMetadataAddress();
+		await instance.setMetadataAddress('0x0000000000000000000000000000000000000001');
 		let response = await instance.erc721Metadata();
 
-		assert.equal(response, false);
+		assert.equal(response, '0x0000000000000000000000000000000000000001');
 	});
-	*/
 
 	it('should setNewAddress correctly', async () => {
 		const instance = await KittyCore.deployed();
@@ -228,15 +229,13 @@ contract('KittyCore', async accounts => {
 		assert.equal(response, '0x0000000000000000000000000000000000000000');
 	});
 
-	/*
 	it('should setSaleAuctionAddress correctly', async () => {
 		const instance = await KittyCore.deployed();
-		await instance.setSaleAuctionAddress();
+		await instance.setSaleAuctionAddress(SaleAuction.address);
 		let response = await instance.saleAuction();
 
-		assert.equal(response, false);
+		assert.equal(response, SaleAuction.address);
 	});
-	*/
 
 	it('should setSecondsPerBlock correctly', async () => {
 		const instance = await KittyCore.deployed();
@@ -246,13 +245,12 @@ contract('KittyCore', async accounts => {
 		assert.equal(response.valueOf(), 10);
 	});
 
-	/*
 	it('should setSiringAuctionAddress correctly', async () => {
 		const instance = await KittyCore.deployed();
-		await instance.setSiringAuctionAddress();
+		await instance.setSiringAuctionAddress(SiringAuction.address);
 		let response = await instance.siringAuction();
 
-		assert.equal(response, false);
+		assert.equal(response, SiringAuction.address);
 	});
 
 	it('should unpause correctly', async () => {
@@ -269,6 +267,133 @@ contract('KittyCore', async accounts => {
 		let response = await instance.paused();
 
 		assert.equal(response, true);
+		await instance.unpause();
 	});
-	*/
+
+	it('should createGen0Auction correctly', async () => {
+		const instance = await KittyCore.deployed();
+
+		await instance.createGen0Auction(1)
+		await instance.createGen0Auction(1);
+	});
+
+	it('should totalSupply correctly', async () => {
+		const instance = await KittyCore.deployed();
+		const response = await instance.totalSupply();
+
+		assert.equal(response.valueOf(), 2);
+	});
+
+	it('should getKitty correctly', async () => {
+		const instance = await KittyCore.deployed();
+		let response = await instance.getKitty(1);
+
+		assert.equal(!!response, true);
+	});
+
+	it('should getKitty correctly', async () => {
+		const instance = await KittyCore.deployed();
+		let response = await instance.getKitty(1);
+
+		assert.equal(!!response, true);
+	});
+
+	it('should start with correct isSaleClockAuction', async () => {
+		const instance = await SaleAuction.deployed();
+		const response = await instance.isSaleClockAuction();
+
+		assert.equal(response, true);
+	});
+
+	it('should start with correct paused', async () => {
+		const instance = await SaleAuction.deployed();
+		const response = await instance.paused();
+
+		assert.equal(response, false);
+	});
+
+	it('should start with correct getAuction', async () => {
+		const instance = await SaleAuction.deployed();
+		const response = await instance.getAuction(1);
+
+		assert.equal(!!response, true);
+	});
+
+	it('should bid correctly', async () => {
+		const instance = await SaleAuction.deployed();
+		await instance.bid(1, { from: accounts[1], value: ethUnit.toWei(10, 'finney') });
+		await instance.bid(2, { from: accounts[1], value: ethUnit.toWei(10, 'finney') }); 
+	});
+
+	it('should gen0SaleCount correctly', async () => {
+		const instance = await SaleAuction.deployed();
+		const response = await instance.gen0SaleCount();
+
+		assert.equal(response.valueOf(), 2);
+	});
+
+	it('should ownerOf correctly', async () => {
+		const instance = await KittyCore.deployed();
+		const response = await instance.ownerOf(1);
+		const response2 = await instance.ownerOf(2);
+
+		assert.equal(response, accounts[1]);
+		assert.equal(response2, accounts[1]);
+	});
+
+	it('should tokensOfOwner correctly', async () => {
+		const instance = await KittyCore.deployed();
+		const response = await instance.tokensOfOwner(accounts[1]);
+
+		assert.equal(response.length, 2);
+	});
+
+	it('should isReadyToBreed correctly', async () => {
+		const instance = await KittyCore.deployed();
+		const response = await instance.isReadyToBreed(1);
+
+		assert.equal(response, true);
+	});
+
+	it('should canBreedWith correctly', async () => {
+		const instance = await KittyCore.deployed();
+		const response = await instance.canBreedWith(1, 2);
+
+		assert.equal(response, true);
+	});
+
+	it('should breedWithAuto correctly', async () => {
+		const instance = await KittyCore.deployed();
+		await instance.breedWithAuto(1, 2, { from: accounts[1], value: ethUnit.toWei(2, 'finney') });
+	});
+
+	it('should isPregnant correctly', async () => {
+		const instance = await KittyCore.deployed();
+		const response = await instance.isPregnant(1);
+
+		assert.equal(response, true);
+	});
+
+	it('should pregnantKitties correctly', async () => {
+		const instance = await KittyCore.deployed();
+		const response = await instance.pregnantKitties();
+
+		assert.equal(response.valueOf(), 1);
+	});
+
+	it('should giveBirth correctly', async () => {
+		const instance = await KittyCore.deployed();
+
+		const array = new Array(5);
+
+		for (let i of array) {
+			await instance.createGen0Auction(1);
+		}
+
+		await instance.giveBirth(1, { from: accounts[1] });
+
+		const response = await instance.tokensOfOwner(accounts[1]);
+
+		assert.equal(response.length, 3);
+	});
 });
