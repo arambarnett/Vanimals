@@ -3,16 +3,16 @@
 	"version": "1.0.0",
 	"description": "Vanimals - Digital Companions",
 	"main": "index.js",
-	"engines": {
-		"node": "9.4.0",
-		"npm": "5.6.0"
-	},
 	"scripts": {
+		"dev": "next",
+		"build": "next build",
+		"start": "next start",
 		"compile": "./node_modules/truffle/build/cli.bundled.js compile",
 		"test": "./node_modules/truffle/build/cli.bundled.js test",
 		"migrate": "./node_modules/truffle/build/cli.bundled.js migrate",
 		"develop": "scripts/develop.sh",
 		"truffle": "./node_modules/truffle/build/cli.bundled.js",
+		"server": "node server.js",
 		"format": "node_modules/prettier/bin-prettier.js --write \"**/*.js\""
 	},
 	"repository": {
@@ -26,11 +26,22 @@
 	},
 	"homepage": "https://github.com/arambarnett/Vanimals#readme",
 	"dependencies": {
+		"body-parser": "1.18.3",
+		"classes": "0.3.0",
+		"compression": "1.7.2",
+		"concurrently": "3.5.1",
+		"deepmerge": "2.1.1",
 		"dotenv": "6.0.0",
 		"ethjs-unit": "0.1.6",
+		"express": "4.16.3",
+		"next": "6.0.3",
 		"nodemon": "1.17.5",
 		"prettier": "1.13.4",
+		"react": "16.4.0",
+		"react-dom": "16.4.0",
 		"truffle": "4.1.11",
-		"truffle-hdwallet-provider": "0.0.5"
+		"truffle-contract": "3.0.5",
+		"truffle-hdwallet-provider": "0.0.5",
+		"truffle-provider": "0.0.4"
 	}
 }

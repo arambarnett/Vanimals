@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const HDWalletProvider = require('truffle-hdwallet-provider');
+const ethUnit = require('ethjs-unit');
 
 module.exports = {
 	networks: {
@@ -8,7 +9,7 @@ module.exports = {
 			host: '127.0.0.1',
 			port: 9545,
 			network_id: '*',
-			gasPrice: 100000000 // .1 Gwei
+			gasPrice: ethUnit.toWei(.1, 'gwei')
 		},
 		rinkeby: {
 			provider: function() {
@@ -18,7 +19,7 @@ module.exports = {
 				);
 			},
 			network_id: '*',
-			gasPrice: 100000000 // .1 Gwei
+			gasPrice: ethUnit.toWei(.1, 'gwei')
 		}
 	}
 };
