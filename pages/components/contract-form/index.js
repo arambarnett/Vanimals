@@ -26,7 +26,12 @@ export default class ContractForm extends BaseComponent {
 					style={{
 						fontWeight: 'bold',
 						display: 'inline-block',
-						color: method.constant ? 'blue' : 'red'
+						background: method.constant ? 'blue' : 'red',
+						height: '36px',
+						borderRadius: '7px',
+						color: 'white',
+						border: 'none',
+						padding: '8px 12px'
 					}}
 				>
 					{method.name}
@@ -54,14 +59,20 @@ export default class ContractForm extends BaseComponent {
 				onChange={this.handleOnChange.bind(this, method, input)}
 				value={this.state[`${method.name}-${input.name}`]}
 				placeholder={`${input.name} ${input.type}`}
-				style={{ display: 'inline-block', marginLeft: '12px' }}
+				style={{
+					display: 'inline-block',
+					marginLeft: '12px',
+					background: 'rgba(0, 0, 0, .1)',
+					borderRadius: '7px',
+					height: '36px',
+					padding: '0 12px',
+					border: 'none'
+				}}
 			/>
 		);
 	}
 
 	handleOnChange(method, input, evt) {
-		const c = this.state[contract];
-
 		return this.setState({
 			[`${method.name}-${input.name}`]: evt.target.value
 		});
