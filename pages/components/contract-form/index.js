@@ -31,7 +31,8 @@ export default class ContractForm extends BaseComponent {
 						borderRadius: '7px',
 						color: 'white',
 						border: 'none',
-						padding: '8px 12px'
+						padding: '8px 12px',
+						cursor: 'pointer',
 					}}
 				>
 					{method.name}
