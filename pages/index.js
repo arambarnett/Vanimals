@@ -1,20 +1,23 @@
 import react from 'react';
-import BasePage from './base/page';
+import BasePage from './lib/BasePage';
 
 import api from './utilities/api';
+import KittyCoreContract from './contracts/KittyCore';
+import SaleAuctionContract from './contracts/SaleAuction';
+import SiringAuctionContract from './contracts/SiringAuction';
+
+import ContractForm from './components/contract-form';
 
 export default class IndexPage extends BasePage {
-	state = {
-		kittyCore: {},
-		saleAuction: {},
-		siringAuction: {}
-	};
-
 	static async getInitialProps() {
-		const kittyCoreResponse = await api.fetchKittyCoreContract();
+		const kittyCoreResponse = await KittyCoreContract.fetchContract();
+		const saleAuctionResponse = await SaleAuctionContract.fetchContract();
+		const siringAuctionResponse = await SiringAuctionContract.fetchContract();
 
 		return {
 			kittyCore: kittyCoreResponse.data,
+			saleAuction: saleAuctionResponse.data,
+			siringAuction: siringAuctionResponse.data
 		};
 	}
 
@@ -25,74 +28,10 @@ export default class IndexPage extends BasePage {
 
 		return (
 			<div>
-				Kitty Core: {this.props.kittyCore.address}
-				{this.props.kittyCore.abi
-					.filter(e => e.constant)
-					.map(this.renderCall.bind(this, 'kittyCore'))}
+				<ContractForm contract={this.props.kittyCore} Contract={KittyCoreContract} />
+				<ContractForm contract={this.props.saleAuction} Contract={SaleAuctionContract} />
+				<ContractForm contract={this.props.siringAuction} Contract={SiringAuctionContract} />
 			</div>
 		);
-	}
-
-	renderCall(contract, method, index) {
-		return (
-			<div style={{ margin: '12px 0' }} key={`call-${contract}${index}`}>
-				<button
-					onClick={this.handleOnClick.bind(this, contract, method)}
-					style={{ fontWeight: 'bold', display: 'inline-block' }}
-				>
-					{method.name}
-				</button>
-				{method.inputs.map(this.renderInput.bind(this, contract, method))}
-				{this.renderValue(contract, method)}
-			</div>
-		);
-	}
-
-	renderValue(contract, method) {
-		const value = this.state[contract][`${method.name}-value`];
-
-		if (!value) {
-			return;
-		}
-
-		return (
-			<div style={{ marginTop: '12px' }}>
-				{JSON.stringify(value, null, 2)}
-			</div>
-		);
-	}
-
-	renderInput(contract, method, input, index) {
-		return (
-			<input
-				key={`input-${contract}${index}`}
-				onChange={this.handleOnChange.bind(this, contract, method, input)}
-				value={this.state[contract][`${method.name}-${input.name}`]}
-				placeholder={input.name}
-				style={{ display: 'inline-block', marginLeft: '12px' }}
-			/>
-		);
-	}
-
-	handleOnChange(contract, method, input, evt) {
-		const c = this.state[contract];
-
-		return this.setState({
-			[contract]: Object.assign({}, c, { [`${method.name}-${input.name}`]: evt.target.value })
-		});
-	}
-
-	async handleOnClick(contract, method) {
-		const payload = {};
-		const inputs = method.inputs.forEach(each => {
-			payload[each.name] = this.state[contract][`${method.name}-${each.name}`];
-		});
-
-		const response = await api.fetchKittyCoreCall(method, payload);
-
-		const c = this.state[contract];
-		return this.setState({
-			[contract]: Object.assign({}, c, { [`${method.name}-value`]: response.data })
-		});
 	}
 }

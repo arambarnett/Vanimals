@@ -1,5 +1,5 @@
-const axios = require('axios');
-const qs = require('qs');
+import axios from 'axios';
+import qs from 'qs';
 
 class Api {
 	constructor(config) {
@@ -13,25 +13,13 @@ class Api {
 		);
 	}
 
-	get Client() {
-		return this.client;
+	async fetchContract(route, params) {
+		return this.client.get(`/contracts/${route}`, { params });
 	}
 
-	async fetchKittyCoreContract(params) {
-		return this.client.get(`/contracts/kitty-core`, { params });
-	}
-
-	async fetchKittyCoreSaleAuctionContract(params) {
-		return this.client.get(`/contracts/kitty-core/sale-auction`, { params });
-	}
-
-	async fetchKittyCoreSiringAuctionContract(params) {
-		return this.client.get(`/contracts/kitty-core/siring-auction`, { params });
-	}
-
-	async fetchKittyCoreCall(method, payload, params) {
+	async callContract(route, method, payload, params) {
 		const payloadString = `?${qs.stringify(payload)}`;
-		return this.client.get(`/contracts/kitty-core/${method.name}${Object.keys(payload).length ? payloadString : ''}`, { params });
+		return this.client.get(`/contracts/${route}/${method.name}${Object.keys(payload).length ? payloadString : ''}`, { params });
 	}
 }
 
