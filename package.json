@@ -24,6 +24,7 @@
 	},
 	"homepage": "https://github.com/arambarnett/Vanimals#readme",
 	"dependencies": {
+		"@material-ui/core": "1.2.1",
 		"axios": "0.18.0",
 		"body-parser": "1.18.3",
 		"compression": "1.7.2",

@@ -1,8 +1,11 @@
 import react from 'react';
 import BaseComponent from '../../lib/BaseComponent';
+import Grid from '@material-ui/core/Grid';
 
 export default class ContractForm extends BaseComponent {
-	state = {};
+	state = {
+		log: ''
+	};
 
 	render() {
 		if (!this.props.contract) {
@@ -10,15 +13,21 @@ export default class ContractForm extends BaseComponent {
 		}
 
 		return (
-			<div>
-				{this.props.Contract.objectName}: {this.props.contract.address}
-				{this.props.contract.abi.filter(e => e.constant).map(this.renderCall.bind(this))}
-				{this.props.contract.abi.filter(e => !e.constant).map(this.renderCall.bind(this))}
-			</div>
+			<Grid container spacing={0}>
+				<Grid item xs={12}>
+					{this.props.Contract.objectName}: {this.props.contract.address}
+					{this.props.contract.abi.filter(e => e.constant).map(this.renderCall.bind(this))}
+					{this.props.contract.abi.filter(e => !e.constant).map(this.renderCall.bind(this))}
+				</Grid>
+			</Grid>
 		);
 	}
 
 	renderCall(method, index) {
+		if (method.type === 'fallback' || method.type === 'constructor') {
+			return;
+		}
+
 		return (
 			<div style={{ margin: '12px 0' }} key={`call-${index}`}>
 				<button
@@ -32,25 +41,14 @@ export default class ContractForm extends BaseComponent {
 						color: 'white',
 						border: 'none',
 						padding: '8px 12px',
-						cursor: 'pointer',
+						cursor: 'pointer'
 					}}
 				>
 					{method.name}
 				</button>
 				{(method.inputs || []).map(this.renderInput.bind(this, method))}
-				{this.renderValue(method)}
 			</div>
 		);
-	}
-
-	renderValue(method) {
-		const value = this.state[`${method.name}-value`];
-
-		if (!value) {
-			return;
-		}
-
-		return <div style={{ marginTop: '12px' }}>{JSON.stringify(value, null, 2)}</div>;
 	}
 
 	renderInput(method, input, index) {
@@ -85,15 +83,20 @@ export default class ContractForm extends BaseComponent {
 			payload[each.name] = this.state[`${method.name}-${each.name}`];
 		});
 
-		if (!method.constant) {
+		let response;
+		let log = `${this.props.Contract.objectName}`;
+		log = log + `.${method.name}(${Object.values(payload).join(', ')})`;
+
+		try {
 			const args = Object.keys(payload).map(e => payload[e]);
 			const instance = await this.props.Contract.deployed();
 
-			return await instance[method.name](...args, { from: web3.eth.accounts[0] });
+			response = await instance[method.name](...args, { from: web3.eth.accounts[0] });
+			log = log + `\n${JSON.stringify(response, null, 2)}`;
+		} catch (e) {
+			log = log + `\n${e}`;
 		}
 
-		const response = await this.props.Contract.callContract(method, payload);
-
-		return this.setState({ [`${method.name}-value`]: response.data });
+		this.props.onLog(`${log}\n\n`);
 	}
 }
