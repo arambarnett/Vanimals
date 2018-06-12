@@ -29,45 +29,49 @@ export default class ContractForm extends BaseComponent {
 		}
 
 		return (
-			<div style={{ margin: '12px 0' }} key={`call-${index}`}>
-				<button
-					onClick={this.handleOnClick.bind(this, method)}
-					style={{
-						fontWeight: 'bold',
-						display: 'inline-block',
-						background: method.constant ? 'blue' : 'red',
-						height: '36px',
-						borderRadius: '7px',
-						color: 'white',
-						border: 'none',
-						padding: '8px 12px',
-						cursor: 'pointer'
-					}}
-				>
-					{method.name}
-				</button>
+			<Grid container spacing={8} style={{ margin: '12px 0' }} key={`call-${index}`}>
+				<Grid item xs={12} sm={3} md={2}>
+					<button
+						onClick={this.handleOnClick.bind(this, method)}
+						style={{
+							fontWeight: 'bold',
+							display: 'inline-block',
+							background: method.constant ? 'blue' : 'red',
+							height: '36px',
+							borderRadius: '7px',
+							color: 'white',
+							border: 'none',
+							padding: '8px 12px',
+							cursor: 'pointer',
+							width: '100%'
+						}}
+					>
+						{method.name}
+					</button>
+				</Grid>
 				{(method.inputs || []).map(this.renderInput.bind(this, method))}
-			</div>
+			</Grid>
 		);
 	}
 
 	renderInput(method, input, index) {
 		return (
-			<input
-				key={`input-${index}`}
-				onChange={this.handleOnChange.bind(this, method, input)}
-				value={this.state[`${method.name}-${input.name}`]}
-				placeholder={`${input.name} ${input.type}`}
-				style={{
-					display: 'inline-block',
-					marginLeft: '12px',
-					background: 'rgba(0, 0, 0, .1)',
-					borderRadius: '7px',
-					height: '36px',
-					padding: '0 12px',
-					border: 'none'
-				}}
-			/>
+			<Grid item xs={12} sm={4} md={2} key={`input-${index}`}>
+				<input
+					onChange={this.handleOnChange.bind(this, method, input)}
+					value={this.state[`${method.name}-${input.name}`]}
+					placeholder={`${input.name} ${input.type}`}
+					style={{
+						width: 'calc(100% - 24px)',
+						display: 'block',
+						background: 'rgba(0, 0, 0, .1)',
+						borderRadius: '7px',
+						height: '36px',
+						padding: '0 12px',
+						border: 'none'
+					}}
+				/>
+			</Grid>
 		);
 	}
 
