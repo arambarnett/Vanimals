@@ -46,13 +46,25 @@ export default class IndexPage extends BasePage {
 				>
 					<Grid container spacing={24}>
 						<Grid item xs={12}>
-							<ContractForm contract={this.props.kittyCore} Contract={KittyCoreContract} onLog={this.handleLog.bind(this)} />
+							<ContractForm
+								contract={this.props.kittyCore}
+								Contract={KittyCoreContract}
+								onLog={this.handleLog.bind(this)}
+							/>
 						</Grid>
 						<Grid item xs={12}>
-							<ContractForm contract={this.props.saleAuction} Contract={SaleAuctionContract} onLog={this.handleLog.bind(this)}/>
+							<ContractForm
+								contract={this.props.saleAuction}
+								Contract={SaleAuctionContract}
+								onLog={this.handleLog.bind(this)}
+							/>
 						</Grid>
 						<Grid item xs={12}>
-							<ContractForm contract={this.props.siringAuction} Contract={SiringAuctionContract} onLog={this.handleLog.bind(this)}/>
+							<ContractForm
+								contract={this.props.siringAuction}
+								Contract={SiringAuctionContract}
+								onLog={this.handleLog.bind(this)}
+							/>
 						</Grid>
 					</Grid>
 				</div>

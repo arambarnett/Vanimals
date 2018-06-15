@@ -5,6 +5,10 @@ const compression = require('compression');
 const bodyParser = require('body-parser');
 const { parse } = require('url');
 const Next = require('next');
+const passport = require('passport');
+const session = require('./server/lib/session');
+
+require('./server/lib/passport');
 
 const port = process.env.PORT || 4001;
 let next = Next({ dir: '.', dev: process.env.NODE_ENV !== 'production' });
@@ -18,6 +22,9 @@ async function main() {
 
 	app.use(compression());
 	app.use(bodyParser.json());
+	app.use(session);
+	app.use(passport.initialize());
+	app.use(passport.session());
 
 	const apis = require('./server/apis');
 	app.use('/apis', apis, errorWare);

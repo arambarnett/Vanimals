@@ -4,3 +4,5 @@ scripts/prime.js
 build/
 node_modules/
 website/
+.next
+.git

@@ -9,7 +9,7 @@ module.exports = {
 			host: '127.0.0.1',
 			port: 9545,
 			network_id: '*',
-			gasPrice: ethUnit.toWei(.1, 'gwei')
+			gasPrice: ethUnit.toWei(0.1, 'gwei')
 		},
 		rinkeby: {
 			provider: function() {
@@ -19,13 +19,13 @@ module.exports = {
 				);
 			},
 			network_id: '*',
-			gasPrice: ethUnit.toWei(.1, 'gwei')
+			gasPrice: ethUnit.toWei(0.1, 'gwei')
 		},
 		production: {
 			host: '127.0.0.1',
 			port: 9545,
 			network_id: '*',
-			gasPrice: ethUnit.toWei(.1, 'gwei')
-		},
+			gasPrice: ethUnit.toWei(0.1, 'gwei')
+		}
 	}
 };

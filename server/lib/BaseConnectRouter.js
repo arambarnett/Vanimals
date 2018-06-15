@@ -1,4 +1,5 @@
 const BaseRouter = require('./BaseRouter');
+
 const passport = require('passport');
 
 class BaseConnectRouter extends BaseRouter {
@@ -10,8 +11,23 @@ class BaseConnectRouter extends BaseRouter {
 			new this.passportStrategy(this.passportConfiguration, this.passportCallback)
 		);
 
-		router.get('/', passport.authenticate(this.objectName));
-		router.get('/callback', passport.authenticate(this.objectName));
+		router.get(
+			'/',
+			(req, res, next) => {
+				req.session.redirect = req.query.redirect;
+
+				return next();
+			},
+			passport.authenticate(this.objectName)
+		);
+
+		router.get('/callback', passport.authenticate(this.objectName), (req, res, next) => {
+			if (!req.session.redirect) {
+				return res.redirect('/');
+			}
+
+			return res.redirect(req.session.redirect);
+		});
 
 		return router;
 	}

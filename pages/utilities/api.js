@@ -19,7 +19,10 @@ class Api {
 
 	async callContract(route, method, payload, params) {
 		const payloadString = `?${qs.stringify(payload)}`;
-		return this.client.get(`/contracts/${route}/${method.name}${Object.keys(payload).length ? payloadString : ''}`, { params });
+		return this.client.get(
+			`/contracts/${route}/${method.name}${Object.keys(payload).length ? payloadString : ''}`,
+			{ params }
+		);
 	}
 }
 

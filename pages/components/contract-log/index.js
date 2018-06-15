@@ -25,6 +25,10 @@ export default class ContractLog extends BaseComponent {
 	}
 
 	renderLog(each, index) {
-		return <div key={index} style={{ minHeight: 18 }}>{each}</div>;
+		return (
+			<div key={index} style={{ minHeight: 18 }}>
+				{each}
+			</div>
+		);
 	}
 }

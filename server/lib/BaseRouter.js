@@ -1,7 +1,6 @@
 const express = require('express');
-const BaseModel = require('./BaseModel');
 
-class BaseRouter extends BaseModel {
+class BaseRouter {
 	static get router() {
 		const router = express.Router();
 

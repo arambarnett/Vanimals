@@ -6,15 +6,19 @@ const truffleProvider = require('truffle-provider');
 const truffleConfig = require('../../truffle').networks[process.env.NODE_ENV];
 
 class BaseContract extends BaseRouter {
+	constructor() {
+		super();
+	}
+
 	static get contractRouter() {
 		const router = this.router;
 
-		this.routes(router);
+		this.contractRoutes(router);
 
 		return router;
 	}
 
-	static async routes(router) {
+	static async contractRoutes(router) {
 		const instance = await this.deployed();
 		const calls = instance.abi.filter(e => e.constant);
 

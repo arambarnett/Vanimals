@@ -97,6 +97,16 @@ export default class ContractForm extends BaseComponent {
 
 			response = await instance[method.name](...args, { from: web3.eth.accounts[0] });
 			log = log + `\n${JSON.stringify(response, null, 2)}`;
+
+			if (method.outputs) {
+				const output = {};
+
+				method.outputs.forEach((each, index) => {
+					output[each.name] = response[index];
+				});
+
+				log = log + `\n${JSON.stringify(output, null, 2)}`;
+			}
 		} catch (e) {
 			log = log + `\n${e}`;
 		}

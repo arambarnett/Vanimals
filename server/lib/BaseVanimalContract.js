@@ -1,8 +1,8 @@
 const BaseContract = require('./BaseContract');
 
 class BaseVanimal extends BaseContract {
-	static async routes(router) {
-		await super.routes(router);
+	static async contractRoutes(router) {
+		await super.contractRoutes(router);
 
 		const instance = await this.deployed();
 		const saleContract = await instance.saleAuction();
@@ -20,9 +20,9 @@ class BaseVanimal extends BaseContract {
 			}
 		}
 
-		router.use('/sale-auction', SaleAuction.router);
-		router.use('/siring-auction', SiringAuction.router);
+		router.use('/sale-auction', SaleAuction.contractRouter);
+		router.use('/siring-auction', SiringAuction.contractRouter);
 	}
-};
+}
 
 module.exports = BaseVanimal;
