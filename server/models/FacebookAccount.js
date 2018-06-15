@@ -1,9 +1,9 @@
 const BaseConnectRouter = require('../lib/BaseConnectRouter');
-const BasePostgresModel = require('../lib/BasePostgresModel');
+const BaseRestModel = require('../lib/BaseRestModel');
 
 const FacebookStrategy = require('passport-facebook').Strategy;
 
-class FacebookAccount extends BasePostgresModel(BaseConnectRouter) {
+class FacebookAccount extends BaseRestModel(BaseConnectRouter) {
 	static get objectName() {
 		return 'FacebookAccount';
 	}
@@ -39,7 +39,7 @@ class FacebookAccount extends BasePostgresModel(BaseConnectRouter) {
 		return {
 			clientID: process.env.FACEBOOK_APP_ID,
 			clientSecret: process.env.FACEBOOK_APP_SECRET,
-			callbackURL: `/apis/connect/facebook-account/callback`,
+			callbackURL: `/apis/connect/facebook-accounts/callback`,
 			scope: [],
 			passReqToCallback: true
 		};

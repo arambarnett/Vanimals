@@ -2,7 +2,7 @@ const BaseRouter = require('./BaseRouter');
 
 const passport = require('passport');
 
-class BaseConnectRouter extends BaseRouter {
+class BaseConnectRouter extends BaseRouter() {
 	static get connectRouter() {
 		const router = this.router;
 

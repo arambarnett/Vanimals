@@ -1,7 +1,7 @@
-const BasePostgresModel = require('../lib/BasePostgresModel');
+const BaseRestModel = require('../lib/BaseRestModel');
 const FacebookAccount = require('./FacebookAccount');
 
-class User extends BasePostgresModel() {
+class User extends BaseRestModel() {
 	static get objectName() {
 		return 'User';
 	}

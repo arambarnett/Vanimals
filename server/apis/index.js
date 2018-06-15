@@ -1,9 +1,31 @@
 const router = require('express').Router();
 
-const contracts = require('./contracts');
-const connect = require('./connect');
+const BaseApi = require('../lib/BaseApi');
+const ContractsApi = require('./ContractsApi');
+const ConnectApi = require('./ConnectApi');
+const RestApi = require('./RestApi');
 
-router.use('/contracts', contracts);
-router.use('/connect', connect);
+class ApisApi extends BaseApi {
+	static get name() {
+		return 'apis';
+	}
 
-module.exports = router;
+	static get apiRoutes() {
+		return [
+			{
+				name: ContractsApi.name,
+				router: ContractsApi.apiRouter
+			},
+			{
+				name: ConnectApi.name,
+				router: ConnectApi.apiRouter
+			},
+			{
+				name: RestApi.name,
+				router: RestApi.apiRouter
+			}
+		];
+	}
+}
+
+module.exports = ApisApi;

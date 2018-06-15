@@ -27,7 +27,7 @@ async function main() {
 	app.use(passport.session());
 
 	const apis = require('./server/apis');
-	app.use('/apis', apis, errorWare);
+	app.use('/apis', apis.apiRouter, errorWare);
 
 	const routes = {
 		'/': { page: '/' }

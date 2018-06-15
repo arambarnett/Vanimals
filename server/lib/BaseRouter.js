@@ -1,11 +1,12 @@
 const express = require('express');
+const BaseModel = require('./BaseModel');
 
-class BaseRouter {
-	static get router() {
-		const router = express.Router();
+module.exports = (Model = BaseModel) => {
+	return class BaseRouter extends Model {
+		static get router() {
+			const router = express.Router();
 
-		return router;
-	}
-}
-
-module.exports = BaseRouter;
+			return router;
+		}
+	};
+};

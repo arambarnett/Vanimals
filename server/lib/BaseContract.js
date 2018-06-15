@@ -5,7 +5,7 @@ const truffleProvider = require('truffle-provider');
 
 const truffleConfig = require('../../truffle').networks[process.env.NODE_ENV];
 
-class BaseContract extends BaseRouter {
+class BaseContract extends BaseRouter() {
 	constructor() {
 		super();
 	}
