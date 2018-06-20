@@ -43,6 +43,7 @@
 		"js-md5": "0.7.3",
 		"lodash": "4.17.10",
 		"next": "6.0.3",
+		"next-routes": "1.4.2",
 		"nodemon": "1.17.5",
 		"passport": "0.4.0",
 		"passport-facebook": "2.1.1",
