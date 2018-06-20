@@ -1,5 +1,8 @@
 import App, { Container } from 'next/app';
 import React from 'react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import theme from './styles/theme';
 
 export default class MyApp extends App {
 	static async getInitialProps({ Component, router, ctx }) {
@@ -16,9 +19,13 @@ export default class MyApp extends App {
 		const { Component, pageProps } = this.props;
 
 		return (
-			<div>
-				<Component {...pageProps} />
-			</div>
+			<React.Fragment>
+				<CssBaseline>
+					<MuiThemeProvider theme={theme}>
+						<Component {...pageProps} />
+					</MuiThemeProvider>
+				</CssBaseline>
+			</React.Fragment>
 		);
 	}
 }
