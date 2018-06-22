@@ -39,7 +39,7 @@ async function main() {
 	});
 }
 
-const errorWare = (error, req, res, next) => {
+const errorWare = (error, req, res) => {
 	console.log('ROUTE ERR', error);
 
 	return res.sendStatus(500);
