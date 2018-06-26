@@ -10,6 +10,7 @@ import Grid from '@material-ui/core/Grid';
 
 import ContractForm from './components/contract-form';
 import ContractLog from './components/contract-log';
+import Vanimal from './components/vanimal-render';
 
 export default class IndexPage extends BasePage {
 	static async getInitialProps() {
@@ -20,6 +21,7 @@ export default class IndexPage extends BasePage {
 		return (
 			<div>
 				Vanimals
+				<Vanimal />
 			</div>
 		);
 	}
