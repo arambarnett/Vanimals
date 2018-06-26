@@ -1,5 +1,9 @@
 const BaseApi = require('../lib/BaseApi');
-const KittyCore = require('../models/KittyCoreContract');
+const VanimalDog = require('../models/VanimalDog');
+const VanimalElephant = require('../models/VanimalElephant');
+const VanimalPanda = require('../models/VanimalPanda');
+const VanimalPigeon = require('../models/VanimalPigeon');
+const VanimalSealion = require('../models/VanimalSealion');
 
 class ContractsApi extends BaseApi {
 	static get name() {
@@ -9,8 +13,24 @@ class ContractsApi extends BaseApi {
 	static get apiRoutes() {
 		return [
 			{
-				name: 'kitty-core',
-				router: KittyCore.contractRouter
+				name: 'vanimal-dog',
+				router: VanimalDog.contractRouter
+			},
+			{
+				name: 'vanimal-elephant',
+				router: VanimalElephant.contractRouter
+			},
+			{
+				name: 'vanimal-panda',
+				router: VanimalPanda.contractRouter
+			},
+			{
+				name: 'vanimal-pigeon',
+				router: VanimalPigeon.contractRouter
+			},
+			{
+				name: 'vanimal-sealion',
+				router: VanimalSealion.contractRouter
 			}
 		];
 	}

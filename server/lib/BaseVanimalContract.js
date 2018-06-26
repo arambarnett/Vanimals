@@ -7,16 +7,17 @@ class BaseVanimal extends BaseContract {
 		const instance = await this.deployed();
 		const saleContract = await instance.saleAuction();
 		const siringAuction = await instance.siringAuction();
+		const objectName = this.objectName;
 
 		class SaleAuction extends BaseContract {
 			static get objectName() {
-				return 'SaleClockAuction';
+				return `${objectName}SaleAuction`;
 			}
 		}
 
 		class SiringAuction extends BaseContract {
 			static get objectName() {
-				return 'SiringClockAuction';
+				return `${objectName}SiringAuction`;
 			}
 		}
 
