@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const BaseApi = require('../lib/BaseApi');
+const BaseApi = require('js-base-lib/lib/BaseApi');
 const ContractsApi = require('./ContractsApi');
 const ConnectApi = require('./ConnectApi');
 const RestApi = require('./RestApi');

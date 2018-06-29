@@ -1,5 +1,5 @@
-const BaseConnectRouter = require('../lib/BaseConnectRouter');
-const BaseRestModel = require('../lib/BaseRestModel');
+const BaseConnectRouter = require('js-base-lib/lib/BaseConnectRouter');
+const BaseRestModel = require('js-base-lib/lib/BaseRestModel');
 
 const FacebookStrategy = require('passport-facebook').Strategy;
 

@@ -3,7 +3,7 @@
 require('dotenv').config();
 
 const fs = require('fs');
-const postgrator = require('../server/lib/postgrator');
+const postgrator = require('js-base-lib/lib/Postgrator');
 
 postgrator
 	.migrate()

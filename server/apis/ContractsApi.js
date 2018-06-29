@@ -1,4 +1,4 @@
-const BaseApi = require('../lib/BaseApi');
+const BaseApi = require('js-base-lib/lib/BaseApi');
 const VanimalDog = require('../models/VanimalDog');
 const VanimalElephant = require('../models/VanimalElephant');
 const VanimalPanda = require('../models/VanimalPanda');

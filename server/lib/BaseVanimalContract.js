@@ -1,6 +1,20 @@
-const BaseContract = require('./BaseContract');
+const BaseContract = require('js-base-lib/lib/BaseContract');
 
-class BaseVanimal extends BaseContract {
+class VanimalContract extends BaseContract {
+	static get truffleConfig() {
+		const config = require('../../truffle').networks[process.env.NODE_ENV];
+
+		return config;
+	}
+
+	static get contractJson() {
+		const json = require(`../../build/contracts/${this.objectName}.json`);
+
+		return json;
+	}
+}
+
+class BaseVanimal extends VanimalContract {
 	static async contractRoutes(router) {
 		await super.contractRoutes(router);
 
@@ -9,13 +23,13 @@ class BaseVanimal extends BaseContract {
 		const siringAuction = await instance.siringAuction();
 		const objectName = this.objectName;
 
-		class SaleAuction extends BaseContract {
+		class SaleAuction extends VanimalContract {
 			static get objectName() {
 				return `${objectName}SaleAuction`;
 			}
 		}
 
-		class SiringAuction extends BaseContract {
+		class SiringAuction extends VanimalContract {
 			static get objectName() {
 				return `${objectName}SiringAuction`;
 			}

@@ -1,4 +1,4 @@
-const BaseRestModel = require('../lib/BaseRestModel');
+const BaseRestModel = require('js-base-lib/lib/BaseRestModel');
 const FacebookAccount = require('./FacebookAccount');
 
 class User extends BaseRestModel() {

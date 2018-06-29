@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const postgrator = require('../server/lib/postgrator');
+const postgrator = require('js-base-lib/lib/Postgrator');
 const fs = require('fs');
 
 const files = fs

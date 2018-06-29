@@ -1,4 +1,4 @@
-const BaseApi = require('../lib/BaseApi');
+const BaseApi = require('js-base-lib/lib/BaseApi');
 const FacebookAccount = require('../models/FacebookAccount');
 
 class ConnectApi extends BaseApi {

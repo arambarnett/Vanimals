@@ -71,7 +71,7 @@ export default class HomePage extends BasePage {
 										}}
 									>
 										<a
-											href="../about-us/about.html"
+											href="/vanimal/1"
 											className="link-color-button w-inline-block"
 											data-ix="button-overlay-on-hover"
 											style={{ transition: 'all 0.3s ease 0s' }}
@@ -159,7 +159,7 @@ export default class HomePage extends BasePage {
 								</p>
 								<div className="top-padding">
 									<a
-										href="../service/service.html"
+										href="/marketplace"
 										className="link-color-button w-inline-block"
 										data-ix="button-overlay-on-hover"
 										style={{ transition: 'all 0.3s ease 0s' }}
@@ -203,7 +203,7 @@ export default class HomePage extends BasePage {
 								</p>
 								<div className="top-padding">
 									<a
-										href="../service/service-2.html"
+										href="/vanimal/1"
 										className="link-color-button w-inline-block"
 										data-ix="button-overlay-on-hover"
 										style={{ transition: 'all 0.3s ease 0s' }}
@@ -283,7 +283,7 @@ export default class HomePage extends BasePage {
 								</p>
 								<div className="top-padding">
 									<a
-										href="../service/service-2.html"
+										href="/collection"
 										className="link-color-button w-inline-block"
 										data-ix="button-overlay-on-hover"
 										style={{ transition: 'all 0.3s ease 0s' }}

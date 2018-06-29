@@ -1,4 +1,4 @@
-const BaseRestModel = require('../lib/BaseRestModel');
+const BaseRestModel = require('js-base-lib/lib/BaseRestModel');
 
 class Vanimal extends BaseRestModel() {
 	static get objectName() {

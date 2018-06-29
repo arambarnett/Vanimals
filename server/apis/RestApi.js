@@ -1,4 +1,4 @@
-const BaseApi = require('../lib/BaseApi');
+const BaseApi = require('js-base-lib/lib/BaseApi');
 const User = require('../models/User');
 const FacebookAccount = require('../models/FacebookAccount');
 const Vanimal = require('../models/Vanimal');

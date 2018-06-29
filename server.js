@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const { parse } = require('url');
 const Next = require('next');
 const passport = require('passport');
-const session = require('./server/lib/session');
+const session = require('js-base-lib/lib/RedisSession');
 const routes = require('./routes');
 
 require('./server/lib/passport');
@@ -39,7 +39,7 @@ async function main() {
 	});
 }
 
-const errorWare = (error, req, res) => {
+const errorWare = (error, req, res, next) => {
 	console.log('ROUTE ERR', error);
 
 	return res.sendStatus(500);

@@ -18,7 +18,7 @@ export default class HeaderComponent extends BaseComponent {
 					<div className="line-3" />
 					<div className="line-2" />
 				</div>
-				<a href="../index.html" className="brand w-nav-brand">
+				<a href="/" className="brand w-nav-brand">
 					<img
 						src="/static/images/Vanimals-logo-main.png"
 						width={140}
