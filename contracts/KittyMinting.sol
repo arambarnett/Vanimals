@@ -6,8 +6,8 @@ import './KittyAuction.sol';
 contract KittyMinting is KittyAuction {
 
 	// Limits the number of cats the contract owner can ever create.
-	uint256 public constant PROMO_CREATION_LIMIT = 5000;
-	uint256 public constant GEN0_CREATION_LIMIT = 45000;
+	uint256 public constant PROMO_CREATION_LIMIT = 1000000000000000;
+	uint256 public constant GEN0_CREATION_LIMIT = 1000000000000000;
 
 	// Constants for gen0 auctions.
 	uint256 public constant GEN0_STARTING_PRICE = 10 finney;

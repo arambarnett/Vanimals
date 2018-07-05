@@ -30,27 +30,11 @@ class Vanimal extends BaseRestModel(BaseContract) {
 				allowNull: false,
 				autoIncrement: true
 			},
-			is_gestating: {
-				type: Sequelize.BOOLEAN,
+			owner: {
+				type: Sequelize.TEXT,
 				allowNull: false
 			},
-			is_ready: {
-				type: Sequelize.BOOLEAN,
-				allowNull: false
-			},
-			cooldown_index: {
-				type: Sequelize.BIGINT,
-				allowNull: false
-			},
-			next_action_at: {
-				type: Sequelize.BIGINT,
-				allowNull: false
-			},
-			siring_with_id: {
-				type: Sequelize.BIGINT,
-				allowNull: false
-			},
-			birth_time: {
+			kitty_id: {
 				type: Sequelize.BIGINT,
 				allowNull: false
 			},
@@ -62,10 +46,6 @@ class Vanimal extends BaseRestModel(BaseContract) {
 				type: Sequelize.BIGINT,
 				allowNull: false
 			},
-			generation: {
-				type: Sequelize.BIGINT,
-				allowNull: false
-			},
 			genes: {
 				type: Sequelize.BIGINT,
 				allowNull: false
@@ -73,5 +53,24 @@ class Vanimal extends BaseRestModel(BaseContract) {
 		};
 	}
 }
-
 module.exports = Vanimal;
+
+(async () => {
+	const vanimal = await Vanimal.deployed();
+	vanimal.Birth(async (error, result) => {
+		if (error || !result) {
+			console.log('BIRTH ERROR', error);
+		}
+
+		const payload = {
+			owner: result.args.owner,
+			kitty_id: result.args.kittyId.toString(),
+			matron_id: result.args.matronId.toString(),
+			sire_id: result.args.sireId.toString(),
+			genes: result.args.genes.toString()
+		}
+
+		await Vanimal.Postgres.create(payload)
+	});
+})();
+

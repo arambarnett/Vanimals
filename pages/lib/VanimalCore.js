@@ -1,6 +1,14 @@
 import BaseContract from '../lib/BaseContract';
 
-export default class BaseVanimalContract extends BaseContract {
+export default class VanimalCore extends BaseContract {
+	static get objectName() {
+		return 'VanimalCore';
+	}
+
+	static get contractRoute() {
+		return `vanimal`;
+	}
+
 	static get SaleAuction() {
 		const objectName = this.objectName;
 		const contractRoute = this.contractRoute;
@@ -11,7 +19,7 @@ export default class BaseVanimalContract extends BaseContract {
 			}
 
 			static get contractRoute() {
-				return `${contractRoute}/sale-auction`;
+				return `sale-auction`;
 			}
 		}
 	}
@@ -26,7 +34,7 @@ export default class BaseVanimalContract extends BaseContract {
 			}
 
 			static get contractRoute() {
-				return `${contractRoute}/siring-auction`;
+				return `siring-auction`;
 			}
 		}
 	}
