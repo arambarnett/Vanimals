@@ -1,9 +1,7 @@
 const BaseApi = require('js-base-lib/lib/BaseApi');
-const VanimalDog = require('../models/VanimalDog');
-const VanimalElephant = require('../models/VanimalElephant');
-const VanimalPanda = require('../models/VanimalPanda');
-const VanimalPigeon = require('../models/VanimalPigeon');
-const VanimalSealion = require('../models/VanimalSealion');
+const Vanimal = require('../models/Vanimal');
+const SaleAuction = require('../models/SaleAuction');
+const SiringAuction = require('../models/SiringAuction');
 
 class ContractsApi extends BaseApi {
 	static get name() {
@@ -13,24 +11,16 @@ class ContractsApi extends BaseApi {
 	static get apiRoutes() {
 		return [
 			{
-				name: 'vanimal-dog',
-				router: VanimalDog.contractRouter
+				name: 'vanimal',
+				router: Vanimal.contractRouter
 			},
 			{
-				name: 'vanimal-elephant',
-				router: VanimalElephant.contractRouter
+				name: 'sale-auction',
+				router: SaleAuction.contractRouter
 			},
 			{
-				name: 'vanimal-panda',
-				router: VanimalPanda.contractRouter
-			},
-			{
-				name: 'vanimal-pigeon',
-				router: VanimalPigeon.contractRouter
-			},
-			{
-				name: 'vanimal-sealion',
-				router: VanimalSealion.contractRouter
+				name: 'siring-auction',
+				router: SiringAuction.contractRouter
 			}
 		];
 	}
