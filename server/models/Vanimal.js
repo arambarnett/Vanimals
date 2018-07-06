@@ -34,10 +34,6 @@ class Vanimal extends BaseRestModel(BaseContract) {
 				type: Sequelize.TEXT,
 				allowNull: false
 			},
-			kitty_id: {
-				type: Sequelize.BIGINT,
-				allowNull: false
-			},
 			matron_id: {
 				type: Sequelize.BIGINT,
 				allowNull: false
@@ -63,14 +59,13 @@ module.exports = Vanimal;
 		}
 
 		const payload = {
+			vanimal_id: result.args.kittyId.toString(),
 			owner: result.args.owner,
-			kitty_id: result.args.kittyId.toString(),
 			matron_id: result.args.matronId.toString(),
 			sire_id: result.args.sireId.toString(),
 			genes: result.args.genes.toString()
 		}
 
-		await Vanimal.Postgres.create(payload)
+		await Vanimal.Postgres.findOrCreate({ where: { vanimal_id: payload.vanimal_id }, defaults: payload });
 	});
 })();
-

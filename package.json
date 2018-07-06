@@ -39,7 +39,7 @@
 		"ethjs-unit": "0.1.6",
 		"express": "4.16.3",
 		"express-session": "1.15.6",
-		"js-base-lib": "1.0.3",
+		"js-base-lib": "github:hbeckeri/js-base-lib",
 		"js-md5": "0.7.3",
 		"lodash": "4.17.10",
 		"next": "6.0.3",
