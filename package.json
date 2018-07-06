@@ -6,7 +6,6 @@
 	"scripts": {
 		"build": "next build",
 		"compile": "./node_modules/truffle/build/cli.bundled.js compile",
-		"test": "./node_modules/truffle/build/cli.bundled.js test",
 		"migrate": "npm run migrate-database && npm run deploy-contracts",
 		"migrate-down": "scripts/migrate-down.js",
 		"migrate-create": "scripts/migrate-create.js",
