@@ -4419,7 +4419,6 @@ var IS_MOBILE_SAFARI = ua.match(/iPad/i) || ua.match(/iPhone/);
 
 // Keep throttled events at ~80fps to reduce reflows while maintaining render accuracy
 var THROTTLED_EVENT_WAIT = 12;
-
 function observeRequests(store) {
   Object(__WEBPACK_IMPORTED_MODULE_10__IX2VanillaUtils__["j" /* observeStore */])({
     store: store,
@@ -7032,9 +7031,11 @@ Webflow.define('forms', module.exports = function ($, _) {
     var wrap = $el.closest('div.w-form');
     data.done = wrap.find('> .w-form-done');
     data.fail = wrap.find('> .w-form-fail');
+    data.fileUploads = wrap.find('.w-file-upload');
 
-    var fileUploadWrap = wrap.find('.w-file-upload');
-    fileUploadWrap.each(initFileUpload);
+    data.fileUploads.each(function (j) {
+      initFileUpload(j, data);
+    });
 
     var action = data.action = $el.attr('action');
     data.handler = null;
@@ -7267,9 +7268,13 @@ Webflow.define('forms', module.exports = function ($, _) {
     data.evt = null;
   }
 
-  function initFileUpload(i, el) {
+  function initFileUpload(i, form) {
+    if (!form.fileUploads || !form.fileUploads[i]) {
+      return;
+    }
+
     var file;
-    var $el = $(el);
+    var $el = $(form.fileUploads[i]);
     var $defaultWrap = $el.find('> .w-file-upload-default');
     var $uploadingWrap = $el.find('> .w-file-upload-uploading');
     var $successWrap = $el.find('> .w-file-upload-success');
@@ -7308,6 +7313,12 @@ Webflow.define('forms', module.exports = function ($, _) {
         // Set filename
         $fileNameEl.text(file.name);
 
+        // Disable submit button
+        if (!isUploading()) {
+          disableBtn(form);
+        }
+        form.fileUploads[i].uploading = true;
+
         signFile(file, afterSign);
       });
 
@@ -7341,6 +7352,11 @@ Webflow.define('forms', module.exports = function ($, _) {
       $uploadingWrap.toggle(false);
       $defaultWrap.toggle(true);
       $errorWrap.toggle(true);
+
+      form.fileUploads[i].uploading = false;
+      if (!isUploading()) {
+        reset(form);
+      }
     }
 
     function afterSign(err, data) {
@@ -7364,7 +7380,19 @@ Webflow.define('forms', module.exports = function ($, _) {
 
       // Show success
       $uploadingWrap.toggle(false);
-      $successWrap.toggle(true);
+      $successWrap.css('display', 'inline-block');
+
+      form.fileUploads[i].uploading = false;
+      if (!isUploading()) {
+        reset(form);
+      }
+    }
+
+    function isUploading() {
+      var uploads = form.fileUploads && form.fileUploads.toArray() || [];
+      return uploads.some(function (value) {
+        return value.uploading;
+      });
     }
   }
 
@@ -17293,5 +17321,5 @@ Webflow.require('ix').init([
  * Webflow: Interactions 2.0: Init
  */
 Webflow.require('ix2').init(
-{"events":{"e":{"id":"e","eventTypeId":"PAGE_SCROLL","action":{"id":"","actionTypeId":"GENERAL_CONTINUOUS_ACTION","config":{"actionListId":"a","affectedElements":{},"duration":0}},"mediaQueries":["main","medium","tiny","small"],"target":{"appliesTo":"PAGE","styleBlockIds":[],"id":"5b21830e58b3c25130d92393"},"config":[{"continuousParameterGroupId":"a-p","smoothing":50,"startsEntering":true,"addStartOffset":false,"addOffsetValue":50,"startsExiting":false,"addEndOffset":false,"endOffsetValue":50}],"createdOn":1529528361734}},"actionLists":{"a":{"id":"a","title":"Home Hero Parallax","continuousParameterGroups":[{"id":"a-p","type":"SCROLL_PROGRESS","parameterLabel":"Scroll","continuousActionGroups":[{"keyframe":0,"actionItems":[{"id":"a-n-5","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b21830e58b3c25130d92393|077ddd05-2b35-be02-7011-68ba7dbe7337"},"yValue":0,"xUnit":"PX","yUnit":"PX","zUnit":"PX"}}]},{"keyframe":8,"actionItems":[{"id":"a-n-3","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b21830e58b3c25130d92393|95f227a7-5e33-01e4-670e-8e3976c48bc9"},"value":1,"unit":""}}]},{"keyframe":20,"actionItems":[{"id":"a-n-4","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b21830e58b3c25130d92393|95f227a7-5e33-01e4-670e-8e3976c48bc9"},"value":0,"unit":""}},{"id":"a-n-6","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b21830e58b3c25130d92393|077ddd05-2b35-be02-7011-68ba7dbe7337"},"yValue":250,"xUnit":"PX","yUnit":"PX","zUnit":"PX"}}]}]}],"createdOn":1529528369817}},"site":{"mediaQueries":[{"key":"main","min":992,"max":10000},{"key":"medium","min":768,"max":991},{"key":"small","min":480,"max":767},{"key":"tiny","min":0,"max":479}]}}
+{"events":{"e":{"id":"e","eventTypeId":"PAGE_SCROLL","action":{"id":"","actionTypeId":"GENERAL_CONTINUOUS_ACTION","config":{"actionListId":"a","affectedElements":{},"duration":0}},"mediaQueries":["main","medium","tiny","small"],"target":{"appliesTo":"PAGE","styleBlockIds":[],"id":"5b21830e58b3c25130d92393"},"config":[{"continuousParameterGroupId":"a-p","smoothing":50,"startsEntering":true,"addStartOffset":false,"addOffsetValue":50,"startsExiting":false,"addEndOffset":false,"endOffsetValue":50}],"createdOn":1529528361734},"e-2":{"id":"e-2","eventTypeId":"PAGE_START","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-2","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-3"}},"mediaQueries":["main","medium","small","tiny"],"target":{"appliesTo":"PAGE","styleBlockIds":[],"id":"5b33d285775e2174251e67e4"},"config":{"loop":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1530424928652},"e-4":{"id":"e-4","eventTypeId":"PAGE_START","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-3","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-5"}},"mediaQueries":["main","medium","small","tiny"],"target":{"appliesTo":"PAGE","styleBlockIds":[],"id":"5b33d285775e2174251e67e4"},"config":{"loop":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1530425197606},"e-6":{"id":"e-6","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-4","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-7"}},"mediaQueries":["main","medium","small","tiny"],"target":{"appliesTo":"ELEMENT","styleBlockIds":[],"id":"5b33d285775e2174251e67e4|78236d6c-9ff7-8929-72d0-57e3b8eafb73"},"config":{"loop":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1530425360146},"e-8":{"id":"e-8","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-5","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-9"}},"mediaQueries":["main","medium","small","tiny"],"target":{"appliesTo":"ELEMENT","styleBlockIds":[],"id":"5b33d285775e2174251e67e4|78236d6c-9ff7-8929-72d0-57e3b8eafb73"},"config":{"loop":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1530426788634},"e-10":{"id":"e-10","eventTypeId":"MOUSE_CLICK","action":{"id":"","actionTypeId":"GENERAL_START_ACTION","config":{"delay":0,"easing":"","duration":0,"actionListId":"a-6","affectedElements":{},"playInReverse":false,"autoStopEventId":"e-11"}},"mediaQueries":["main","medium","small","tiny"],"target":{"appliesTo":"ELEMENT","styleBlockIds":[],"id":"5b33d285775e2174251e67e4|306843cc-e53e-5584-bfdb-1829be4f6bf4"},"config":{"loop":false,"scrollOffsetValue":null,"scrollOffsetUnit":null,"delay":null,"direction":null,"effectIn":null},"createdOn":1530427410942}},"actionLists":{"a":{"id":"a","title":"Home Hero Parallax","continuousParameterGroups":[{"id":"a-p","type":"SCROLL_PROGRESS","parameterLabel":"Scroll","continuousActionGroups":[{"keyframe":0,"actionItems":[{"id":"a-n-5","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b21830e58b3c25130d92393|077ddd05-2b35-be02-7011-68ba7dbe7337"},"yValue":0,"xUnit":"PX","yUnit":"PX","zUnit":"PX"}}]},{"keyframe":8,"actionItems":[{"id":"a-n-3","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b21830e58b3c25130d92393|95f227a7-5e33-01e4-670e-8e3976c48bc9"},"value":1,"unit":""}}]},{"keyframe":20,"actionItems":[{"id":"a-n-4","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b21830e58b3c25130d92393|95f227a7-5e33-01e4-670e-8e3976c48bc9"},"value":0,"unit":""}},{"id":"a-n-6","actionTypeId":"TRANSFORM_MOVE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b21830e58b3c25130d92393|077ddd05-2b35-be02-7011-68ba7dbe7337"},"yValue":250,"xUnit":"PX","yUnit":"PX","zUnit":"PX"}}]}]}],"createdOn":1529528369817},"a-2":{"id":"a-2","title":"Snapcode Hide on Page Load","actionItemGroups":[{"actionItems":[{"id":"a-2-n-2","actionTypeId":"TRANSFORM_ROTATE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b33d285775e2174251e67e4|58ecc05d-cc78-0a48-9097-19052f0449ff"},"zValue":-4,"xUnit":"DEG","yUnit":"DEG","zUnit":"DEG"}},{"id":"a-2-n-3","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b33d285775e2174251e67e4|58ecc05d-cc78-0a48-9097-19052f0449ff"},"value":0,"unit":""}},{"id":"a-2-n","actionTypeId":"TRANSFORM_SCALE","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b33d285775e2174251e67e4|58ecc05d-cc78-0a48-9097-19052f0449ff"},"xValue":0.8,"yValue":0.8,"locked":true}}]}],"createdOn":1530424933377,"useFirstGroupAsInitialState":true},"a-3":{"id":"a-3","title":"Modal Wrapper Hide on Load","actionItemGroups":[{"actionItems":[{"id":"a-3-n","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":500,"target":{"id":"5b33d285775e2174251e67e4|18cab7f0-e074-f065-3ad4-a0212448be73"},"value":0,"unit":""}},{"id":"a-3-n-2","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"value":"none","target":{"id":"5b33d285775e2174251e67e4|18cab7f0-e074-f065-3ad4-a0212448be73"}}}]}],"createdOn":1530425204874,"useFirstGroupAsInitialState":true},"a-4":{"id":"a-4","title":"Open Snapcode Trigger","actionItemGroups":[{"actionItems":[{"id":"a-4-n","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"value":"flex","target":{"id":"5b33d285775e2174251e67e4|18cab7f0-e074-f065-3ad4-a0212448be73"}}}]},{"actionItems":[{"id":"a-4-n-2","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":300,"target":{"id":"5b33d285775e2174251e67e4|18cab7f0-e074-f065-3ad4-a0212448be73"},"value":1,"unit":""}}]}],"createdOn":1530425390623,"useFirstGroupAsInitialState":false},"a-5":{"id":"a-5","title":"Show Snapcode","actionItemGroups":[{"actionItems":[{"id":"a-5-n","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":300,"target":{"id":"5b33d285775e2174251e67e4|58ecc05d-cc78-0a48-9097-19052f0449ff"},"value":1,"unit":""}},{"id":"a-5-n-2","actionTypeId":"TRANSFORM_ROTATE","config":{"delay":0,"easing":"","duration":300,"target":{"id":"5b33d285775e2174251e67e4|58ecc05d-cc78-0a48-9097-19052f0449ff"},"zValue":0,"xUnit":"DEG","yUnit":"DEG","zUnit":"DEG"}},{"id":"a-5-n-3","actionTypeId":"TRANSFORM_SCALE","config":{"delay":0,"easing":"","duration":300,"target":{"id":"5b33d285775e2174251e67e4|58ecc05d-cc78-0a48-9097-19052f0449ff"},"xValue":1,"yValue":1,"locked":true}}]}],"createdOn":1530426792831,"useFirstGroupAsInitialState":false},"a-6":{"id":"a-6","title":"Close Snapcode Modal","actionItemGroups":[{"actionItems":[{"id":"a-6-n","actionTypeId":"GENERAL_DISPLAY","config":{"delay":0,"easing":"","duration":0,"value":"none","target":{"id":"5b33d285775e2174251e67e4|18cab7f0-e074-f065-3ad4-a0212448be73"}}}]},{"actionItems":[{"id":"a-6-n-2","actionTypeId":"STYLE_OPACITY","config":{"delay":0,"easing":"","duration":200,"target":{"id":"5b33d285775e2174251e67e4|18cab7f0-e074-f065-3ad4-a0212448be73"},"value":0,"unit":""}}]}],"createdOn":1530427422135,"useFirstGroupAsInitialState":false}},"site":{"mediaQueries":[{"key":"main","min":992,"max":10000},{"key":"medium","min":768,"max":991},{"key":"small","min":480,"max":767},{"key":"tiny","min":0,"max":479}]}}
 );

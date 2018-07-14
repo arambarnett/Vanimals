@@ -1,7 +1,6 @@
 import React from 'react';
 import BasePage from '../../lib/BasePage';
 import Footer from '../../components/footer';
-import Header from '../../components/header';
 
 export default class VanimalPage extends BasePage {
 	render() {
@@ -12,7 +11,6 @@ export default class VanimalPage extends BasePage {
 				style={{ opacity: 1, transition: 'opacity 200ms' }}
 			>
 				<div className="banner portfolio fullwidth">
-					<Header />
 					<div className="container w-container">
 						<div className="center text">
 							<div>

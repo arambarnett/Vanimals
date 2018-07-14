@@ -1,5 +1,6 @@
 import App, { Container } from 'next/app';
 import React from 'react';
+import Header from './components/header';
 
 export default class MyApp extends App {
 	static async getInitialProps({ Component, router, ctx }) {

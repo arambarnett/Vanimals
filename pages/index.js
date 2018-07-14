@@ -126,7 +126,11 @@ export default class HomePage extends BasePage {
 								<div
 									className="play-icon-style-2 white"
 									data-ix="play-button-wave"
-									style={{ opacity: 1, transform: 'scaleX(1) scaleY(1)' }}
+									style={{
+										opacity: 0,
+										transform: 'scaleX(1.7) scaleY(1.7)',
+										transition: 'transform 1200ms, opacity 1200ms'
+									}}
 								/>
 								<div
 									className="play-icon-style-2 white"
@@ -159,7 +163,7 @@ export default class HomePage extends BasePage {
 								</p>
 								<div className="top-padding">
 									<a
-										href="/marketplace"
+										href="../service/service.html"
 										className="link-color-button w-inline-block"
 										data-ix="button-overlay-on-hover"
 										style={{ transition: 'all 0.3s ease 0s' }}
@@ -169,7 +173,8 @@ export default class HomePage extends BasePage {
 											data-ix="intitialoverlay-button"
 											style={{
 												width: '0%',
-												transform: 'translateX(0px) translateY(0px) translateZ(0px)'
+												transform: 'translateX(0px) translateY(0px) translateZ(0px)',
+												transition: 'width 400ms'
 											}}
 										/>
 										<div className="button-text">Learn More</div>
@@ -203,7 +208,7 @@ export default class HomePage extends BasePage {
 								</p>
 								<div className="top-padding">
 									<a
-										href="/vanimal/1"
+										href="../service/service-2.html"
 										className="link-color-button w-inline-block"
 										data-ix="button-overlay-on-hover"
 										style={{ transition: 'all 0.3s ease 0s' }}
@@ -232,6 +237,7 @@ export default class HomePage extends BasePage {
 						}}
 					/>
 				</div>
+
 				<div className="w-clearfix">
 					<div className="half-section image-background">
 						<a
@@ -267,8 +273,9 @@ export default class HomePage extends BasePage {
 							<div
 								data-ix="fade-right"
 								style={{
-									opacity: 0,
-									transform: 'translateX(-60px) translateY(0px) translateZ(0px)'
+									opacity: 1,
+									transform: 'translateX(0px) translateY(0px) translateZ(0px)',
+									transition: 'opacity 500ms, transform 800ms'
 								}}
 							>
 								<h1 className="section-tittle-hero-white in-half-section">Be the Best</h1>
@@ -283,7 +290,7 @@ export default class HomePage extends BasePage {
 								</p>
 								<div className="top-padding">
 									<a
-										href="/collection"
+										href="../service/service-2.html"
 										className="link-color-button w-inline-block"
 										data-ix="button-overlay-on-hover"
 										style={{ transition: 'all 0.3s ease 0s' }}
@@ -307,7 +314,11 @@ export default class HomePage extends BasePage {
 					<div
 						className="half-section gray"
 						data-ix="fade-right"
-						style={{ opacity: 0, transform: 'translateX(-60px) translateY(0px) translateZ(0px)' }}
+						style={{
+							opacity: 1,
+							transform: 'translateX(0px) translateY(0px) translateZ(0px)',
+							transition: 'opacity 500ms, transform 800ms'
+						}}
 					>
 						<div className="center-container-content intro">
 							<div>
@@ -316,7 +327,7 @@ export default class HomePage extends BasePage {
 								<div className="top-padding _40">
 									<div className="row-button w-row">
 										<div className="w-col w-col-3 w-col-medium-3">
-											<a href="../about-us/about.html" className="inner-link w-button">
+											<a href="../vanimals-site/about-4.html" className="inner-link w-button">
 												Diamond
 											</a>
 										</div>
@@ -407,7 +418,7 @@ export default class HomePage extends BasePage {
 									</div>
 									<div className="row-button w-row">
 										<div className="w-col w-col-3">
-											<a href="../pages/table.html" className="inner-link w-button">
+											<a href="../vanimals-site/table.html" className="inner-link w-button">
 												Raspberry
 											</a>
 										</div>
@@ -434,7 +445,11 @@ export default class HomePage extends BasePage {
 					<div
 						className="half-section image-background intro"
 						data-ix="fade-left-2"
-						style={{ opacity: 0, transform: 'translateX(60px) translateY(0px) translateZ(0px)' }}
+						style={{
+							opacity: 1,
+							transform: 'translateX(0px) translateY(0px) translateZ(0px)',
+							transition: 'opacity 500ms, transform 800ms'
+						}}
 					/>
 				</div>
 				<div className="section">
@@ -442,8 +457,8 @@ export default class HomePage extends BasePage {
 						<div className="algin-center">
 							<div className="bottom-padding-80">
 								<div className="algin-center">
-									<h2 className="tab-features-heading">Featured Vanimals</h2>
-									<div className="subtittle">The Vanimals you can collect</div>
+									<h2 className="tab-features-heading">Meet The Vanimals</h2>
+									<div className="subtittle">Click on the Vanimals to learn more about them</div>
 									<div className="headline-sign">
 										<div className="line-features gray" />
 										<div className="color-line" />
@@ -479,17 +494,17 @@ export default class HomePage extends BasePage {
 													className="project-wrapper style2 w-inline-block"
 													data-ix="fade-up"
 													style={{
-														transition: 'all 0.3s ease 0s',
-														opacity: 0,
-														transform: 'translateX(0px) translateY(60px) translateZ(0px)'
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
 													}}
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/jona-dinges-tiger.jpg"
+															src="static/images/jona-dinges-tiger.jpg"
 															width={200}
 															height={260}
-															srcSet="/static/images/jona-dinges-tiger-p-500.jpeg 500w, /static/images/jona-dinges-tiger.jpg 800w"
+															srcSet="static/images/jona-dinges-tiger-p-500.jpeg 500w, static/images/jona-dinges-tiger.jpg 800w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -506,8 +521,8 @@ export default class HomePage extends BasePage {
 														</div>
 													</div>
 													<div className="white-portfolio-content">
-														<p className="paragraph-project dark _5">Critically Endangered</p>
-														<h4 className="project-header white-content">Sumatran Tiger</h4>
+														<p className="paragraph-project dark _5">Teri</p>
+														<h4 className="project-header white-content">The Sumatran Tiger</h4>
 													</div>
 												</a>
 											</div>
@@ -517,17 +532,17 @@ export default class HomePage extends BasePage {
 													className="project-wrapper style2 w-inline-block"
 													data-ix="fade-up-2"
 													style={{
-														transition: 'all 0.3s ease 0s',
-														opacity: 0,
-														transform: 'translateX(0px) translateY(60px) translateZ(0px)'
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
 													}}
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/oleg-stebenyev-r4-gorilla-f.jpg"
+															src="static/images/oleg-stebenyev-r4-gorilla-f.jpg"
 															width={200}
 															height={260}
-															srcSet="/static/images/oleg-stebenyev-r4-gorilla-f-p-500.jpeg 500w, /static/images/oleg-stebenyev-r4-gorilla-f-p-800.jpeg 800w, /static/images/oleg-stebenyev-r4-gorilla-f-p-1080.jpeg 1080w, /static/images/oleg-stebenyev-r4-gorilla-f-p-1600.jpeg 1600w, /static/images/oleg-stebenyev-r4-gorilla-f.jpg 1827w"
+															srcSet="static/images/oleg-stebenyev-r4-gorilla-f-p-500.jpeg 500w, static/images/oleg-stebenyev-r4-gorilla-f-p-800.jpeg 800w, static/images/oleg-stebenyev-r4-gorilla-f-p-1080.jpeg 1080w, static/images/oleg-stebenyev-r4-gorilla-f-p-1600.jpeg 1600w, static/images/oleg-stebenyev-r4-gorilla-f.jpg 1827w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -539,13 +554,20 @@ export default class HomePage extends BasePage {
 															<div
 																className="project-content style _5"
 																data-ix="hide-project-overlay-on-initial"
-																style={{ opacity: 0 }}
+																style={{
+																	opacity: 0,
+																	transformStyle: 'preserve-3d',
+																	transition: 'opacity 400ms, transform 400ms',
+																	transform: 'scaleX(1) scaleY(1) scaleZ(1)'
+																}}
 															/>
 														</div>
 													</div>
 													<div className="white-portfolio-content">
-														<p className="paragraph-project dark _3"> Critically Endangered</p>
-														<h4 className="project-header white-content">Cross River Gorilla</h4>
+														<p className="paragraph-project dark _3">Georgio</p>
+														<h4 className="project-header white-content">
+															The Cross River Gorilla
+														</h4>
 													</div>
 												</a>
 											</div>
@@ -555,17 +577,17 @@ export default class HomePage extends BasePage {
 													className="project-wrapper style2 w-inline-block"
 													data-ix="fade-up-3"
 													style={{
-														transition: 'all 0.3s ease 0s',
-														opacity: 0,
-														transform: 'translateX(0px) translateY(60px) translateZ(0px)'
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
 													}}
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/elephant.jpg"
+															src="static/images/elephant.jpg"
 															width={200}
 															height={260}
-															srcSet="/static/images/elephant-p-500.jpeg 500w, /static/images/elephant-p-800.jpeg 800w, /static/images/elephant.jpg 900w"
+															srcSet="static/images/elephant-p-500.jpeg 500w, static/images/elephant-p-800.jpeg 800w, static/images/elephant.jpg 900w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -577,13 +599,18 @@ export default class HomePage extends BasePage {
 															<div
 																className="project-content style _1"
 																data-ix="hide-project-overlay-on-initial"
-																style={{ opacity: 0 }}
+																style={{
+																	opacity: 0,
+																	transformStyle: 'preserve-3d',
+																	transition: 'opacity 400ms, transform 400ms',
+																	transform: 'scaleX(1) scaleY(1) scaleZ(1)'
+																}}
 															/>
 														</div>
 													</div>
 													<div className="white-portfolio-content">
-														<p className="paragraph-project dark _3">Critically Endangered</p>
-														<h4 className="project-header white-content">Elephant</h4>
+														<p className="paragraph-project dark _3">Dewi</p>
+														<h4 className="project-header white-content">Dewi the Elephant</h4>
 													</div>
 												</a>
 											</div>
@@ -595,15 +622,15 @@ export default class HomePage extends BasePage {
 													className="project-wrapper style2 w-inline-block"
 													data-ix="fade-up-4"
 													style={{
-														transition: 'all 0.3s ease 0s',
-														opacity: 0,
-														transform: 'translateX(0px) translateY(60px) translateZ(0px)'
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
 													}}
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/alvaro-bernal-21561.jpg"
-															srcSet="/static/images/alvaro-bernal-21561-p-1080.jpeg 1080w, /static/images/alvaro-bernal-21561-p-1600.jpeg 1600w, /static/images/alvaro-bernal-21561-p-2000.jpeg 2000w, /static/images/alvaro-bernal-21561-p-2600.jpeg 2600w, /static/images/alvaro-bernal-21561-p-3200.jpeg 3200w, /static/images/alvaro-bernal-21561.jpg 4272w"
+															src="static/images/alvaro-bernal-21561.jpg"
+															srcSet="static/images/alvaro-bernal-21561-p-1080.jpeg 1080w, static/images/alvaro-bernal-21561-p-1600.jpeg 1600w, static/images/alvaro-bernal-21561-p-2000.jpeg 2000w, static/images/alvaro-bernal-21561-p-2600.jpeg 2600w, static/images/alvaro-bernal-21561-p-3200.jpeg 3200w, static/images/alvaro-bernal-21561.jpg 4272w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -620,7 +647,7 @@ export default class HomePage extends BasePage {
 														</div>
 													</div>
 													<div className="white-portfolio-content">
-														<p className="paragraph-project dark _2">Critically Endangered</p>
+														<p className="paragraph-project dark _2">Mohammad</p>
 														<h4 className="project-header white-content">Lemur</h4>
 													</div>
 												</a>
@@ -631,15 +658,15 @@ export default class HomePage extends BasePage {
 													className="project-wrapper style2 w-inline-block"
 													data-ix="fade-up-5"
 													style={{
-														transition: 'all 0.3s ease 0s',
-														opacity: 0,
-														transform: 'translateX(0px) translateY(60px) translateZ(0px)'
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
 													}}
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/malte-wingen-381987.jpg"
-															srcSet="/static/images/malte-wingen-381987-p-1080.jpeg 1080w, /static/images/malte-wingen-381987-p-1600.jpeg 1600w, /static/images/malte-wingen-381987-p-2000.jpeg 2000w, /static/images/malte-wingen-381987-p-2600.jpeg 2600w, /static/images/malte-wingen-381987-p-3200.jpeg 3200w, /static/images/malte-wingen-381987.jpg 5760w"
+															src="static/images/malte-wingen-381987.jpg"
+															srcSet="static/images/malte-wingen-381987-p-1080.jpeg 1080w, static/images/malte-wingen-381987-p-1600.jpeg 1600w, static/images/malte-wingen-381987-p-2000.jpeg 2000w, static/images/malte-wingen-381987-p-2600.jpeg 2600w, static/images/malte-wingen-381987-p-3200.jpeg 3200w, static/images/malte-wingen-381987.jpg 5760w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -651,12 +678,17 @@ export default class HomePage extends BasePage {
 															<div
 																className="project-content style _2"
 																data-ix="hide-project-overlay-on-initial"
-																style={{ opacity: 0 }}
+																style={{
+																	opacity: 0,
+																	transformStyle: 'preserve-3d',
+																	transition: 'opacity 400ms, transform 400ms',
+																	transform: 'scaleX(1) scaleY(1) scaleZ(1)'
+																}}
 															/>
 														</div>
 													</div>
 													<div className="white-portfolio-content">
-														<p className="paragraph-project dark _5">Endangered</p>
+														<p className="paragraph-project dark _5">Diego</p>
 														<h4 className="project-header white-content">Sea Lion</h4>
 													</div>
 												</a>
@@ -667,15 +699,15 @@ export default class HomePage extends BasePage {
 													className="project-wrapper style2 w-inline-block"
 													data-ix="fade-up-6"
 													style={{
-														transition: 'all 0.3s ease 0s',
-														opacity: 0,
-														transform: 'translateX(0px) translateY(60px) translateZ(0px)'
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
 													}}
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/temple-cerulean-421274.jpg"
-															srcSet="/static/images/temple-cerulean-421274-p-1080.jpeg 1080w, /static/images/temple-cerulean-421274-p-1600.jpeg 1600w, /static/images/temple-cerulean-421274-p-2000.jpeg 2000w, /static/images/temple-cerulean-421274-p-2600.jpeg 2600w, /static/images/temple-cerulean-421274-p-3200.jpeg 3200w, /static/images/temple-cerulean-421274.jpg 6000w"
+															src="static/images/temple-cerulean-421274.jpg"
+															srcSet="static/images/temple-cerulean-421274-p-1080.jpeg 1080w, static/images/temple-cerulean-421274-p-1600.jpeg 1600w, static/images/temple-cerulean-421274-p-2000.jpeg 2000w, static/images/temple-cerulean-421274-p-2600.jpeg 2600w, static/images/temple-cerulean-421274-p-3200.jpeg 3200w, static/images/temple-cerulean-421274.jpg 6000w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -687,12 +719,17 @@ export default class HomePage extends BasePage {
 															<div
 																className="project-content style"
 																data-ix="hide-project-overlay-on-initial"
-																style={{ opacity: 0 }}
+																style={{
+																	opacity: 0,
+																	transformStyle: 'preserve-3d',
+																	transition: 'opacity 400ms, transform 400ms',
+																	transform: 'scaleX(1) scaleY(1) scaleZ(1)'
+																}}
 															/>
 														</div>
 													</div>
 													<div className="white-portfolio-content">
-														<p className="paragraph-project dark">Endangered</p>
+														<p className="paragraph-project dark">Pomo</p>
 														<h4 className="project-header white-content">Panda</h4>
 													</div>
 												</a>
@@ -708,8 +745,8 @@ export default class HomePage extends BasePage {
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/alvaro-bernal-21561.jpg"
-															srcSet="/static/images/alvaro-bernal-21561-p-1080.jpeg 1080w, /static/images/alvaro-bernal-21561-p-1600.jpeg 1600w, /static/images/alvaro-bernal-21561-p-2000.jpeg 2000w, /static/images/alvaro-bernal-21561-p-2600.jpeg 2600w, /static/images/alvaro-bernal-21561-p-3200.jpeg 3200w, /static/images/alvaro-bernal-21561.jpg 4272w"
+															src="static/images/alvaro-bernal-21561.jpg"
+															srcSet="static/images/alvaro-bernal-21561-p-1080.jpeg 1080w, static/images/alvaro-bernal-21561-p-1600.jpeg 1600w, static/images/alvaro-bernal-21561-p-2000.jpeg 2000w, static/images/alvaro-bernal-21561-p-2600.jpeg 2600w, static/images/alvaro-bernal-21561-p-3200.jpeg 3200w, static/images/alvaro-bernal-21561.jpg 4272w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -738,8 +775,8 @@ export default class HomePage extends BasePage {
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/malte-wingen-381987.jpg"
-															srcSet="/static/images/malte-wingen-381987-p-1080.jpeg 1080w, /static/images/malte-wingen-381987-p-1600.jpeg 1600w, /static/images/malte-wingen-381987-p-2000.jpeg 2000w, /static/images/malte-wingen-381987-p-2600.jpeg 2600w, /static/images/malte-wingen-381987-p-3200.jpeg 3200w, /static/images/malte-wingen-381987.jpg 5760w"
+															src="static/images/malte-wingen-381987.jpg"
+															srcSet="static/images/malte-wingen-381987-p-1080.jpeg 1080w, static/images/malte-wingen-381987-p-1600.jpeg 1600w, static/images/malte-wingen-381987-p-2000.jpeg 2000w, static/images/malte-wingen-381987-p-2600.jpeg 2600w, static/images/malte-wingen-381987-p-3200.jpeg 3200w, static/images/malte-wingen-381987.jpg 5760w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -768,8 +805,100 @@ export default class HomePage extends BasePage {
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/temple-cerulean-421274.jpg"
-															srcSet="/static/images/temple-cerulean-421274-p-1080.jpeg 1080w, /static/images/temple-cerulean-421274-p-1600.jpeg 1600w, /static/images/temple-cerulean-421274-p-2000.jpeg 2000w, /static/images/temple-cerulean-421274-p-2600.jpeg 2600w, /static/images/temple-cerulean-421274-p-3200.jpeg 3200w, /static/images/temple-cerulean-421274.jpg 6000w"
+															src="static/images/temple-cerulean-421274.jpg"
+															srcSet="static/images/temple-cerulean-421274-p-1080.jpeg 1080w, static/images/temple-cerulean-421274-p-1600.jpeg 1600w, static/images/temple-cerulean-421274-p-2000.jpeg 2000w, static/images/temple-cerulean-421274-p-2600.jpeg 2600w, static/images/temple-cerulean-421274-p-3200.jpeg 3200w, static/images/temple-cerulean-421274.jpg 6000w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+										</div>
+										<div className="portfolio-row style2 w-row">
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/alvaro-bernal-21561.jpg"
+															srcSet="static/images/alvaro-bernal-21561-p-1080.jpeg 1080w, static/images/alvaro-bernal-21561-p-1600.jpeg 1600w, static/images/alvaro-bernal-21561-p-2000.jpeg 2000w, static/images/alvaro-bernal-21561-p-2600.jpeg 2600w, static/images/alvaro-bernal-21561-p-3200.jpeg 3200w, static/images/alvaro-bernal-21561.jpg 4272w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _1"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _4">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/malte-wingen-381987.jpg"
+															srcSet="static/images/malte-wingen-381987-p-1080.jpeg 1080w, static/images/malte-wingen-381987-p-1600.jpeg 1600w, static/images/malte-wingen-381987-p-2000.jpeg 2000w, static/images/malte-wingen-381987-p-2600.jpeg 2600w, static/images/malte-wingen-381987-p-3200.jpeg 3200w, static/images/malte-wingen-381987.jpg 5760w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _2"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _5">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/temple-cerulean-421274.jpg"
+															srcSet="static/images/temple-cerulean-421274-p-1080.jpeg 1080w, static/images/temple-cerulean-421274-p-1600.jpeg 1600w, static/images/temple-cerulean-421274-p-2000.jpeg 2000w, static/images/temple-cerulean-421274-p-2600.jpeg 2600w, static/images/temple-cerulean-421274-p-3200.jpeg 3200w, static/images/temple-cerulean-421274.jpg 6000w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -802,8 +931,100 @@ export default class HomePage extends BasePage {
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/temple-cerulean-421274.jpg"
-															srcSet="/static/images/temple-cerulean-421274-p-1080.jpeg 1080w, /static/images/temple-cerulean-421274-p-1600.jpeg 1600w, /static/images/temple-cerulean-421274-p-2000.jpeg 2000w, /static/images/temple-cerulean-421274-p-2600.jpeg 2600w, /static/images/temple-cerulean-421274-p-3200.jpeg 3200w, /static/images/temple-cerulean-421274.jpg 6000w"
+															src="static/images/temple-cerulean-421274.jpg"
+															srcSet="static/images/temple-cerulean-421274-p-1080.jpeg 1080w, static/images/temple-cerulean-421274-p-1600.jpeg 1600w, static/images/temple-cerulean-421274-p-2000.jpeg 2000w, static/images/temple-cerulean-421274-p-2600.jpeg 2600w, static/images/temple-cerulean-421274-p-3200.jpeg 3200w, static/images/temple-cerulean-421274.jpg 6000w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark">Teri</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/malte-wingen-381987.jpg"
+															srcSet="static/images/malte-wingen-381987-p-1080.jpeg 1080w, static/images/malte-wingen-381987-p-1600.jpeg 1600w, static/images/malte-wingen-381987-p-2000.jpeg 2000w, static/images/malte-wingen-381987-p-2600.jpeg 2600w, static/images/malte-wingen-381987-p-3200.jpeg 3200w, static/images/malte-wingen-381987.jpg 5760w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _2"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _5">Georgio</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/scott-webb-347201.jpg"
+															srcSet="static/images/scott-webb-347201-p-500.jpeg 500w, static/images/scott-webb-347201-p-1080.jpeg 1080w, static/images/scott-webb-347201-p-1600.jpeg 1600w, static/images/scott-webb-347201-p-2000.jpeg 2000w, static/images/scott-webb-347201-p-2600.jpeg 2600w, static/images/scott-webb-347201-p-3200.jpeg 3200w, static/images/scott-webb-347201.jpg 6000w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _5"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _2">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+										</div>
+										<div className="portfolio-row style2 w-row">
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/temple-cerulean-421274.jpg"
+															srcSet="static/images/temple-cerulean-421274-p-1080.jpeg 1080w, static/images/temple-cerulean-421274-p-1600.jpeg 1600w, static/images/temple-cerulean-421274-p-2000.jpeg 2000w, static/images/temple-cerulean-421274-p-2600.jpeg 2600w, static/images/temple-cerulean-421274-p-3200.jpeg 3200w, static/images/temple-cerulean-421274.jpg 6000w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -832,8 +1053,8 @@ export default class HomePage extends BasePage {
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/malte-wingen-381987.jpg"
-															srcSet="/static/images/malte-wingen-381987-p-1080.jpeg 1080w, /static/images/malte-wingen-381987-p-1600.jpeg 1600w, /static/images/malte-wingen-381987-p-2000.jpeg 2000w, /static/images/malte-wingen-381987-p-2600.jpeg 2600w, /static/images/malte-wingen-381987-p-3200.jpeg 3200w, /static/images/malte-wingen-381987.jpg 5760w"
+															src="static/images/malte-wingen-381987.jpg"
+															srcSet="static/images/malte-wingen-381987-p-1080.jpeg 1080w, static/images/malte-wingen-381987-p-1600.jpeg 1600w, static/images/malte-wingen-381987-p-2000.jpeg 2000w, static/images/malte-wingen-381987-p-2600.jpeg 2600w, static/images/malte-wingen-381987-p-3200.jpeg 3200w, static/images/malte-wingen-381987.jpg 5760w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -862,8 +1083,8 @@ export default class HomePage extends BasePage {
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/scott-webb-347201.jpg"
-															srcSet="/static/images/scott-webb-347201-p-500.jpeg 500w, /static/images/scott-webb-347201-p-1080.jpeg 1080w, /static/images/scott-webb-347201-p-1600.jpeg 1600w, /static/images/scott-webb-347201-p-2000.jpeg 2000w, /static/images/scott-webb-347201-p-2600.jpeg 2600w, /static/images/scott-webb-347201-p-3200.jpeg 3200w, /static/images/scott-webb-347201.jpg 6000w"
+															src="static/images/scott-webb-347201.jpg"
+															srcSet="static/images/scott-webb-347201-p-500.jpeg 500w, static/images/scott-webb-347201-p-1080.jpeg 1080w, static/images/scott-webb-347201-p-1600.jpeg 1600w, static/images/scott-webb-347201-p-2000.jpeg 2000w, static/images/scott-webb-347201-p-2600.jpeg 2600w, static/images/scott-webb-347201-p-3200.jpeg 3200w, static/images/scott-webb-347201.jpg 6000w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -896,8 +1117,8 @@ export default class HomePage extends BasePage {
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/keila-hotzel-395555.jpg"
-															srcSet="/static/images/keila-hotzel-395555-p-1080.jpeg 1080w, /static/images/keila-hotzel-395555-p-1600.jpeg 1600w, /static/images/keila-hotzel-395555-p-2000.jpeg 2000w, /static/images/keila-hotzel-395555-p-2600.jpeg 2600w, /static/images/keila-hotzel-395555-p-3200.jpeg 3200w, /static/images/keila-hotzel-395555.jpg 4200w"
+															src="static/images/keila-hotzel-395555.jpg"
+															srcSet="static/images/keila-hotzel-395555-p-1080.jpeg 1080w, static/images/keila-hotzel-395555-p-1600.jpeg 1600w, static/images/keila-hotzel-395555-p-2000.jpeg 2000w, static/images/keila-hotzel-395555-p-2600.jpeg 2600w, static/images/keila-hotzel-395555-p-3200.jpeg 3200w, static/images/keila-hotzel-395555.jpg 4200w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -926,8 +1147,8 @@ export default class HomePage extends BasePage {
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/scott-webb-347201.jpg"
-															srcSet="/static/images/scott-webb-347201-p-500.jpeg 500w, /static/images/scott-webb-347201-p-1080.jpeg 1080w, /static/images/scott-webb-347201-p-1600.jpeg 1600w, /static/images/scott-webb-347201-p-2000.jpeg 2000w, /static/images/scott-webb-347201-p-2600.jpeg 2600w, /static/images/scott-webb-347201-p-3200.jpeg 3200w, /static/images/scott-webb-347201.jpg 6000w"
+															src="static/images/scott-webb-347201.jpg"
+															srcSet="static/images/scott-webb-347201-p-500.jpeg 500w, static/images/scott-webb-347201-p-1080.jpeg 1080w, static/images/scott-webb-347201-p-1600.jpeg 1600w, static/images/scott-webb-347201-p-2000.jpeg 2000w, static/images/scott-webb-347201-p-2600.jpeg 2600w, static/images/scott-webb-347201-p-3200.jpeg 3200w, static/images/scott-webb-347201.jpg 6000w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -956,8 +1177,627 @@ export default class HomePage extends BasePage {
 												>
 													<div className="project-image">
 														<img
-															src="/static/images/ash-edmonds-488225.jpg"
-															srcSet="/static/images/ash-edmonds-488225-p-800.jpeg 800w, /static/images/ash-edmonds-488225-p-1080.jpeg 1080w, /static/images/ash-edmonds-488225-p-1600.jpeg 1600w, /static/images/ash-edmonds-488225-p-2000.jpeg 2000w, /static/images/ash-edmonds-488225-p-2600.jpeg 2600w, /static/images/ash-edmonds-488225-p-3200.jpeg 3200w, /static/images/ash-edmonds-488225.jpg 4570w"
+															src="static/images/ash-edmonds-488225.jpg"
+															srcSet="static/images/ash-edmonds-488225-p-800.jpeg 800w, static/images/ash-edmonds-488225-p-1080.jpeg 1080w, static/images/ash-edmonds-488225-p-1600.jpeg 1600w, static/images/ash-edmonds-488225-p-2000.jpeg 2000w, static/images/ash-edmonds-488225-p-2600.jpeg 2600w, static/images/ash-edmonds-488225-p-3200.jpeg 3200w, static/images/ash-edmonds-488225.jpg 4570w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _1"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _4">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+										</div>
+										<div className="portfolio-row style2 w-row">
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/keila-hotzel-395555.jpg"
+															srcSet="static/images/keila-hotzel-395555-p-1080.jpeg 1080w, static/images/keila-hotzel-395555-p-1600.jpeg 1600w, static/images/keila-hotzel-395555-p-2000.jpeg 2000w, static/images/keila-hotzel-395555-p-2600.jpeg 2600w, static/images/keila-hotzel-395555-p-3200.jpeg 3200w, static/images/keila-hotzel-395555.jpg 4200w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _4"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _1">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/scott-webb-347201.jpg"
+															srcSet="static/images/scott-webb-347201-p-500.jpeg 500w, static/images/scott-webb-347201-p-1080.jpeg 1080w, static/images/scott-webb-347201-p-1600.jpeg 1600w, static/images/scott-webb-347201-p-2000.jpeg 2000w, static/images/scott-webb-347201-p-2600.jpeg 2600w, static/images/scott-webb-347201-p-3200.jpeg 3200w, static/images/scott-webb-347201.jpg 6000w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _5"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _2">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/ash-edmonds-488225.jpg"
+															srcSet="static/images/ash-edmonds-488225-p-800.jpeg 800w, static/images/ash-edmonds-488225-p-1080.jpeg 1080w, static/images/ash-edmonds-488225-p-1600.jpeg 1600w, static/images/ash-edmonds-488225-p-2000.jpeg 2000w, static/images/ash-edmonds-488225-p-2600.jpeg 2600w, static/images/ash-edmonds-488225-p-3200.jpeg 3200w, static/images/ash-edmonds-488225.jpg 4570w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _1"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _4">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div className="tabs-content w-tab-content">
+									<div data-w-tab="Tab 3" className="w-tab-pane w--tab-active">
+										<div className="portfolio-row style2 w-row">
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+													data-ix="fade-up"
+													style={{
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
+													}}
+												>
+													<div className="project-image">
+														<img
+															src="static/images/jona-dinges-tiger.jpg"
+															width={200}
+															height={260}
+															srcSet="static/images/jona-dinges-tiger-p-500.jpeg 500w, static/images/jona-dinges-tiger.jpg 800w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _4"
+																data-ix="hide-project-overlay-on-initial"
+																style={{
+																	opacity: 0,
+																	transformStyle: 'preserve-3d',
+																	transition: 'opacity 400ms, transform 400ms',
+																	transform: 'scaleX(1) scaleY(1) scaleZ(1)'
+																}}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _5">Nezzie</p>
+														<h4 className="project-header white-content">The Pigeon</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+													data-ix="fade-up-2"
+													style={{
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
+													}}
+												>
+													<div className="project-image">
+														<img
+															src="static/images/oleg-stebenyev-r4-gorilla-f.jpg"
+															width={200}
+															height={260}
+															srcSet="static/images/oleg-stebenyev-r4-gorilla-f-p-500.jpeg 500w, static/images/oleg-stebenyev-r4-gorilla-f-p-800.jpeg 800w, static/images/oleg-stebenyev-r4-gorilla-f-p-1080.jpeg 1080w, static/images/oleg-stebenyev-r4-gorilla-f-p-1600.jpeg 1600w, static/images/oleg-stebenyev-r4-gorilla-f.jpg 1827w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _5"
+																data-ix="hide-project-overlay-on-initial"
+																style={{
+																	opacity: 0,
+																	transformStyle: 'preserve-3d',
+																	transition: 'opacity 400ms, transform 400ms',
+																	transform: 'scaleX(1) scaleY(1) scaleZ(1)'
+																}}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _3">Satoshi</p>
+														<h4 className="project-header white-content">The Shiba Inu</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+													data-ix="fade-up-3"
+													style={{
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
+													}}
+												>
+													<div className="project-image">
+														<img
+															src="static/images/elephant.jpg"
+															width={200}
+															height={260}
+															srcSet="static/images/elephant-p-500.jpeg 500w, static/images/elephant-p-800.jpeg 800w, static/images/elephant.jpg 900w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _1"
+																data-ix="hide-project-overlay-on-initial"
+																style={{
+																	opacity: 0,
+																	transformStyle: 'preserve-3d',
+																	transition: 'opacity 400ms, transform 400ms',
+																	transform: 'scaleX(1) scaleY(1) scaleZ(1)'
+																}}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _3">Charlemagne</p>
+														<h4 className="project-header white-content">The Frog</h4>
+													</div>
+												</a>
+											</div>
+										</div>
+										<div className="portfolio-row style2 last w-row">
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+													data-ix="fade-up-4"
+													style={{
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
+													}}
+												>
+													<div className="project-image">
+														<img
+															src="static/images/alvaro-bernal-21561.jpg"
+															srcSet="static/images/alvaro-bernal-21561-p-1080.jpeg 1080w, static/images/alvaro-bernal-21561-p-1600.jpeg 1600w, static/images/alvaro-bernal-21561-p-2000.jpeg 2000w, static/images/alvaro-bernal-21561-p-2600.jpeg 2600w, static/images/alvaro-bernal-21561-p-3200.jpeg 3200w, static/images/alvaro-bernal-21561.jpg 4272w"
+															sizes="100vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _1"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _2">Critically Endangered</p>
+														<h4 className="project-header white-content">Lemur</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+													data-ix="fade-up-5"
+													style={{
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
+													}}
+												>
+													<div className="project-image">
+														<img
+															src="static/images/malte-wingen-381987.jpg"
+															srcSet="static/images/malte-wingen-381987-p-1080.jpeg 1080w, static/images/malte-wingen-381987-p-1600.jpeg 1600w, static/images/malte-wingen-381987-p-2000.jpeg 2000w, static/images/malte-wingen-381987-p-2600.jpeg 2600w, static/images/malte-wingen-381987-p-3200.jpeg 3200w, static/images/malte-wingen-381987.jpg 5760w"
+															sizes="100vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _2"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _5">Endangered</p>
+														<h4 className="project-header white-content">Sea Lion</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+													data-ix="fade-up-6"
+													style={{
+														transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
+														opacity: 1,
+														transform: 'translateX(0px) translateY(0px) translateZ(0px)'
+													}}
+												>
+													<div className="project-image">
+														<img
+															src="static/images/temple-cerulean-421274.jpg"
+															srcSet="static/images/temple-cerulean-421274-p-1080.jpeg 1080w, static/images/temple-cerulean-421274-p-1600.jpeg 1600w, static/images/temple-cerulean-421274-p-2000.jpeg 2000w, static/images/temple-cerulean-421274-p-2600.jpeg 2600w, static/images/temple-cerulean-421274-p-3200.jpeg 3200w, static/images/temple-cerulean-421274.jpg 6000w"
+															sizes="100vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark">Endangered</p>
+														<h4 className="project-header white-content">Panda</h4>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div data-w-tab="Tab 4" className="w-tab-pane">
+										<div className="portfolio-row style2 w-row">
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/alvaro-bernal-21561.jpg"
+															srcSet="static/images/alvaro-bernal-21561-p-1080.jpeg 1080w, static/images/alvaro-bernal-21561-p-1600.jpeg 1600w, static/images/alvaro-bernal-21561-p-2000.jpeg 2000w, static/images/alvaro-bernal-21561-p-2600.jpeg 2600w, static/images/alvaro-bernal-21561-p-3200.jpeg 3200w, static/images/alvaro-bernal-21561.jpg 4272w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _1"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _4">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/malte-wingen-381987.jpg"
+															srcSet="static/images/malte-wingen-381987-p-1080.jpeg 1080w, static/images/malte-wingen-381987-p-1600.jpeg 1600w, static/images/malte-wingen-381987-p-2000.jpeg 2000w, static/images/malte-wingen-381987-p-2600.jpeg 2600w, static/images/malte-wingen-381987-p-3200.jpeg 3200w, static/images/malte-wingen-381987.jpg 5760w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _2"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _5">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/temple-cerulean-421274.jpg"
+															srcSet="static/images/temple-cerulean-421274-p-1080.jpeg 1080w, static/images/temple-cerulean-421274-p-1600.jpeg 1600w, static/images/temple-cerulean-421274-p-2000.jpeg 2000w, static/images/temple-cerulean-421274-p-2600.jpeg 2600w, static/images/temple-cerulean-421274-p-3200.jpeg 3200w, static/images/temple-cerulean-421274.jpg 6000w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div data-w-tab="Tab 5" className="w-tab-pane">
+										<div className="portfolio-row style2 w-row">
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/temple-cerulean-421274.jpg"
+															srcSet="static/images/temple-cerulean-421274-p-1080.jpeg 1080w, static/images/temple-cerulean-421274-p-1600.jpeg 1600w, static/images/temple-cerulean-421274-p-2000.jpeg 2000w, static/images/temple-cerulean-421274-p-2600.jpeg 2600w, static/images/temple-cerulean-421274-p-3200.jpeg 3200w, static/images/temple-cerulean-421274.jpg 6000w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/malte-wingen-381987.jpg"
+															srcSet="static/images/malte-wingen-381987-p-1080.jpeg 1080w, static/images/malte-wingen-381987-p-1600.jpeg 1600w, static/images/malte-wingen-381987-p-2000.jpeg 2000w, static/images/malte-wingen-381987-p-2600.jpeg 2600w, static/images/malte-wingen-381987-p-3200.jpeg 3200w, static/images/malte-wingen-381987.jpg 5760w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _2"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _5">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/scott-webb-347201.jpg"
+															srcSet="static/images/scott-webb-347201-p-500.jpeg 500w, static/images/scott-webb-347201-p-1080.jpeg 1080w, static/images/scott-webb-347201-p-1600.jpeg 1600w, static/images/scott-webb-347201-p-2000.jpeg 2000w, static/images/scott-webb-347201-p-2600.jpeg 2600w, static/images/scott-webb-347201-p-3200.jpeg 3200w, static/images/scott-webb-347201.jpg 6000w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _5"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _2">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+									<div data-w-tab="Tab 6" className="w-tab-pane">
+										<div className="portfolio-row style2 w-row">
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/keila-hotzel-395555.jpg"
+															srcSet="static/images/keila-hotzel-395555-p-1080.jpeg 1080w, static/images/keila-hotzel-395555-p-1600.jpeg 1600w, static/images/keila-hotzel-395555-p-2000.jpeg 2000w, static/images/keila-hotzel-395555-p-2600.jpeg 2600w, static/images/keila-hotzel-395555-p-3200.jpeg 3200w, static/images/keila-hotzel-395555.jpg 4200w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _4"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _1">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/scott-webb-347201.jpg"
+															srcSet="static/images/scott-webb-347201-p-500.jpeg 500w, static/images/scott-webb-347201-p-1080.jpeg 1080w, static/images/scott-webb-347201-p-1600.jpeg 1600w, static/images/scott-webb-347201-p-2000.jpeg 2000w, static/images/scott-webb-347201-p-2600.jpeg 2600w, static/images/scott-webb-347201-p-3200.jpeg 3200w, static/images/scott-webb-347201.jpg 6000w"
+															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
+															className="tab-style-2-image"
+														/>
+														<div
+															className="overlay-image"
+															data-ix="overlay-hide-content-image"
+															style={{ transition: 'all 0.3s ease 0s' }}
+														>
+															<div
+																className="project-content style _5"
+																data-ix="hide-project-overlay-on-initial"
+																style={{ opacity: 0 }}
+															/>
+														</div>
+													</div>
+													<div className="white-portfolio-content">
+														<p className="paragraph-project dark _2">Design Idea</p>
+														<h4 className="project-header white-content">Design Domo</h4>
+													</div>
+												</a>
+											</div>
+											<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
+												<a
+													href="../vanimals-site/single-portfolio.html"
+													className="project-wrapper style2 w-inline-block"
+												>
+													<div className="project-image">
+														<img
+															src="static/images/ash-edmonds-488225.jpg"
+															srcSet="static/images/ash-edmonds-488225-p-800.jpeg 800w, static/images/ash-edmonds-488225-p-1080.jpeg 1080w, static/images/ash-edmonds-488225-p-1600.jpeg 1600w, static/images/ash-edmonds-488225-p-2000.jpeg 2000w, static/images/ash-edmonds-488225-p-2600.jpeg 2600w, static/images/ash-edmonds-488225-p-3200.jpeg 3200w, static/images/ash-edmonds-488225.jpg 4570w"
 															sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
 															className="tab-style-2-image"
 														/>
@@ -986,34 +1826,6 @@ export default class HomePage extends BasePage {
 						</div>
 					</div>
 				</div>
-				<div className="section color-purple clients">
-					<div className="w-container">
-						<div className="bottom-padding _50">
-							<div className="algin-center">
-								<h1 className="section-tittle-hero-white white">Our Partners</h1>
-								<div className="subtittle white">Build Motion Digital Projects for Startups</div>
-								<div className="headline-sign">
-									<div className="line-features gray" />
-									<div className="color-line white" />
-								</div>
-							</div>
-						</div>
-						<div
-							data-ix="fade-up-2"
-							style={{
-								opacity: 1,
-								transform: 'translateX(0px) translateY(0px) translateZ(0px)',
-								transition: 'opacity 500ms, transform 800ms'
-							}}
-						>
-							<a className="client-logo color-link first w-inline-block" />
-							<a href="#" className="client-logo _1 color-link w-inline-block" />
-							<a href="#" className="client-logo _2 color-link w-inline-block" />
-							<a href="#" className="client-logo color-link w-inline-block" />
-							<a href="#" className="client-logo _5 color-link w-inline-block" />
-						</div>
-					</div>
-				</div>
 				<div>
 					<div className="section background-image gradient">
 						<div>
@@ -1025,8 +1837,9 @@ export default class HomePage extends BasePage {
 												className="subtittle bold white-one"
 												data-ix="fade-right"
 												style={{
-													opacity: 0,
-													transform: 'translateX(-60px) translateY(0px) translateZ(0px)'
+													opacity: 1,
+													transform: 'translateX(0px) translateY(0px) translateZ(0px)',
+													transition: 'opacity 500ms, transform 800ms'
 												}}
 											>
 												FOrever yours
@@ -1035,8 +1848,9 @@ export default class HomePage extends BasePage {
 												className="baner-big-text white center"
 												data-ix="fade-left"
 												style={{
-													opacity: 0,
-													transform: 'translateX(60px) translateY(0px) translateZ(0px)'
+													opacity: 1,
+													transform: 'translateX(0px) translateY(0px) translateZ(0px)',
+													transition: 'opacity 500ms, transform 800ms'
 												}}
 											>
 												Every Vanimal is authentically yours. The integrity of its DNA is publicly
@@ -1049,11 +1863,12 @@ export default class HomePage extends BasePage {
 												className="important-text white"
 												data-ix="fade-up-3"
 												style={{
-													opacity: 0,
-													transform: 'translateX(0px) translateY(60px) translateZ(0px)'
+													opacity: 1,
+													transform: 'translateX(0px) translateY(0px) translateZ(0px)',
+													transition: 'opacity 500ms, transform 800ms'
 												}}
 											>
-												Branding Design&nbsp; +&nbsp;&nbsp; Mobile Website &nbsp;+&nbsp; eNewsletter
+												&nbsp;Learn More About Blockchain Tech Here
 											</div>
 										</div>
 									</div>
@@ -1062,6 +1877,7 @@ export default class HomePage extends BasePage {
 						</div>
 					</div>
 				</div>
+
 				<Footer />
 			</div>
 		);

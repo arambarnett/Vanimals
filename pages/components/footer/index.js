@@ -12,7 +12,7 @@ export default class FooterComponent extends BaseComponent {
 								<h6 className="tittle-footer">ABOUT VANIMALS</h6>
 								<p className="about-us-text">
 									We are a group of technologist and animal rights activist who came together to
-									create a product that is fun.
+									create a product that is fun. Save the animals buy a vanimal<strong />
 								</p>
 							</div>
 							<div className="social-wrapper">
@@ -22,44 +22,42 @@ export default class FooterComponent extends BaseComponent {
 								<a href="#" className="social-icon gmail w-inline-block" />
 							</div>
 						</div>
-						<div className="w-col w-col-3">
+						<div className="w-col w-col-6">
 							<div className="div-useful-links">
-								<h6 className="tittle-footer">Our Office</h6>
-								<a href="#" className="footer-link">
-									Boston
-								</a>
-								<a href="#" className="footer-link">
-									San Francisco
-								</a>
-								<a href="#" className="footer-link">
-									Chicago
-								</a>
-								<a href="#" className="footer-link">
-									Houston
-								</a>
-								<a href="#" className="footer-link">
-									New York
-								</a>
-							</div>
-						</div>
-						<div className="w-col w-col-3">
-							<div className="useful-pages">
-								<h6 className="tittle-footer">Useful Links</h6>
-								<a href="../vanimals-site/coming-soon.html" className="footer-link">
-									Coming Soon
-								</a>
-								<a href="../401.html" className="footer-link">
-									Password Page
-								</a>
-								<a href="../404.html" className="footer-link">
-									404 Page
-								</a>
-								<a href="../pages/blog.html" className="footer-link">
-									Style Guide
-								</a>
-								<a href="../vanimals-site/licensing.html" className="footer-link">
-									Licensing
-								</a>
+								<h6 className="tittle-footer">useful links</h6>
+								<div className="w-row">
+									<div className="w-col w-col-6">
+										<a href="/" className="footer-link top w--current">
+											Home
+										</a>
+										<a href="/about" className="footer-link">
+											About
+										</a>
+										<a href="/marketplace" className="footer-link">
+											Marketplace
+										</a>
+										<a href="/store" className="footer-link">
+											Store
+										</a>
+									</div>
+									<div className="w-col w-col-6">
+										<a
+											href="/my-account"
+											className="footer-link top"
+										>
+											My Account
+										</a>
+										<a href="/faq" className="footer-link">
+											FAQ's
+										</a>
+										<a href="/settings" className="footer-link">
+											Settings
+										</a>
+										<a href="/coming-soon" className="footer-link">
+											Coming Soon
+										</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
