@@ -24,6 +24,10 @@ class Api {
 			{ params }
 		);
 	}
+
+	async listVanimals(params) {
+		return this.client.get(`/rest/vanimals`, params);
+	}
 }
 
 export default new Api();

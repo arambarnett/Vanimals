@@ -45,6 +45,18 @@ class Vanimal extends BaseRestModel(BaseContract) {
 			genes: {
 				type: Sequelize.BIGINT,
 				allowNull: false
+			},
+			is_featured: {
+				type: Sequelize.BOOLEAN,
+			},
+			name: {
+				type: Sequelize.TEXT
+			},
+			description: {
+				type: Sequelize.TEXT
+			},
+			image_url: {
+				type: Sequelize.TEXT
 			}
 		};
 	}

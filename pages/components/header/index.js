@@ -4,6 +4,7 @@ import BaseComponent from '../../lib/BaseComponent';
 export default class HeaderComponent extends BaseComponent {
 	render() {
 		return (
+			<div style={{ height: '80px'}}>
 			<div
 				data-collapse="medium"
 				data-animation="default"
@@ -83,6 +84,7 @@ export default class HeaderComponent extends BaseComponent {
 					</div>
 				</div>
 				<div className="w-nav-overlay" data-wf-ignore />
+			</div>
 			</div>
 		);
 	}

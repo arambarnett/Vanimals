@@ -6,6 +6,10 @@ create table vanimals (
 	matron_id bigint not null,
 	sire_id bigint not null,
 	genes text not null,
+	is_featured bool default false,
+	image_url text,
+	name text,
+	description text,
 	updated_at timestamp default now(),
 	created_at timestamp default now(),
 	constraint vanimal_pkey primary key (vanimal_id)
