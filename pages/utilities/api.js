@@ -28,6 +28,10 @@ class Api {
 	async listVanimals(params) {
 		return this.client.get(`/rest/vanimals`, params);
 	}
+
+	async listAttributes(params) {
+		return this.client.get(`/rest/attributes`, params);
+	}
 }
 
 export default new Api();

@@ -5,12 +5,14 @@ import api from './utilities/api';
 
 import Footer from './components/footer';
 import Header from './components/header';
+import VanimalCard from './components/vanimal-card';
 
 export default class HomePage extends BasePage {
 	static async getInitialProps() {
 		const vanimalsResponse = await api.listVanimals({ is_featured: true });
+		const attributesResponse = await api.listAttributes();
 
-		return { vanimals: vanimalsResponse.data };
+		return { vanimals: vanimalsResponse.data, attributes: attributesResponse.data };
 	}
 
 	render() {
@@ -330,117 +332,7 @@ export default class HomePage extends BasePage {
 								<div className="subtittle left-padding">Check out the amazing colorways</div>
 								<div className="top-padding _40">
 									<div className="row-button w-row">
-										<div className="w-col w-col-3 w-col-medium-3">
-											<a href="../vanimals-site/about-4.html" className="inner-link w-button">
-												Diamond
-											</a>
-										</div>
-										<div className="w-col w-col-3 w-col-medium-3">
-											<a href="../about-us/about-2.html" className="inner-link w-button">
-												Green
-											</a>
-										</div>
-										<div className="w-col w-col-3 w-col-medium-3">
-											<a href="../about-us/about-3.html" className="inner-link w-button">
-												Gold
-											</a>
-										</div>
-										<div className="w-col w-col-3 w-col-medium-3">
-											<a href="../about-us/about-4.html" className="inner-link w-button">
-												Orange
-											</a>
-										</div>
-									</div>
-									<div className="row-button w-row">
-										<div className="w-col w-col-3">
-											<a href="../service/service.html" className="inner-link w-button">
-												Tourquoise
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../service/service-2.html" className="inner-link w-button">
-												Galaxy
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../service/service-3.html" className="inner-link w-button">
-												Chrome
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../vanimals-site/portfolio-3.html" className="inner-link w-button">
-												Purple
-											</a>
-										</div>
-									</div>
-									<div className="row-button w-row">
-										<div className="w-col w-col-3">
-											<a href="../vanimals-site/portfolio-2.html" className="inner-link w-button">
-												Jade
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../portfolio/portfolio-3.html" className="inner-link w-button">
-												Lemon
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a
-												href="../vanimals-site/single-portfolio.html"
-												className="inner-link w-button"
-											>
-												Red
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../blog/blog.html" className="inner-link w-button">
-												Water
-											</a>
-										</div>
-									</div>
-									<div className="row-button w-row">
-										<div className="w-col w-col-3">
-											<a href="../blog/blog-2.html" className="inner-link w-button">
-												Lobster
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../blog/blog-3.html" className="inner-link w-button">
-												Copper
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../contact/contact-1.html" className="inner-link w-button">
-												Green Fractal
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../contact/contact.html" className="inner-link w-button">
-												Circuit Board
-											</a>
-										</div>
-									</div>
-									<div className="row-button w-row">
-										<div className="w-col w-col-3">
-											<a href="../vanimals-site/table.html" className="inner-link w-button">
-												Raspberry
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../pages/f-a-q.html" className="inner-link w-button">
-												Circuit Board
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../vanimals-site/coming-soon.html" className="inner-link w-button">
-												Glowing Moss
-											</a>
-										</div>
-										<div className="w-col w-col-3">
-											<a href="../pages/blog.html" className="inner-link w-button">
-												Speckled Blue
-											</a>
-										</div>
+										{this.props.attributes.map(this.renderAttribute.bind(this))}
 									</div>
 								</div>
 							</div>
@@ -472,23 +364,6 @@ export default class HomePage extends BasePage {
 						</div>
 						<div className="top-padding _80">
 							<div data-duration-in={300} data-duration-out={100} className="w-tabs">
-								<div className="tab-menu left-side w-tab-menu">
-									<a
-										data-w-tab="Tab 3"
-										className="tab-link-style-2 w-inline-block w-tab-link w--current"
-									>
-										<div className="tab-tittle">All</div>
-									</a>
-									<a data-w-tab="Tab 4" className="tab-link-style-2 w-inline-block w-tab-link">
-										<div className="tab-tittle">Critically Endangered</div>
-									</a>
-									<a data-w-tab="Tab 5" className="tab-link-style-2 w-inline-block w-tab-link">
-										<div className="tab-tittle">Endangered</div>
-									</a>
-									<a data-w-tab="Tab 6" className="tab-link-style-2 w-inline-block w-tab-link">
-										<div className="tab-tittle">Ubiquitous</div>
-									</a>
-								</div>
 								<div className="tabs-content w-tab-content">
 									<div data-w-tab="Tab 3" className="w-tab-pane w--tab-active">
 										<div className="portfolio-row style2 w-row">
@@ -557,44 +432,15 @@ export default class HomePage extends BasePage {
 		);
 	}
 
-	renderVanimal() {
+	renderVanimal(vanimal) {
+		return <VanimalCard key={vanimal.vanimal_id} vanimal={vanimal} />;
+	}
+
+	renderAttribute(attribute) {
 		return (
-			<div className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4">
-				<a
-					href="../vanimals-site/single-portfolio.html"
-					className="project-wrapper style2 w-inline-block"
-					data-ix="fade-up"
-					style={{
-						transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
-						opacity: 1,
-						transform: 'translateX(0px) translateY(0px) translateZ(0px)'
-					}}
-				>
-					<div className="project-image">
-						<img
-							src="static/images/jona-dinges-tiger.jpg"
-							width={200}
-							height={260}
-							srcSet="static/images/jona-dinges-tiger-p-500.jpeg 500w, static/images/jona-dinges-tiger.jpg 800w"
-							sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
-							className="tab-style-2-image"
-						/>
-						<div
-							className="overlay-image"
-							data-ix="overlay-hide-content-image"
-							style={{ transition: 'all 0.3s ease 0s' }}
-						>
-							<div
-								className="project-content style _4"
-								data-ix="hide-project-overlay-on-initial"
-								style={{ opacity: 0 }}
-							/>
-						</div>
-					</div>
-					<div className="white-portfolio-content">
-						<p className="paragraph-project dark _5">Teri</p>
-						<h4 className="project-header white-content">The Sumatran Tiger</h4>
-					</div>
+			<div key={attribute.attribute_id} style={{ marginBottom: '12px' }} className="w-col w-col-3 w-col-medium-3">
+				<a href={`/marketplace?attribute_id=${attribute.attribute_id}`} className="inner-link w-button">
+					{attribute.name}
 				</a>
 			</div>
 		);

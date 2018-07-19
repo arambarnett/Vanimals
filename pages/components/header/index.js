@@ -15,6 +15,7 @@ export default class HeaderComponent extends BaseComponent {
 					<a href="static/index.html" className="brand-link-second w-nav-brand">
 						<img
 							src="static/images/Vanimals-logo-main.png"
+							style={{ marginTop: '24px' }}
 							width={120}
 							srcSet="static/images/Vanimals-logo-main-p-500.png 500w, static/images/Vanimals-logo-main.png 543w"
 							sizes="120px"

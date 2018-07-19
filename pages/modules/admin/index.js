@@ -34,10 +34,9 @@ export default class AdminPage extends BasePage {
 				<div
 					style={{
 						width: 'calc(100% - 8px)',
-						maxHeight: 'calc(100vh - 238px)',
+						maxHeight: 'calc(100vh - 292px)',
 						overflowY: 'auto',
 						padding: '12px',
-						margin: '-8px'
 					}}
 				>
 					<Grid container spacing={24}>
@@ -67,7 +66,7 @@ export default class AdminPage extends BasePage {
 				<div
 					style={{
 						position: 'fixed',
-						bottom: 0,
+						bottom: '24px',
 						left: 0,
 						height: '200px',
 						width: 'calc(100% - 24px)',

@@ -1,6 +1,8 @@
 const BaseApi = require('js-base-lib/lib/BaseApi');
-const User = require('../models/User');
+
+const Attribute = require('../models/Attribute');
 const FacebookAccount = require('../models/FacebookAccount');
+const User = require('../models/User');
 const Vanimal = require('../models/Vanimal');
 
 class RestApi extends BaseApi {
@@ -21,6 +23,10 @@ class RestApi extends BaseApi {
 			{
 				name: 'vanimals',
 				router: Vanimal.restRouter
+			},
+			{
+				name: 'attributes',
+				router: Attribute.restRouter
 			}
 		];
 	}
