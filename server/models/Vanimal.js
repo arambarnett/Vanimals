@@ -1,5 +1,6 @@
 const BaseRestModel = require('js-base-lib/lib/BaseRestModel');
 const BaseContract = require('js-base-lib/lib/BaseContract');
+const vanimalsMap = require('../../vanimals');
 
 class Vanimal extends BaseRestModel(BaseContract) {
 	static get truffleConfig() {
@@ -88,13 +89,16 @@ module.exports = Vanimal;
 			console.log('BIRTH ERROR', error);
 		}
 
-		const payload = {
+		const randomIndex = Math.floor(Math.random() * 3) + 1
+		const vaniamalData = vanimalsMap.vanimals[randomIndex];
+
+		const payload = Object.assign({}, vanimalData, {
 			vanimal_id: result.args.kittyId.toString(),
 			owner: result.args.owner,
 			matron_id: result.args.matronId.toString(),
 			sire_id: result.args.sireId.toString(),
 			genes: result.args.genes.toString()
-		}
+		});
 
 		await Vanimal.Postgres.findOrCreate({ where: { vanimal_id: payload.vanimal_id }, defaults: payload });
 	});
