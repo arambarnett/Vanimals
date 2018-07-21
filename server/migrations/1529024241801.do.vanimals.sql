@@ -9,7 +9,13 @@ create table vanimals (
 	is_featured bool default false,
 	image_url text,
 	name text,
+	short_description text,
+	population text,
+	status text,
+	distribution text,
 	description text,
+	location text,
+	rarity text,
 	updated_at timestamp default now(),
 	created_at timestamp default now(),
 	constraint vanimal_pkey primary key (vanimal_id)

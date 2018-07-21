@@ -29,6 +29,10 @@ class Api {
 		return this.client.get(`/rest/vanimals`, params);
 	}
 
+	async fetchVanimal(vanimalId, params) {
+		return this.client.get(`/rest/vanimals/${vanimalId}`, params);
+	}
+
 	async listAttributes(params) {
 		return this.client.get(`/rest/attributes`, params);
 	}

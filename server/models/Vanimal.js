@@ -52,7 +52,25 @@ class Vanimal extends BaseRestModel(BaseContract) {
 			name: {
 				type: Sequelize.TEXT
 			},
+			short_description: {
+				type: Sequelize.TEXT
+			},
+			population: {
+				type: Sequelize.TEXT
+			},
+			status: {
+				type: Sequelize.TEXT
+			},
+			distribution: {
+				type: Sequelize.TEXT
+			},
 			description: {
+				type: Sequelize.TEXT
+			},
+			location: {
+				type: Sequelize.TEXT
+			},
+			rarity: {
 				type: Sequelize.TEXT
 			},
 			image_url: {

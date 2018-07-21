@@ -4,7 +4,6 @@ import BasePage from './lib/BasePage';
 import api from './utilities/api';
 
 import Footer from './components/footer';
-import Header from './components/header';
 import VanimalCard from './components/vanimal-card';
 
 export default class HomePage extends BasePage {
@@ -27,7 +26,6 @@ export default class HomePage extends BasePage {
 					className="banner second"
 					style={{ willChange: 'opacity', opacity: 1 }}
 				>
-					<Header />
 					<div className="colored-square-background-div colored-square-lighter" />
 					<div className="colored-square-background-div" />
 					<div className="container-fluid">
@@ -77,7 +75,7 @@ export default class HomePage extends BasePage {
 										}}
 									>
 										<a
-											href="/vanimal/1"
+											href="/store"
 											className="link-color-button w-inline-block"
 											data-ix="button-overlay-on-hover"
 											style={{ transition: 'all 0.3s ease 0s' }}
@@ -169,7 +167,7 @@ export default class HomePage extends BasePage {
 								</p>
 								<div className="top-padding">
 									<a
-										href="../service/service.html"
+										href="/about"
 										className="link-color-button w-inline-block"
 										data-ix="button-overlay-on-hover"
 										style={{ transition: 'all 0.3s ease 0s' }}
@@ -214,7 +212,7 @@ export default class HomePage extends BasePage {
 								</p>
 								<div className="top-padding">
 									<a
-										href="../service/service-2.html"
+										href="/my-account"
 										className="link-color-button w-inline-block"
 										data-ix="button-overlay-on-hover"
 										style={{ transition: 'all 0.3s ease 0s' }}
@@ -296,7 +294,7 @@ export default class HomePage extends BasePage {
 								</p>
 								<div className="top-padding">
 									<a
-										href="../service/service-2.html"
+										href="/faq"
 										className="link-color-button w-inline-block"
 										data-ix="button-overlay-on-hover"
 										style={{ transition: 'all 0.3s ease 0s' }}

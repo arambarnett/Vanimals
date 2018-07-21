@@ -26,18 +26,18 @@ export default class MyDocument extends Document {
 						<meta content="summary" name="twitter:card" />
 						<meta content="width=device-width, initial-scale=1" name="viewport" />
 						<meta content="Webflow" name="generator" />
-						<link href="static/css/normalize.css" rel="stylesheet" type="text/css" />
-						<link href="static/css/webflow.css" rel="stylesheet" type="text/css" />
-						<link href="static/css/vanimals.webflow.css" rel="stylesheet" type="text/css" />
+						<link href="/static/css/normalize.css" rel="stylesheet" type="text/css" />
+						<link href="/static/css/webflow.css" rel="stylesheet" type="text/css" />
+						<link href="/static/css/vanimals.webflow.css" rel="stylesheet" type="text/css" />
 						<link
 							rel="stylesheet"
 							href="http://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic%7COpen+Sans:300,300italic,400,400italic,600,600italic,700,700italic,800,800italic%7CMuli:200,200italic,300,300italic,regular,italic,600,600italic,700,700italic,800,800italic,900,900italic%7CPoppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
 						/>
 						{/* [if lt IE 9]><![endif] */}
-						<link href="static/images/32_132.jpg" rel="shortcut icon" type="image/x-icon" />
-						<link href="static/images/256.jpg" rel="apple-touch-icon" />
+						<link href="/static/images/32_132.jpg" rel="shortcut icon" type="image/x-icon" />
+						<link href="/static/images/256.jpg" rel="apple-touch-icon" />
 						<script src="https://code.jquery.com/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-						<script src="static/js/webflow.js" type="text/javascript"></script>
+						<script src="/static/js/webflow.js" type="text/javascript"></script>
 					</div>
 				</Head>
 				<body>

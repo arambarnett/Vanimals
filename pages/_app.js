@@ -9,6 +9,8 @@ import Header from './components/header';
 import getPageContext from './utilities/get-page-context';
 
 export default class MyApp extends App {
+	state = { loading: true };
+
 	constructor(props) {
 		super(props);
 		this.pageContext = getPageContext();
@@ -29,6 +31,8 @@ export default class MyApp extends App {
 		if (jssStyles && jssStyles.parentNode) {
 			jssStyles.parentNode.removeChild(jssStyles);
 		}
+
+		this.setState({ loading: false });
 	}
 
 	render() {
@@ -44,11 +48,21 @@ export default class MyApp extends App {
 						theme={this.pageContext.theme}
 						sheetsManager={this.pageContext.sheetsManager}
 					>
+						{this.renderLoading()}
 						<Header />
 						<Component {...pageProps} />
 					</MuiThemeProvider>
 				</JssProvider>
 			</Container>
 		);
+	}
+
+	renderLoading() {
+		if (!this.state.loading) {
+			return;
+		}
+
+		return (
+			<div style={{ position: 'fixed', height: '100%', width: '100%', background: 'white', zIndex: 2000 }}></div>);;
 	}
 }

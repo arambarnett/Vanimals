@@ -10,11 +10,13 @@ export default class AboutPage extends BasePage {
 				data-ix="page-fade-in"
 				style={{ opacity: 1, transition: 'opacity 200ms' }}
 			>
-				<div className="banner about portfolio">
+				<div className="banner about portfolio" style={{ paddingTop: '100px' }}>
 					<div className="container w-container">
 						<div className="center">
 							<div>
-								<div className="section-tittle dark">About Us</div>
+								<div className="section-tittle dark" style={{ color: 'white' }}>
+									About Us
+								</div>
 							</div>
 						</div>
 					</div>

@@ -11,6 +11,6 @@ routes
 	.add('my-account', '/my-account', '/modules/my-account')
 	.add('settings', '/settings', '/modules/settings')
 	.add('store', '/store', '/modules/store')
-	.add('vanimal', '/vanimal/:id', '/modules/vanimal');
+	.add('vanimals', '/vanimals/:id', '/modules/vanimal');
 
 module.exports = routes;
