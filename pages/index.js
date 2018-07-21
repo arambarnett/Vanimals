@@ -3,6 +3,8 @@ import BasePage from './lib/BasePage';
 
 import api from './utilities/api';
 
+import Grid from '@material-ui/core/Grid';
+
 import Footer from './components/footer';
 import VanimalCard from './components/vanimal-card';
 
@@ -329,9 +331,9 @@ export default class HomePage extends BasePage {
 								<h1 className="section-tittle-hero-white in-half-section">Vanimal Colors</h1>
 								<div className="subtittle left-padding">Check out the amazing colorways</div>
 								<div className="top-padding _40">
-									<div className="row-button w-row">
+									<Grid container spacing={16}>
 										{this.props.attributes.map(this.renderAttribute.bind(this))}
-									</div>
+									</Grid>
 								</div>
 							</div>
 						</div>
@@ -364,9 +366,9 @@ export default class HomePage extends BasePage {
 							<div data-duration-in={300} data-duration-out={100} className="w-tabs">
 								<div className="tabs-content w-tab-content">
 									<div data-w-tab="Tab 3" className="w-tab-pane w--tab-active">
-										<div className="portfolio-row style2 w-row">
+										<Grid container spacing={24}>
 											{this.props.vanimals.map(this.renderVanimal.bind(this))}
-										</div>
+										</Grid>
 									</div>
 								</div>
 							</div>
@@ -389,7 +391,7 @@ export default class HomePage extends BasePage {
 													transition: 'opacity 500ms, transform 800ms'
 												}}
 											>
-												FOrever yours
+												Forever yours
 											</div>
 											<div
 												className="baner-big-text white center"
@@ -431,16 +433,23 @@ export default class HomePage extends BasePage {
 	}
 
 	renderVanimal(vanimal) {
-		return <VanimalCard key={vanimal.vanimal_id} vanimal={vanimal} />;
+		return (
+			<Grid key={vanimal.vanimal_id} item xs={12} sm={6} md={4}>
+				<VanimalCard vanimal={vanimal} />
+			</Grid>
+		);
 	}
 
 	renderAttribute(attribute) {
 		return (
-			<div key={attribute.attribute_id} style={{ marginBottom: '12px' }} className="w-col w-col-3 w-col-medium-3">
-				<a href={`/marketplace?attribute_id=${attribute.attribute_id}`} className="inner-link w-button">
+			<Grid item xs={6} sm={4} md={3} key={attribute.attribute_id}>
+				<a
+					href={`/marketplace?attribute_id=${attribute.attribute_id}`}
+					className="inner-link w-button"
+				>
 					{attribute.name}
 				</a>
-			</div>
+			</Grid>
 		);
 	}
 }

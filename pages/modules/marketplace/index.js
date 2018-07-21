@@ -2,6 +2,8 @@ import React from 'react';
 import BasePage from '../../lib/BasePage';
 import api from '../../utilities/api';
 
+import Grid from '@material-ui/core/Grid';
+
 import Footer from '../../components/footer';
 import VanimalCard from '../../components/vanimal-card';
 
@@ -49,7 +51,9 @@ export default class MarketplacePage extends BasePage {
 					<div className="container w-container">
 						<div className="center text">
 							<div>
-								<div className="section-tittle dark" style={{ color: 'white' }}>Current Vanimals</div>
+								<div className="section-tittle dark" style={{ color: 'white' }}>
+									Current Vanimals
+								</div>
 							</div>
 						</div>
 					</div>
@@ -126,7 +130,9 @@ export default class MarketplacePage extends BasePage {
 								</div>
 								<div className="tabs-content w-tab-content">
 									<div data-w-tab="Tab 3" className="w-tab-pane w--tab-active">
-										{this.props.vanimals.map(this.renderVanimal.bind(this))}
+										<Grid container spacing={24}>
+											{this.props.vanimals.map(this.renderVanimal.bind(this))}
+										</Grid>
 									</div>
 								</div>
 							</div>
@@ -144,6 +150,10 @@ export default class MarketplacePage extends BasePage {
 	}
 
 	renderVanimal(vanimal) {
-		return <VanimalCard key={vanimal.vanimal_id} vanimal={vanimal} />;
+		return (
+			<Grid key={vanimal.vanimal_id} item xs={12} sm={6} md={4}>
+				<VanimalCard vanimal={vanimal} />
+			</Grid>
+		);
 	}
 }

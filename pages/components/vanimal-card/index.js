@@ -3,10 +3,7 @@ import BaseComponent from '../../lib/BaseComponent';
 export default class VanimalCard extends BaseComponent {
 	render() {
 		return (
-			<div
-				className="column-iteam style-2 w-clearfix w-col w-col-4 w-col-medium-4"
-				style={{ marginBottom: '24px' }}
-			>
+			<div>
 				<a
 					href={`/vanimals/${this.props.vanimal.vanimal_id}`}
 					className="project-wrapper style2 w-inline-block"
@@ -14,7 +11,8 @@ export default class VanimalCard extends BaseComponent {
 					style={{
 						transition: 'all 0.3s ease 0s, opacity 500ms, transform 800ms',
 						opacity: 1,
-						transform: 'translateX(0px) translateY(0px) translateZ(0px)'
+						transform: 'translateX(0px) translateY(0px) translateZ(0px)',
+						marginBottom: '0px !important'
 					}}
 				>
 					<div className="project-image">
@@ -34,7 +32,7 @@ export default class VanimalCard extends BaseComponent {
 					<div className="white-portfolio-content">
 						<p className="paragraph-project dark _5">{this.props.vanimal.name || 'Untitled'}</p>
 						<h4 className="project-header white-content">
-							{this.props.vanimal.description || '--'}
+							{this.props.vanimal.short_description || '--'}
 						</h4>
 					</div>
 				</a>

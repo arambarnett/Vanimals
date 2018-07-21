@@ -89,8 +89,8 @@ module.exports = Vanimal;
 			console.log('BIRTH ERROR', error);
 		}
 
-		const randomIndex = Math.floor(Math.random() * 3) + 1
-		const vaniamalData = vanimalsMap.vanimals[randomIndex];
+		const randomIndex = Math.floor(Math.random() * 3);
+		const vanimalData = vanimalsMap.vanimals[randomIndex];
 
 		const payload = Object.assign({}, vanimalData, {
 			vanimal_id: result.args.kittyId.toString(),
