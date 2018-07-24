@@ -17,6 +17,8 @@ export default class HomePage extends BasePage {
 	}
 
 	render() {
+		api.listVanimals({ is_featured: true });
+
 		return (
 			<div
 				className="page-fade-in"

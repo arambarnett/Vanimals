@@ -1,6 +1,8 @@
 const BaseRestModel = require('js-base-lib/lib/BaseRestModel');
 const BaseContract = require('js-base-lib/lib/BaseContract');
-const vanimalsMap = require('../../vanimals');
+const vanimals = require('../../vanimals');
+
+const Attribute = require('./Attribute');
 
 class Vanimal extends BaseRestModel(BaseContract) {
 	static get truffleConfig() {
@@ -48,7 +50,7 @@ class Vanimal extends BaseRestModel(BaseContract) {
 				allowNull: false
 			},
 			is_featured: {
-				type: Sequelize.BOOLEAN,
+				type: Sequelize.BOOLEAN
 			},
 			name: {
 				type: Sequelize.TEXT
@@ -79,7 +81,14 @@ class Vanimal extends BaseRestModel(BaseContract) {
 			}
 		};
 	}
+
+	static associations(Model) {
+		Model.belongsToMany(Attribute.Postgres, { through: 'vanimal_attributes' });
+
+		return Model;
+	}
 }
+
 module.exports = Vanimal;
 
 (async () => {
@@ -89,10 +98,9 @@ module.exports = Vanimal;
 			console.log('BIRTH ERROR', error);
 		}
 
-		const randomIndex = Math.floor(Math.random() * 3);
-		const vanimalData = vanimalsMap.vanimals[randomIndex];
+		const selectedVanimal = vanimals.select();
 
-		const payload = Object.assign({}, vanimalData, {
+		const payload = Object.assign({}, selectedVanimal.payload, {
 			vanimal_id: result.args.kittyId.toString(),
 			owner: result.args.owner,
 			matron_id: result.args.matronId.toString(),
@@ -100,6 +108,20 @@ module.exports = Vanimal;
 			genes: result.args.genes.toString()
 		});
 
-		await Vanimal.Postgres.findOrCreate({ where: { vanimal_id: payload.vanimal_id }, defaults: payload });
+		const [instance, created] = await Vanimal.Postgres.findOrCreate({
+			where: { vanimal_id: payload.vanimal_id },
+			defaults: payload
+		});
+
+		if (created) {
+			for (let each of selectedVanimal.attributes) {
+				const attribute = await Attribute.Postgres.findOrCreate({
+					where: { name: each },
+					defaults: { name: each }
+				});
+
+				await instance.addAttribute(attribute, { through: {} });
+			}
+		}
 	});
 })();

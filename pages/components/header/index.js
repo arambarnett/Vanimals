@@ -60,13 +60,6 @@ export default class HeaderComponent extends BaseComponent {
 							>
 								settings
 							</a>
-							<a
-								href="/coming-soon"
-								className="dropdown vertical w-nav-link"
-								style={{ maxWidth: 1170 }}
-							>
-								coming soon
-							</a>
 						</nav>
 						<div className="menu-b w-nav-button">
 							<div className="second-icon w-icon-nav-menu" />
