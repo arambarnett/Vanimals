@@ -83,7 +83,12 @@ class Vanimal extends BaseRestModel(BaseContract) {
 	}
 
 	static associations(Model) {
-		Model.belongsToMany(Attribute.Postgres, { through: 'vanimal_attributes' });
+		Model.belongsToMany(Attribute.Postgres, {
+			through: 'vanimal_attributes',
+			as: 'attributes',
+			foreignKey: 'vanimal_id',
+			otherKey: 'attribute_id'
+		});
 
 		return Model;
 	}
@@ -115,12 +120,12 @@ module.exports = Vanimal;
 
 		if (created) {
 			for (let each of selectedVanimal.attributes) {
-				const attribute = await Attribute.Postgres.findOrCreate({
+				const [attribute] = await Attribute.Postgres.findOrCreate({
 					where: { name: each },
 					defaults: { name: each }
 				});
 
-				await instance.addAttribute(attribute, { through: {} });
+				await instance.addAttribute(attribute.attribute_id);
 			}
 		}
 	});

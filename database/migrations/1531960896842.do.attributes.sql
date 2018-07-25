@@ -10,7 +10,9 @@ create table attributes (
 
 create table vanimal_attributes(
 	vanimal_id bigint references vanimals(vanimal_id) not null,
-	attribute_id bigint references attributes(attribute_id) not null
+	attribute_id bigint references attributes(attribute_id) not null,
+	updated_at timestamp default now(),
+	created_at timestamp default now()
 );
 
 insert into attributes(name) values 
