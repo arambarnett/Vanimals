@@ -44,7 +44,7 @@ if (args.help === null) {
 }
 
 ['do', 'undo'].forEach(action => {
-	let path = `server/migrations/${version}.${action}`;
+	let path = `database/migrations/${version}.${action}`;
 
 	if (args.name) {
 		path = path + `.${args.name}`;
