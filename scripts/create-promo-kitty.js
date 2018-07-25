@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const Vanimal = require('../server/models/Vanimal');
+const Vanimal = require('../models/Vanimal');
 
 (async () => {
 	const vanimal = await Vanimal.deployed();

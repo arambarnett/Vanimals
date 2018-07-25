@@ -6,13 +6,13 @@ class SiringAuction extends BaseContract {
 	}
 
 	static get truffleConfig() {
-		const config = require('../../truffle').networks[process.env.NODE_ENV];
+		const config = require('../truffle').networks[process.env.NODE_ENV];
 
 		return config;
 	}
 
 	static get contractJson() {
-		const json = require(`../../build/contracts/VanimalCoreSiringAuction.json`);
+		const json = require(`../build/contracts/VanimalCoreSiringAuction.json`);
 
 		return json;
 	}

@@ -9,7 +9,7 @@ const passport = require('passport');
 const session = require('js-base-lib/lib/RedisSession');
 const routes = require('./routes');
 
-require('./server/lib/passport');
+require('./lib/passport');
 
 const port = process.env.PORT || 4001;
 let next = Next({ dir: '.', dev: process.env.NODE_ENV !== 'production' });
@@ -28,7 +28,7 @@ async function main() {
 	app.use(passport.initialize());
 	app.use(passport.session());
 
-	const apis = require('./server/apis');
+	const apis = require('./apis');
 	app.use('/apis', apis.apiRouter, errorWare);
 	app.get('*', routeHandler);
 

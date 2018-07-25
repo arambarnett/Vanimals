@@ -1,18 +1,18 @@
 const BaseRestModel = require('js-base-lib/lib/BaseRestModel');
 const BaseContract = require('js-base-lib/lib/BaseContract');
-const vanimals = require('../../vanimals');
+const vanimals = require('../vanimals');
 
 const Attribute = require('./Attribute');
 
 class Vanimal extends BaseRestModel(BaseContract) {
 	static get truffleConfig() {
-		const config = require('../../truffle').networks[process.env.NODE_ENV];
+		const config = require('../truffle').networks[process.env.NODE_ENV];
 
 		return config;
 	}
 
 	static get contractJson() {
-		const json = require(`../../build/contracts/VanimalCore.json`);
+		const json = require(`../build/contracts/VanimalCore.json`);
 
 		return json;
 	}
