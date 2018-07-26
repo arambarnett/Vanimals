@@ -3,6 +3,10 @@
 	"version": "1.0.0",
 	"description": "Vanimals - Digital Companions",
 	"main": "index.js",
+	"engines": {
+		"node": "10.2.1",
+		"npm": "5.6.0"
+	},
 	"scripts": {
 		"build": "next build",
 		"compile": "./node_modules/truffle/build/cli.bundled.js compile",
