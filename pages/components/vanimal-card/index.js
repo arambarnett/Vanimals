@@ -1,5 +1,7 @@
 import BaseComponent from '../../lib/BaseComponent';
 
+import VanimalRender from '../vanimal-render';
+
 export default class VanimalCard extends BaseComponent {
 	render() {
 		return (
@@ -16,6 +18,7 @@ export default class VanimalCard extends BaseComponent {
 					}}
 				>
 					<div className="project-image">
+						<VanimalRender imageUrl={this.props.vanimal.image_url}/>
 						{this.renderImage()}
 						<div
 							className="overlay-image"
@@ -41,26 +44,5 @@ export default class VanimalCard extends BaseComponent {
 	}
 
 	renderImage() {
-		const imageUrl = this.props.vanimal.image_url;
-
-		if (!imageUrl) {
-			return (
-				<div
-					style={{ height: 260, background: 'rgba(0, 0, 0, .1)' }}
-					sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
-					className="tab-style-2-image"
-				/>
-			);
-		}
-
-		return (
-			<img
-				src={imageUrl}
-				width={200}
-				height={260}
-				sizes="(max-width: 479px) 83vw, (max-width: 767px) 90vw, 30vw"
-				className="tab-style-2-image"
-			/>
-		);
 	}
 }

@@ -29,6 +29,7 @@
 	"homepage": "https://github.com/arambarnett/Vanimals#readme",
 	"dependencies": {
 		"@material-ui/core": "^1.3.1",
+		"@zeit/next-typescript": "1.1.0",
 		"axios": "0.18.0",
 		"body-parser": "1.18.3",
 		"command-line-args": "5.0.2",
@@ -43,6 +44,7 @@
 		"js-base-lib": "1.0.12",
 		"js-md5": "0.7.3",
 		"lodash": "4.17.10",
+		"metaverse-api": "4.0.4",
 		"next": "6.0.3",
 		"next-routes": "1.4.2",
 		"nodemon": "1.17.5",
