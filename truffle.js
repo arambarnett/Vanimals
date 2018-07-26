@@ -11,7 +11,7 @@ module.exports = {
 			network_id: '*',
 			gasPrice: ethUnit.toWei(0.1, 'gwei')
 		},
-		rinkeby: {
+		staging: {
 			provider: function() {
 				return new HDWalletProvider(
 					process.env.MNEMONIC_PHRASE,
@@ -19,13 +19,17 @@ module.exports = {
 				);
 			},
 			network_id: '*',
-			gasPrice: ethUnit.toWei(0.1, 'gwei')
+			gasPrice: ethUnit.toWei(1000, 'gwei')
 		},
 		production: {
-			host: '127.0.0.1',
-			port: 9545,
+			provider: function() {
+				return new HDWalletProvider(
+					process.env.MNEMONIC_PHRASE,
+					'https://mainnet.infura.io/01dJIr88UVq6pLzueOSW'
+				);
+			},
 			network_id: '*',
-			gasPrice: ethUnit.toWei(0.1, 'gwei')
-		}
+			gasPrice: ethUnit.toWei(100, 'gwei')
+		},
 	}
 };

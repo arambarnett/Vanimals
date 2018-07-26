@@ -6,16 +6,17 @@
 	"scripts": {
 		"build": "next build",
 		"compile": "./node_modules/truffle/build/cli.bundled.js compile",
-		"migrate": "npm run migrate-database && npm run deploy-contracts",
-		"migrate-down": "scripts/migrate-down.js",
-		"migrate-create": "scripts/migrate-create.js",
-		"migrate-database": "scripts/migrate-database.js",
 		"deploy-contracts": "./node_modules/truffle/build/cli.bundled.js migrate",
 		"develop": "scripts/develop.sh",
+		"format": "node_modules/prettier/bin-prettier.js --write \"**/*.js\"",
+		"migrate": "npm run migrate-database && npm run deploy-contracts",
+		"migrate-create": "scripts/migrate-create.js",
+		"migrate-database": "scripts/migrate-database.js",
+		"migrate-down": "scripts/migrate-down.js",
+		"postinstall": "npm run migrate-database && npm run build",
+		"server": "node server.js",
 		"truffle": "./node_modules/truffle/build/cli.bundled.js",
-		"truffle-clean": "./node_modules/truffle/build/cli.bundled.js networks --clean",
-		"start": "node server.js",
-		"format": "node_modules/prettier/bin-prettier.js --write \"**/*.js\""
+		"truffle-clean": "./node_modules/truffle/build/cli.bundled.js networks --clean"
 	},
 	"repository": {
 		"type": "git",
@@ -30,6 +31,8 @@
 	"dependencies": {
 		"@material-ui/core": "^1.3.1",
 		"axios": "0.18.0",
+		"babel-plugin-inline-dotenv": "1.1.2",
+		"babel-plugin-transform-inline-environment-variables": "0.4.3",
 		"body-parser": "1.18.3",
 		"command-line-args": "5.0.2",
 		"command-line-usage": "5.0.5",
@@ -40,6 +43,7 @@
 		"ethjs-unit": "0.1.6",
 		"express": "4.16.3",
 		"express-session": "1.15.6",
+		"heroku-ssl-redirect": "0.0.4",
 		"js-base-lib": "1.0.12",
 		"js-md5": "0.7.3",
 		"lodash": "4.17.10",

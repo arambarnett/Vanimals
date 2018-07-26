@@ -10,4 +10,5 @@ module.exports = async (deployer, network, accounts) => {
 	await vanimal.setSaleAuctionAddress(VanimalCoreSaleAuction.address);
 	await vanimal.setSiringAuctionAddress(VanimalCoreSiringAuction.address);
 	await vanimal.setGeneScienceAddress(GeneScience.address);
+	await vanimal.unpause();
 };

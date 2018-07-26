@@ -6,7 +6,7 @@ class Api {
 		this.client = axios.create(
 			Object.assign(
 				{
-					baseURL: `http://localhost:4001/apis`
+					baseURL: `${process.env.SELF_URL}/apis`
 				},
 				config
 			)
