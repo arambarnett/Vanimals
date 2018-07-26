@@ -17,7 +17,7 @@
 		"migrate-create": "scripts/migrate-create.js",
 		"migrate-database": "scripts/migrate-database.js",
 		"migrate-down": "scripts/migrate-down.js",
-		"postinstall": "npm run migrate-database && npm run build",
+		"postinstall": "npm run migrate-database && npm run compile && npm run build",
 		"server": "node server.js",
 		"truffle": "./node_modules/truffle/build/cli.bundled.js",
 		"truffle-clean": "./node_modules/truffle/build/cli.bundled.js networks --clean"
