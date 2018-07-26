@@ -12,7 +12,7 @@ const routes = require('./routes');
 require('./lib/passport');
 
 const port = process.env.PORT || 4001;
-const next = Next({ dir: '.', dev: process.env.NODE_ENV !== 'production' });
+const next = Next({ dir: '.', dev: process.env.NODE_ENV === 'development' });
 
 (async () => {
 	await next.prepare();
