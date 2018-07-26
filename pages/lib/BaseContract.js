@@ -40,7 +40,7 @@ export default class BaseContract {
 	}
 
 	static get Contract() {
-		const json = require(`../../build/contracts/${this.objectName}.json`);
+		const json = require(`../../contracts/build/${this.objectName}.json`);
 
 		return truffleContract(json);
 	}

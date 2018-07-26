@@ -12,7 +12,7 @@ class SiringAuction extends BaseContract {
 	}
 
 	static get contractJson() {
-		const json = require(`../build/contracts/VanimalCoreSiringAuction.json`);
+		const json = require(`../contracts/build/VanimalCoreSiringAuction.json`);
 
 		return json;
 	}

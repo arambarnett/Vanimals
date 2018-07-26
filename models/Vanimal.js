@@ -12,9 +12,7 @@ class Vanimal extends BaseRestModel(BaseContract) {
 	}
 
 	static get contractJson() {
-		const json = require(`../build/contracts/VanimalCore.json`);
-
-		console.log({ json });
+		const json = require(`../contracts/build/VanimalCore.json`);
 
 		return json;
 	}

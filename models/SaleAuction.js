@@ -12,7 +12,7 @@ class SaleAuction extends BaseContract {
 	}
 
 	static get contractJson() {
-		const json = require(`../build/contracts/VanimalCoreSaleAuction.json`);
+		const json = require(`../contracts/build/VanimalCoreSaleAuction.json`);
 
 		return json;
 	}
