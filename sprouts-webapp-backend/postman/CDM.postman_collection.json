@@ -1,0 +1,891 @@
+{
+	"info": {
+		"_postman_id": "adb68a38-ca14-4bd0-a349-408652323b36",
+		"name": "CSM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Prototypes",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"PROTOTYPE_ID\", jsonData.id);\r",
+									"pm.environment.set(\"PROTOTYPE_NAME\", jsonData.name);\r",
+									"pm.environment.set(\"PROTOTYPE_ASSET\", jsonData.name.replace(/ +/g, \"\"));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-admin-token",
+								"value": "{{ADMIN_SECRET}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Ben Affleck3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CDM_API}}/prototypes",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"prototypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Asset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"ASSET_URL\", jsonData.value);\r",
+									"pm.environment.set(\"ASSET_TYPE\", jsonData.type);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-admin-token",
+								"value": "{{ADMIN_SECRET}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"IMAGE\",\r\n    \"value\": \"https://cdm-backend-assets.s3.amazonaws.com/items/{{PROTOTYPE_ASSET}}.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CDM_API}}/prototypes/:prototypeId/asset",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"prototypes",
+								":prototypeId",
+								"asset"
+							],
+							"variable": [
+								{
+									"key": "prototypeId",
+									"value": "{{PROTOTYPE_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Stat",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-admin-token",
+								"value": "{{ADMIN_SECRET}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"statType\": \"TWITTER_TWEETS\",\r\n    \"value\": 50000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CDM_API}}/prototypes/:prototypeId/stat",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"prototypes",
+								":prototypeId",
+								"stat"
+							],
+							"variable": [
+								{
+									"key": "prototypeId",
+									"value": "{{PROTOTYPE_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Prototype",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CDM_API}}/prototypes/:prototypeId",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"prototypes",
+								":prototypeId"
+							],
+							"variable": [
+								{
+									"key": "prototypeId",
+									"value": "{{PROTOTYPE_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Prototypes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CDM_API}}/prototypes?limit=20&offset=0",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"prototypes"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-admin-token",
+								"value": "{{ADMIN_SECRET}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{CDM_API}}/prototypes/:prototypeId",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"prototypes",
+								":prototypeId"
+							],
+							"variable": [
+								{
+									"key": "prototypeId",
+									"value": "{{PROTOTYPE_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "value",
+						"value": "{{ADMIN_SECRET}}",
+						"type": "string"
+					},
+					{
+						"key": "key",
+						"value": "x-admin-token",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Purchase",
+					"item": [
+						{
+							"name": "My Purchases",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "x-admin-token",
+										"value": "{{ADMIN_SECRET}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{CDM_API}}/users/me/purchases",
+									"host": [
+										"{{CDM_API}}"
+									],
+									"path": [
+										"users",
+										"me",
+										"purchases"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Stripe Publishable Key",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CDM_API}}/users/stripe-key",
+									"host": [
+										"{{CDM_API}}"
+									],
+									"path": [
+										"users",
+										"stripe-key"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buy",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-admin-token",
+										"value": "{{ADMIN_SECRET}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"paymentMethodId\": \"pm_1JPJpsBsQrSpslRv4kG0SWlg\",\r\n    \"currency\": \"usd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CDM_API}}/users/me/:characterId/buy",
+									"host": [
+										"{{CDM_API}}"
+									],
+									"path": [
+										"users",
+										"me",
+										":characterId",
+										"buy"
+									],
+									"variable": [
+										{
+											"key": "characterId",
+											"value": "itm_2soPuqMfSbZGQ"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Buy With CKB",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-admin-token",
+										"value": "{{ADMIN_SECRET}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"quoteToken\": \"{{QUOTE_TOKEN}}\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{CDM_API}}/users/me/:characterId/buy/ckb",
+									"host": [
+										"{{CDM_API}}"
+									],
+									"path": [
+										"users",
+										"me",
+										":characterId",
+										"buy",
+										"ckb"
+									],
+									"variable": [
+										{
+											"key": "characterId",
+											"value": "itm_hJkZ5l87jxGy0"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Confirm",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "x-admin-token",
+										"value": "{{ADMIN_SECRET}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{CDM_API}}/users/me/purchases/:purchaseId/confirm",
+									"host": [
+										"{{CDM_API}}"
+									],
+									"path": [
+										"users",
+										"me",
+										"purchases",
+										":purchaseId",
+										"confirm"
+									],
+									"variable": [
+										{
+											"key": "purchaseId",
+											"value": "pch_28r7iiewwS08v"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-admin-token",
+										"value": "{{ADMIN_SECRET}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{CDM_API}}/users/me/purchases/:purchaseId/status",
+									"host": [
+										"{{CDM_API}}"
+									],
+									"path": [
+										"users",
+										"me",
+										"purchases",
+										":purchaseId",
+										"status"
+									],
+									"variable": [
+										{
+											"key": "purchaseId",
+											"value": "pch_ojK8rkWY4Q2A9"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Status CKB",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "x-admin-token",
+										"value": "{{ADMIN_SECRET}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{CDM_API}}/users/me/purchases/ckb/:purchaseCkbId/status",
+									"host": [
+										"{{CDM_API}}"
+									],
+									"path": [
+										"users",
+										"me",
+										"purchases",
+										"ckb",
+										":purchaseCkbId",
+										"status"
+									],
+									"variable": [
+										{
+											"key": "purchaseCkbId",
+											"value": "ckb_QUcJWeM590ViH"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Instances",
+					"item": [
+						{
+							"name": "Get Instances",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CDM_API}}/users/me/instances",
+									"host": [
+										"{{CDM_API}}"
+									],
+									"path": [
+										"users",
+										"me",
+										"instances"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Instance",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{CDM_API}}/users/me/instances/:instanceId",
+									"host": [
+										"{{CDM_API}}"
+									],
+									"path": [
+										"users",
+										"me",
+										"instances",
+										":instanceId"
+									],
+									"variable": [
+										{
+											"key": "instanceId",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "apikey",
+				"apikey": [
+					{
+						"key": "key",
+						"value": "Authorization",
+						"type": "string"
+					},
+					{
+						"key": "value",
+						"value": "{{mg_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Items",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"ITEM_ID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-admin-token",
+								"value": "{{ADMIN_SECRET}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{PROTOTYPE_NAME}}\",\r\n    \"type\": \"PROTOTYPE\",\r\n    \"prototypeId\": \"{{PROTOTYPE_ID}}\",\r\n    \"modifier\": \"standard\",\r\n    \"asset\": \"{{PROTOTYPE_URL}}\",\r\n    \"assetType\": \"{{PROTOTYPE_TYPE}}\",\r\n    \"price\": 5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CDM_API}}/items",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Item",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CDM_API}}/items/:itemId",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "{{ITEM_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Items",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CDM_API}}/items?limit=20&offset=0",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Item",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-admin-token",
+								"value": "{{ADMIN_SECRET}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{CDM_API}}/items/:itemId",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"items",
+								":itemId"
+							],
+							"variable": [
+								{
+									"key": "itemId",
+									"value": "{{ITEM_ID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Items Packs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{CDM_API}}/items/packs?limit=20&offset=0",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"items",
+								"packs"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "20"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Pack",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"ITEM_ID\", jsonData.id);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-admin-token",
+								"value": "{{ADMIN_SECRET}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Pack x5\",\r\n    \"type\": \"BOX\",\r\n    \"modifier\": \"standard\",\r\n    \"price\": 35000,\r\n    \"asset\": \"https://cdm-backend-assets.s3.amazonaws.com/items/box3.jpg\",\r\n    \"assetType\": \"IMAGE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{CDM_API}}/items",
+							"host": [
+								"{{CDM_API}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CDM_API}}/health",
+					"host": [
+						"{{CDM_API}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "minimum-client-version",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CDM_API}}/minimum-client-version",
+					"host": [
+						"{{CDM_API}}"
+					],
+					"path": [
+						"minimum-client-version"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CKB rate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CDM_API}}/ckb-rate",
+					"host": [
+						"{{CDM_API}}"
+					],
+					"path": [
+						"ckb-rate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CKB quote token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"pm.environment.set(\"QUOTE_TOKEN\", jsonData.quoteToken);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{CDM_API}}/quote-tokens",
+					"host": [
+						"{{CDM_API}}"
+					],
+					"path": [
+						"quote-tokens"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

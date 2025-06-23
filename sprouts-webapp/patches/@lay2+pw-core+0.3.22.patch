@@ -1,0 +1,26 @@
+diff --git a/node_modules/@lay2/pw-core/build/main/core.js b/node_modules/@lay2/pw-core/build/main/core.js
+index 33b91ee..f38be54 100644
+--- a/node_modules/@lay2/pw-core/build/main/core.js
++++ b/node_modules/@lay2/pw-core/build/main/core.js
+@@ -89,7 +89,7 @@ class PWCore {
+         if (!signer) {
+             signer = new signers_1.DefaultSigner(PWCore.provider);
+         }
+-        return this.rpc.send_transaction(ckb_js_toolkit_1.transformers.TransformTransaction(await signer.sign(tx)));
++        return this.rpc.send_transaction(ckb_js_toolkit_1.transformers.TransformTransaction(await signer.sign(tx)), "passthrough");
+     }
+     /**
+      * Transfer sudt to any address
+diff --git a/node_modules/@lay2/pw-core/build/module/core.js b/node_modules/@lay2/pw-core/build/module/core.js
+index bcbc13b..9dd5632 100644
+--- a/node_modules/@lay2/pw-core/build/module/core.js
++++ b/node_modules/@lay2/pw-core/build/module/core.js
+@@ -89,7 +89,7 @@ export default class PWCore {
+         if (!signer) {
+             signer = new DefaultSigner(PWCore.provider);
+         }
+-        return this.rpc.send_transaction(transformers.TransformTransaction(await signer.sign(tx)));
++        return this.rpc.send_transaction(transformers.TransformTransaction(await signer.sign(tx)), "passthrough");
+     }
+     /**
+      * Transfer sudt to any address

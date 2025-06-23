@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(uuid())
+  privyId   String  @unique
+  email String? @unique
+  name          String
+  experience    Int      @default(0)
+  level         Int      @default(1)
+  animal        Animal   @relation(fields: [animalId], references: [id])
+  animalId      String
+  habits        Habit[]
+  milestones    Milestone[]
+  integrations  Integration[]
+  createdAt     DateTime @default(now())
+}
+
+model Animal {
+  id         String   @id @default(uuid())
+  name       String
+  imageUrl   String
+  users      User[]
+  createdAt  DateTime @default(now())
+}
+
+model Habit {
+  id          String   @id @default(uuid())
+  title       String
+  frequency   String
+  user        User     @relation(fields: [userId], references: [id])
+  userId      String
+  createdAt   DateTime @default(now())
+}
+
+model Milestone {
+  id        String   @id @default(uuid())
+  title     String
+  achieved  Boolean  @default(false)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
+}
+
+model Integration {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Integration details
+  provider    String   // "strava", "apple_health", "duolingo", etc.
+  providerId  String   // External user ID from the provider
+  accessToken String?  // OAuth access token (encrypted)
+  refreshToken String? // OAuth refresh token (encrypted)
+  
+  // Metadata
+  isActive    Boolean  @default(true)
+  lastSync    DateTime?
+  syncFrequency String? // "daily", "weekly", etc.
+  
+  // Provider-specific data (JSON)
+  metadata    Json?    // Store provider-specific settings/data
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([userId, provider]) // One integration per provider per user
+  @@map("integrations")
+}

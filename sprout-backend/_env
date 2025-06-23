@@ -1,0 +1,4 @@
+DATABASE_URL="postgresql://sproutuser:sproutpass@localhost:5432/sprouts"
+PORT=3000
+STRAVA_CLIENT_ID=165294
+STRAVA_CLIENT_SECRET=8680056c0f4fd78fb0ff482d8323ae34b41d8fee
