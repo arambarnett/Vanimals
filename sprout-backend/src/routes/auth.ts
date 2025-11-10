@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma';
 import { verifyPrivyToken } from '../middleware/verifyPrivy';
 
 const router = express.Router();
-const prisma = new PrismaClient();
+// Using singleton prisma instance from ../lib/prisma
 
 // OAuth success page
 router.get('/success', (req: Request, res: Response) => {
@@ -17,7 +17,7 @@ router.get('/success', (req: Request, res: Response) => {
 });
 
 // Get all animals
-router.get('/animals', async (req: Request, res: Response) => {
+router.get('/animals', async (req: Request, res: Response): Promise<void> => {
   try {
     const animals = await prisma.animal.findMany();
     res.json(animals);
@@ -28,7 +28,7 @@ router.get('/animals', async (req: Request, res: Response) => {
 });
 
 // Create a new user
-router.post('/users', async (req: Request, res: Response) => {
+router.post('/users', async (req: Request, res: Response): Promise<void> => {
   try {
     const { privyId, name, email, animalId } = req.body;
     
@@ -63,7 +63,7 @@ router.post('/users', async (req: Request, res: Response) => {
 });
 
 // Get user by ID
-router.get('/users/:userId', async (req: Request, res: Response) => {
+router.get('/users/:userId', async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId } = req.params;
     
@@ -88,7 +88,7 @@ router.get('/users/:userId', async (req: Request, res: Response) => {
 });
 
 // Update user
-router.put('/users/:userId', async (req: Request, res: Response) => {
+router.put('/users/:userId', async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId } = req.params;
     const { name, email, experience, level } = req.body;
@@ -115,7 +115,7 @@ router.put('/users/:userId', async (req: Request, res: Response) => {
 });
 
 // Get user's habits
-router.get('/users/:userId/habits', async (req: Request, res: Response) => {
+router.get('/users/:userId/habits', async (req: Request, res: Response): Promise<void> => {
   try {
     const { userId } = req.params;
     

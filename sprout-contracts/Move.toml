@@ -1,0 +1,21 @@
+[package]
+name = "sprout_nft"
+version = "1.0.0"
+authors = []
+
+[addresses]
+sprout_addr = "0x52503f9537f9c995b1883cc5967b6cc104842954aee3c009dcd08022aa2cee1e"
+
+[dev-addresses]
+
+[dependencies.AptosFramework]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-framework"
+
+[dependencies.AptosTokenObjects]
+git = "https://github.com/aptos-labs/aptos-core.git"
+rev = "mainnet"
+subdir = "aptos-move/framework/aptos-token-objects"
+
+[dev-dependencies]

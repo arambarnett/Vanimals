@@ -1,12 +1,12 @@
 // src/routes/strava.ts
 import express, { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '../lib/prisma';
 
 const router = express.Router();
-const prisma = new PrismaClient();
+// Using singleton prisma instance from ../lib/prisma
 
 // Strava OAuth callback - exchange authorization code for access token
-router.get('/exchange_token', async (req: Request, res: Response) => {
+router.get('/exchange_token', async (req: Request, res: Response): Promise<void> => {
   try {
     const { code, state } = req.query;
     
@@ -126,7 +126,7 @@ router.get('/exchange_token', async (req: Request, res: Response) => {
 });
 
 // Get user's Strava activities
-router.get('/activities', async (req: Request, res: Response) => {
+router.get('/activities', async (req: Request, res: Response): Promise<void> => {
   try {
     // TODO: Get the actual user ID from your authentication system
     // For now, we'll use a placeholder

@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../models/user_model.dart';
+import '../../core/constants/app_constants.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://192.168.12.244:3000'; // Backend URL
-  
+  static const String baseUrl = AppConstants.baseUrl;
+
   static const Map<String, String> headers = {
     'Content-Type': 'application/json',
   };
@@ -252,11 +253,215 @@ class ApiService {
         Uri.parse('$baseUrl/auth/users/$userId/integrations/strava'),
         headers: headers,
       );
-      
+
       if (response.statusCode == 200) {
         return Integration.fromJson(json.decode(response.body));
       } else {
         throw Exception('Strava integration not found: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  // Sprouts endpoints
+  static Future<List<dynamic>> getUserSprouts(String userId) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/sprouts/user/$userId'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return json.decode(response.body) as List<dynamic>;
+      } else {
+        throw Exception('Failed to get sprouts: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  static Future<Map<String, dynamic>> getSproutById(String sproutId) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/sprouts/$sproutId'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Failed to get sprout: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  static Future<Map<String, dynamic>> getSproutHealth(String sproutId) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/sprouts/$sproutId/health'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Failed to get sprout health: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  // Goals endpoints
+  static Future<Map<String, dynamic>> createGoal({
+    required String userId,
+    required String title,
+    String? description,
+    required String type,
+    String? category,
+    required double targetValue,
+    required String unit,
+    required String frequency,
+    String? startDate,
+    String? endDate,
+    int? experienceReward,
+    int? pointsReward,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/api/goals'),
+        headers: headers,
+        body: json.encode({
+          'userId': userId,
+          'title': title,
+          'description': description,
+          'type': type,
+          'category': category ?? type,
+          'targetValue': targetValue,
+          'unit': unit,
+          'frequency': frequency,
+          'startDate': startDate,
+          'endDate': endDate,
+          'experienceReward': experienceReward ?? 100,
+          'pointsReward': pointsReward ?? 50,
+        }),
+      );
+
+      if (response.statusCode == 201) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Failed to create goal: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  static Future<List<dynamic>> getUserGoals(String userId, {bool? isActive, bool? isCompleted}) async {
+    try {
+      String url = '$baseUrl/api/goals/user/$userId';
+      List<String> queryParams = [];
+
+      if (isActive != null) {
+        queryParams.add('isActive=$isActive');
+      }
+      if (isCompleted != null) {
+        queryParams.add('isCompleted=$isCompleted');
+      }
+
+      if (queryParams.isNotEmpty) {
+        url += '?${queryParams.join('&')}';
+      }
+
+      final response = await http.get(
+        Uri.parse(url),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return json.decode(response.body) as List<dynamic>;
+      } else {
+        throw Exception('Failed to get goals: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  static Future<Map<String, dynamic>> getGoalById(String goalId) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/api/goals/$goalId'),
+        headers: headers,
+      );
+
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Failed to get goal: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  static Future<Map<String, dynamic>> updateGoal({
+    required String goalId,
+    String? title,
+    String? description,
+    double? targetValue,
+    double? currentValue,
+    bool? isActive,
+    String? endDate,
+  }) async {
+    try {
+      final Map<String, dynamic> updateData = {};
+      if (title != null) updateData['title'] = title;
+      if (description != null) updateData['description'] = description;
+      if (targetValue != null) updateData['targetValue'] = targetValue;
+      if (currentValue != null) updateData['currentValue'] = currentValue;
+      if (isActive != null) updateData['isActive'] = isActive;
+      if (endDate != null) updateData['endDate'] = endDate;
+
+      final response = await http.put(
+        Uri.parse('$baseUrl/api/goals/$goalId'),
+        headers: headers,
+        body: json.encode(updateData),
+      );
+
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Failed to update goal: ${response.body}');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  static Future<Map<String, dynamic>> logGoalProgress({
+    required String goalId,
+    required double value,
+    String? notes,
+  }) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/api/goals/$goalId/progress'),
+        headers: headers,
+        body: json.encode({
+          'value': value,
+          'notes': notes,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        return json.decode(response.body);
+      } else {
+        throw Exception('Failed to log progress: ${response.body}');
       }
     } catch (e) {
       throw Exception('Network error: $e');

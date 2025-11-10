@@ -1,0 +1,114 @@
+🌱 Sprouts Pitch Deck
+Slide 1 — Cover
+Title:
+🌱 Sprouts
+Grow Better Habits. Collect the Rewards.
+Tagline:
+Gamified goal tracking meets digital companions.
+Visual:
+Soft, gradient background (mint → blush). Floating Sprout character or waifu companion with subtle particle glow.
+Slide 2 — The Problem
+Humans struggle to stay consistent.
+We set goals — fitness, learning, productivity — but motivation fades fast.
+The data:
+80% of people abandon new habits within 3 weeks.
+92% of productivity apps are deleted within 30 days.
+Brands struggle to create long-term engagement, not just impressions.
+Bottom line:
+Motivation is fleeting, incentives are boring, and digital engagement feels transactional — not emotional.
+Slide 3 — The Insight
+What if your goals had a life of their own?
+People form deeper bonds with characters than with checklists.
+When progress is seen, shared, and rewarded, habits stick.
+Behavioral psychology meets gaming:
+Visual progress = dopamine loop
+Collectibility = sustained engagement
+Emotional attachment = habit reinforcement
+Slide 4 — The Solution
+Sprouts: The Incentive Engine for the Internet
+A gamified platform where users complete goals, grow digital companions, and earn rewards.
+Each goal feels like a quest. Each reward becomes a character evolution.
+For Users:
+Daily goals become visual stories
+Characters evolve as you improve
+Exclusive drops keep it fresh
+For Brands:
+Turn “ads” into interactive challenges
+Sponsor themed Sprouts (Nike Run Sprout, Starbucks Morning Ritual)
+Measure actions, not just views
+Slide 5 — The Product
+(Visual mock: user dashboard with growing character, daily quest, and progress bar)
+Core Features:
+🎯 Goal & Habit Tracking
+🌱 Character Growth System
+💎 Limited Drops & Seasonal Collectibles
+💬 Social Sharing & Leaderboards
+💼 Brand Challenge Integrations
+🪙 Optional Token Rewards (Phase 2)
+Tagline:
+Your motivation, made visual.
+Slide 6 — Market Opportunity
+Massive intersection of three proven markets:
+Market	TAM	CAGR	Example Players
+Habit & Wellness Apps	$9.5B	24%	Duolingo, Headspace
+Mobile Gaming	$110B	9%	Pokémon GO, Genshin Impact
+Digital Collectibles / Web3	$25B	18%	Axie Infinity, Zepeto
+Sprouts sits at the intersection:
+Gamified goals + owned progress = the next evolution of digital self-expression.
+Slide 7 — Why Now
+Gamification is mainstream: Duolingo, Notion, Strava prove people crave playful UX.
+Web3 fatigue reset: users want ownership without friction.
+Brands want engagement: post-cookie era demands interactive advertising.
+AI companions & avatars booming: people bond with virtual entities (Replika, Character.ai).
+Sprouts combines these trends into one universal platform for motivation and engagement.
+Slide 8 — Business Model
+Revenue Stream	Description	Example
+1. Limited Drops & In-App Purchases	Exclusive characters, skins, and goal packs.	$4.99–$9.99 per drop
+2. Brand Challenges / Ads	Sponsored interactive challenges tied to goals.	$25K per brand campaign
+3. Subscription (Sprouts+)	Premium tracking, analytics, early access.	$7.99/month
+4. Token Economy (Phase 2)	Utility token for creator drops & community rewards.	Earn-to-Grow model
+Revenue Flywheel:
+User Growth → In-App Purchases → Brand Sponsorships → Token Engagement → Retention Loop
+Slide 9 — Traction & Early Signals
+(If pre-product: keep aspirational but credible)
+Prototype completed — integrated on Aptos blockchain for instant wallet creation.
+6 characters created and ready for 3D integration (via Meshy.ai).
+Alpha waitlist: 2,300+ signups with 40% opt-in for early drops.
+Brand interest: exploratory talks with wellness and gaming communities.
+(Add logos or visuals as available)
+Slide 10 — Roadmap
+Phase	Timeline	Milestone
+MVP Launch	Q1 2026	Habit tracking + character evolution live
+Brand SDK	Q2 2026	Branded challenge creation tools
+Sprouts+ Subscriptions	Q3 2026	Monetization layer live
+Token Launch	Q4 2026	Reward & community system
+Open Ecosystem	2027	External creator drops & marketplace
+Slide 11 — Team
+Aram (Jon) Barnett — CEO & Founder
+Product-obsessed founder with multiple shipped AI & Web3 platforms.
+Scaled engineering teams across continents, delivering infrastructure handling 100K+ RPM with 99.8% uptime.
+Founder of Lightning Cut, WrldBuilder, and Curbily — with 350M+ total content views across platforms.
+Advisors / Collaborators:
+(If applicable: include design, blockchain, or growth advisors)
+Slide 12 — Fundraise & Vision
+Raise: $1.5M Seed Round
+Use of Funds:
+40% Product & Engineering
+30% Growth & Partnerships
+20% Art & Character Design
+10% Ops & Legal
+Vision:
+To become the universal platform for motivation, where every brand, creator, and user can turn goals into living digital companions.
+“We believe the future of motivation looks less like spreadsheets and more like Pokémon — where progress itself feels alive.”
+🎨 Visual Style Guide
+Color Palette:
+Mint Green #A8F5D8
+Blush Pink #FFD1E3
+Lavender #C8B6FF
+Charcoal Text #1A1A1A
+White Background
+Typography:
+Titles: Montserrat Bold
+Body: Inter Regular
+Design Mood:
+Soft gradients, rounded corners, glowing lines — like a mix of Duolingo meets Genshin Impact.

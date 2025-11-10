@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprouts - Teaser Deck</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #ffffff;
+            color: #1A1A1A;
+            line-height: 1.6;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            padding: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 72px;
+            line-height: 1.2;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 48px;
+            line-height: 1.3;
+            margin-bottom: 40px;
+        }
+
+        h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        p, li {
+            font-size: 28px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #A8F5D8 0%, #FFD1E3 50%, #C8B6FF 100%);
+        }
+
+        .subtitle {
+            font-size: 32px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            font-size: 36px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-top: 40px;
+        }
+
+        .emoji {
+            font-size: 80px;
+            margin-bottom: 30px;
+            display: block;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            padding-left: 50px;
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #A8F5D8;
+            font-weight: bold;
+            font-size: 32px;
+        }
+
+        .data-point {
+            font-size: 64px;
+            font-weight: 800;
+            color: #A8F5D8;
+            margin-bottom: 10px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 40px;
+            background: rgba(168, 245, 216, 0.1);
+            border-radius: 24px;
+        }
+
+        .quote {
+            font-size: 32px;
+            font-style: italic;
+            color: #666;
+            border-left: 6px solid #A8F5D8;
+            padding-left: 30px;
+            margin: 40px 0;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+
+        .box {
+            background: rgba(168, 245, 216, 0.1);
+            padding: 40px;
+            border-radius: 24px;
+            border: 2px solid #A8F5D8;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #A8F5D8, #FFD1E3);
+            padding: 30px 50px;
+            border-radius: 16px;
+            font-size: 32px;
+            font-weight: 700;
+            display: inline-block;
+            margin: 30px 0;
+        }
+
+        .checkmark {
+            color: #A8F5D8;
+            font-size: 32px;
+            margin-right: 10px;
+        }
+
+        @media print {
+            body {
+                width: 1920px;
+                height: 1080px;
+            }
+            .slide {
+                page-break-after: always;
+            }
+        }
+
+        @page {
+            size: 1920px 1080px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide gradient-bg center">
+    <span class="emoji">🌱</span>
+    <h1 style="color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.2);">Sprouts</h1>
+    <p class="subtitle" style="color: white; font-size: 48px; font-weight: 700;">Grow Better Habits. Collect the Rewards.</p>
+    <p class="tagline" style="color: white; margin-top: 60px;">Gamified goal tracking meets digital companions</p>
+    <p style="color: white; margin-top: 100px; font-size: 24px; opacity: 0.9;">Teaser Deck • January 2025</p>
+</div>
+
+<!-- SLIDE 2: THE PROBLEM -->
+<div class="slide">
+    <h2>The Problem</h2>
+    <h3 style="margin-bottom: 60px;">Humans struggle to stay consistent.</h3>
+
+    <div style="margin: 40px 0;">
+        <div class="data-point">80%</div>
+        <p>of people abandon new habits within 3 weeks</p>
+    </div>
+
+    <div style="margin: 40px 0;">
+        <div class="data-point">92%</div>
+        <p>of productivity apps are deleted within 30 days</p>
+    </div>
+
+    <div class="quote" style="margin-top: 60px;">
+        Motivation is fleeting, incentives are boring, and digital engagement feels transactional — not emotional.
+    </div>
+</div>
+
+<!-- SLIDE 3: THE SOLUTION -->
+<div class="slide">
+    <h2>The Solution</h2>
+    <div class="highlight center">
+        Sprouts: The Incentive Engine for the Internet
+    </div>
+
+    <p style="font-size: 32px; margin: 40px 0;">Users complete goals → Grow NFT companions → Earn rewards</p>
+
+    <div class="two-column" style="margin-top: 60px;">
+        <div class="box">
+            <h3 style="color: #A8F5D8;">For Users:</h3>
+            <ul>
+                <li>Characters evolve with your habits</li>
+                <li>Real integrations (Strava, Plaid)</li>
+                <li>True NFT ownership (Aptos)</li>
+                <li>Tamagotchi-style engagement</li>
+            </ul>
+        </div>
+        <div class="box">
+            <h3 style="color: #FFD1E3;">For Brands:</h3>
+            <ul>
+                <li>Sponsored challenges ($25K/campaign)</li>
+                <li>Measure actions, not views</li>
+                <li>Native, non-interruptive ads</li>
+            </ul>
+        </div>
+    </div>
+
+    <p class="center" style="font-size: 32px; font-weight: 700; margin-top: 60px; color: #A8F5D8;">
+        Duolingo meets Pokémon meets Tamagotchi
+    </p>
+</div>
+
+<!-- SLIDE 4: TRACTION -->
+<div class="slide">
+    <h2>Product is LIVE</h2>
+    <div class="highlight center">Not Vaporware • Download Today</div>
+
+    <div class="stat-grid" style="margin-top: 80px;">
+        <div class="stat-card">
+            <div class="data-point">✓</div>
+            <p><strong>iOS App</strong><br>In App Store</p>
+        </div>
+        <div class="stat-card">
+            <div class="data-point">26</div>
+            <p><strong>Screens</strong><br>Fully functional</p>
+        </div>
+        <div class="stat-card">
+            <div class="data-point">6</div>
+            <p><strong>Characters</strong><br>NFT species</p>
+        </div>
+        <div class="stat-card">
+            <div class="data-point">✓</div>
+            <p><strong>Strava</strong><br>Integrated</p>
+        </div>
+    </div>
+
+    <div class="two-column" style="margin-top: 80px;">
+        <div class="box">
+            <h3>Technical Validation:</h3>
+            <ul>
+                <li>Aptos blockchain operational</li>
+                <li>Backend API deployed (8 routes)</li>
+                <li>PostgreSQL database (10+ tables)</li>
+                <li>Built for 100K+ RPM</li>
+            </ul>
+        </div>
+        <div class="box">
+            <h3>Team Track Record:</h3>
+            <ul>
+                <li>350M+ content views across platforms</li>
+                <li>Lightning Cut, WrldBuilder, Curbily</li>
+                <li>Multiple shipped AI & Web3 products</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- SLIDE 5: MARKET & MODEL -->
+<div class="slide">
+    <h2>Market & Business Model</h2>
+
+    <div class="box" style="margin-bottom: 40px;">
+        <h3>$140B+ Market Opportunity</h3>
+        <p style="font-size: 24px;">Intersection of Wellness Apps ($9.5B) + Mobile Gaming ($110B) + Digital Collectibles ($25B)</p>
+    </div>
+
+    <h3 style="margin-top: 60px; color: #A8F5D8;">4 Revenue Streams:</h3>
+    <div class="stat-grid">
+        <div class="stat-card">
+            <div class="data-point">45%</div>
+            <p><strong>Limited Drops</strong><br>$4.99-$9.99</p>
+        </div>
+        <div class="stat-card">
+            <div class="data-point">30%</div>
+            <p><strong>Brand Challenges</strong><br>$25K/campaign</p>
+        </div>
+        <div class="stat-card">
+            <div class="data-point">15%</div>
+            <p><strong>Subscriptions</strong><br>$7.99/mo</p>
+        </div>
+        <div class="stat-card">
+            <div class="data-point">10%</div>
+            <p><strong>Token Economy</strong><br>Phase 2</p>
+        </div>
+    </div>
+
+    <div class="center" style="margin-top: 60px;">
+        <div class="data-point" style="display: inline-block;">$4.5M</div>
+        <p style="font-size: 32px;">Year 2 Revenue Target (250K MAU)</p>
+    </div>
+</div>
+
+<!-- SLIDE 6: THE ASK -->
+<div class="slide">
+    <h2>The Ask</h2>
+
+    <div class="highlight center">Raise: $1.5M Seed Round</div>
+
+    <div class="two-column" style="margin-top: 80px;">
+        <div>
+            <h3 style="color: #A8F5D8;">Use of Funds:</h3>
+            <ul style="font-size: 32px;">
+                <li><strong>40%</strong> Product & Engineering</li>
+                <li><strong>30%</strong> Growth & Partnerships</li>
+                <li><strong>20%</strong> Art & Character Design</li>
+                <li><strong>10%</strong> Ops & Legal</li>
+            </ul>
+        </div>
+        <div>
+            <h3 style="color: #FFD1E3;">12-Month Milestones:</h3>
+            <ul style="font-size: 32px;">
+                <li><strong>50K</strong> MAU</li>
+                <li><strong>$500K</strong> ARR</li>
+                <li><strong>10+</strong> Brand Partnerships</li>
+                <li><strong>Token</strong> Economy Deployed</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="quote" style="margin-top: 80px; font-size: 36px; border-left-color: #C8B6FF;">
+        "We believe the future of motivation looks less like spreadsheets and more like Pokémon — where progress itself feels alive."
+    </div>
+</div>
+
+<!-- SLIDE 7: CONTACT -->
+<div class="slide center">
+    <h2>Let's Grow Together</h2>
+
+    <div style="margin: 80px 0;">
+        <span class="emoji">🌱</span>
+        <h1 style="background: linear-gradient(135deg, #A8F5D8, #FFD1E3, #C8B6FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Sprouts</h1>
+        <p class="subtitle">The Incentive Engine for the Internet</p>
+    </div>
+
+    <div class="box" style="max-width: 800px; margin: 0 auto; text-align: left;">
+        <h3 style="margin-bottom: 30px;">Contact:</h3>
+        <p style="font-size: 32px; margin-bottom: 20px;"><strong>Aram (Jon) Barnett</strong></p>
+        <p style="font-size: 28px; margin-bottom: 15px;">CEO & Founder</p>
+        <p style="font-size: 24px; color: #666; margin-bottom: 10px;">📧 Email: <strong>aram.barnett@gmail.com</strong></p>
+        <p style="font-size: 24px; color: #666; margin-bottom: 10px;">🌐 Website: <strong>[insert website]</strong></p>
+        <p style="font-size: 24px; color: #666; margin-bottom: 10px;">📱 Try the app: Search "Sprouts" on iOS</p>
+    </div>
+
+    <div style="margin-top: 80px;">
+        <p style="font-size: 28px; color: #A8F5D8; font-weight: 700;">Ready for the full deck?</p>
+        <p style="font-size: 24px; color: #666; margin-top: 20px;">Request access for detailed financials, roadmap, and technical deep dive</p>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,26 +1,40 @@
 import '../models/user_collection_model.dart';
-import '../repositories/user_repository.dart';
-import '../services/privy_auth_service.dart';
+import '../services/web3auth_service.dart';
+import '../services/api_service.dart';
 
 class UserCollectionRepository {
-  static const String _testUserId = 'test-user-id';
-  
-  // Get user's Sprouts collection
+  // Get user's Sprouts collection from backend
   static Future<List<UserCollectionItem>> getUserCollection([String? userId]) async {
     try {
-      // Try to get authenticated user ID first, fallback to test user
-      String? actualUserId = userId;
+      // Get authenticated user ID
+      String? actualUserId = userId ?? await Web3AuthService.getUserId();
+
       if (actualUserId == null) {
-        final authUserId = await PrivyAuthService.getUserId();
-        actualUserId = authUserId ?? _testUserId;
+        throw Exception('No authenticated user found');
       }
-      
-      // For now, we're using habits to store the user's collection
-      // This is a temporary solution until we implement a proper UserAnimal model
-      final habits = await UserRepository.getUserHabits(actualUserId);
-      
-      return habits.map((habit) => UserCollectionItem.fromHabit(habit.toJson())).toList();
+
+      // Fetch sprouts from backend
+      final sprouts = await ApiService.getUserSprouts(actualUserId);
+
+      // Convert to UserCollectionItem
+      return sprouts.map<UserCollectionItem>((sprout) {
+        return UserCollectionItem(
+          id: sprout['id'] as String,
+          name: sprout['name'] as String,
+          species: sprout['species'] as String,
+          level: sprout['level'] as int,
+          rarity: sprout['rarity'] as String,
+          imagePath: sprout['imagePath'] as String?,
+          category: sprout['category'] as String?,
+          healthPoints: sprout['healthPoints'] as int?,
+          restScore: sprout['restScore'] as int?,
+          waterScore: sprout['waterScore'] as int?,
+          foodScore: sprout['foodScore'] as int?,
+          mood: sprout['mood'] as String?,
+        );
+      }).toList();
     } catch (e) {
+      print('Error fetching collection: $e');
       throw Exception('Failed to fetch user collection: $e');
     }
   }
@@ -28,21 +42,18 @@ class UserCollectionRepository {
   // Get user profile with basic info
   static Future<Map<String, dynamic>> getUserProfile([String? userId]) async {
     try {
-      // Try to get authenticated user ID first, fallback to test user
-      String? actualUserId = userId;
+      // Get authenticated user ID
+      String? actualUserId = userId ?? await Web3AuthService.getUserId();
+
       if (actualUserId == null) {
-        final authUserId = await PrivyAuthService.getUserId();
-        actualUserId = authUserId ?? _testUserId;
+        throw Exception('No authenticated user found');
       }
-      final user = await UserRepository.getUserById(actualUserId);
-      
+
+      // For now, return minimal profile data
+      // TODO: Implement full user profile endpoint
       return {
-        'id': user.id,
-        'name': user.name,
-        'email': user.email,
-        'experience': user.experience,
-        'level': user.level,
-        'animal': user.animal?.toJson(),
+        'id': actualUserId,
+        'name': 'User',
       };
     } catch (e) {
       throw Exception('Failed to fetch user profile: $e');

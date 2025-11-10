@@ -4,9 +4,9 @@ class AppConstants {
   static const String appVersion = '1.0.0';
   
   // API Configuration
-  static const String baseUrl = 'https://your-node-backend.com/api';
-  static const String supabaseUrl = 'https://your-supabase-url.supabase.co';
-  static const String supabaseAnonKey = 'your-supabase-anon-key';
+  static const String baseUrl = 'https://prevocational-unvenial-wes.ngrok-free.dev';
+  static const String supabaseUrl = 'https://fuznyncrufagipokvrub.supabase.co';
+  static const String supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ1em55bmNydWZhZ2lwb2t2cnViIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzODg4OTksImV4cCI6MjA2ODk2NDg5OX0.TPxXKY5cEOSzKP1SEDK9wwpHzyymJhqsjdoSmiqXrqs';
   
   // Animation Durations
   static const Duration shortAnimation = Duration(milliseconds: 300);

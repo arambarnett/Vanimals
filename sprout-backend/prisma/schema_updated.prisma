@@ -1,0 +1,242 @@
+// Updated Prisma schema for Sprouts with Aptos blockchain + Goal tracking
+// This file replaces the existing schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String   @id @default(cuid())
+
+  // Aptos blockchain integration (replaces privyId)
+  walletAddress       String   @unique
+  aptosPublicKey      String?
+  socialProvider      String?  // 'google', 'apple', 'facebook'
+  socialProviderId    String?  @unique
+
+  // User profile
+  name                String?
+  email               String?  @unique
+  profileImage        String?
+
+  // Game stats
+  experience          Int      @default(0)
+  level               Int      @default(1)
+  totalPoints         Int      @default(0)
+  streak              Int      @default(0)
+  lastActiveAt        DateTime @default(now())
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Relations
+  sprouts             Sprout[]
+  goals               Goal[]
+  achievements        Achievement[]
+  integrations        Integration[]
+  activities          Activity[]
+
+  @@index([walletAddress])
+  @@index([socialProviderId])
+  @@map("users")
+}
+
+// Sprout NFTs - on-chain + off-chain data
+model Sprout {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // NFT/Blockchain data
+  nftAddress          String   @unique  // On-chain NFT address
+  tokenId             String   @unique
+  mintTransactionHash String
+
+  // Sprout attributes
+  name                String
+  species             String   // 'Pigeon', 'Elephant', 'Tiger', 'Seedling', etc.
+  rarity              String   // 'Common', 'Rare', 'Epic', 'Legendary'
+  grade               String   @default("Normal")  // Normal, Elite, Knight, Commander, Marshal
+
+  // Stats (Solo Leveling inspired)
+  level               Int      @default(1)
+  experience          Int      @default(0)
+  strength            Int      @default(1)
+  intelligence        Int      @default(1)
+  speed               Int      @default(1)
+  vitality            Int      @default(100)
+
+  // Health/Care (Neopets inspired)
+  healthPoints        Int      @default(100)  // 0-100
+  hungerLevel         Int      @default(50)   // 0-100 (0=starving, 100=bloated)
+  happinessLevel      Int      @default(75)   // 0-100
+  lastFed             DateTime @default(now())
+  lastInteraction     DateTime @default(now())
+
+  // Growth state
+  growthStage         String   @default("Sprout")  // Sprout, Seedling, Plant, Tree
+  sizeMultiplier      Float    @default(1.0)
+  isWithering         Boolean  @default(false)
+
+  // Visuals
+  imagePath           String?
+  modelPath           String?
+  colorScheme         String?
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  @@index([userId])
+  @@index([nftAddress])
+  @@map("sprouts")
+}
+
+// Goals (Financial + Fitness)
+model Goal {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Goal basics
+  title               String
+  description         String?
+  type                String   // 'financial', 'fitness', 'habit'
+  category            String   // 'savings', 'spending', 'running', 'cycling', etc.
+
+  // Target metrics
+  targetValue         Float    // e.g., 1000 (dollars), 50 (miles), 10 (workouts)
+  currentValue        Float    @default(0)
+  unit                String   // 'USD', 'miles', 'count', 'minutes'
+
+  // Time frame
+  frequency           String   // 'daily', 'weekly', 'monthly', 'one-time'
+  startDate           DateTime @default(now())
+  endDate             DateTime?
+
+  // Status
+  isActive            Boolean  @default(true)
+  isCompleted         Boolean  @default(false)
+  completedAt         DateTime?
+
+  // Rewards
+  experienceReward    Int      @default(10)
+  pointsReward        Int      @default(5)
+
+  // Data source
+  integrationId       String?
+  integration         Integration? @relation(fields: [integrationId], references: [id])
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Relations
+  activities          Activity[]
+
+  @@index([userId])
+  @@index([type])
+  @@index([isActive])
+  @@map("goals")
+}
+
+// Integration with external services
+model Integration {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Provider info
+  provider            String   // 'strava', 'plaid', 'apple_health'
+  providerId          String   // External user ID
+  providerAccountId   String?  // For Plaid: account_id, item_id
+
+  // Tokens
+  accessToken         String?  // Encrypted
+  refreshToken        String?  // Encrypted
+  expiresAt           DateTime?
+
+  // Metadata
+  isActive            Boolean  @default(true)
+  lastSync            DateTime?
+  syncFrequency       String?  @default("daily")
+  metadata            Json?    // Provider-specific data
+
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Relations
+  goals               Goal[]
+  activities          Activity[]
+
+  @@unique([userId, provider])
+  @@index([provider])
+  @@map("integrations")
+}
+
+// Activity log (fitness + financial events)
+model Activity {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  goalId              String?
+  goal                Goal?    @relation(fields: [goalId], references: [id], onDelete: SetNull)
+
+  integrationId       String?
+  integration         Integration? @relation(fields: [integrationId], references: [id], onDelete: SetNull)
+
+  // Activity details
+  type                String   // 'workout', 'transaction', 'milestone'
+  category            String?  // 'run', 'ride', 'purchase', 'deposit'
+
+  // Metrics
+  value               Float?   // Distance, amount, duration
+  unit                String?  // 'miles', 'USD', 'minutes'
+
+  // Impact on goals
+  contributesToGoal   Boolean  @default(false)
+  impactType          String?  // 'positive', 'negative'
+  pointsEarned        Int      @default(0)
+  experienceEarned    Int      @default(0)
+
+  // Metadata
+  externalId          String?  // ID from Strava/Plaid
+  metadata            Json?    // Raw data from provider
+
+  activityDate        DateTime @default(now())
+  createdAt           DateTime @default(now())
+
+  @@index([userId])
+  @@index([goalId])
+  @@index([type])
+  @@index([activityDate])
+  @@map("activities")
+}
+
+// Achievements/Badges
+model Achievement {
+  id                  String   @id @default(cuid())
+  userId              String
+  user                User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title               String
+  description         String
+  type                String   // 'streak', 'level', 'goal_completion', 'special'
+  tier                String   // 'bronze', 'silver', 'gold', 'platinum'
+
+  imageUrl            String?
+  nftAddress          String?  // If minted as NFT
+
+  unlockedAt          DateTime @default(now())
+  createdAt           DateTime @default(now())
+
+  @@index([userId])
+  @@index([type])
+  @@map("achievements")
+}
+
+// REMOVED: Animal, Habit, Milestone tables (replaced by Sprout and Goal)

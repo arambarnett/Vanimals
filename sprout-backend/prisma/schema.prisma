@@ -1,9 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-// prisma/schema.prisma
+// Updated Prisma schema for Sprouts with Aptos blockchain + Goal tracking
+// This file replaces the existing schema.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -15,68 +11,386 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(uuid())
-  privyId   String  @unique
-  email String? @unique
-  name          String
-  experience    Int      @default(0)
-  level         Int      @default(1)
-  animal        Animal   @relation(fields: [animalId], references: [id])
-  animalId      String
-  habits        Habit[]
-  milestones    Milestone[]
-  integrations  Integration[]
-  createdAt     DateTime @default(now())
-}
+  id String @id @default(cuid())
 
-model Animal {
-  id         String   @id @default(uuid())
-  name       String
-  imageUrl   String
-  users      User[]
-  createdAt  DateTime @default(now())
-}
+  // Aptos blockchain integration (replaces privyId)
+  walletAddress    String  @unique
+  aptosPublicKey   String?
+  socialProvider   String? // 'google', 'apple', 'facebook'
+  socialProviderId String? @unique
 
-model Habit {
-  id          String   @id @default(uuid())
-  title       String
-  frequency   String
-  user        User     @relation(fields: [userId], references: [id])
-  userId      String
-  createdAt   DateTime @default(now())
-}
+  // User profile
+  name         String?
+  email        String? @unique
+  profileImage String?
 
-model Milestone {
-  id        String   @id @default(uuid())
-  title     String
-  achieved  Boolean  @default(false)
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
+  // Game stats
+  experience   Int      @default(0)
+  level        Int      @default(1)
+  totalPoints  Int      @default(0)
+  streak       Int      @default(0)
+  lastActiveAt DateTime @default(now())
+
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  sprouts          Sprout[]
+  goals            Goal[]
+  achievements     Achievement[]
+  integrations     Integration[]
+  activities       Activity[]
+  userAccessories  UserAccessory[]
+  foodInventory    Food?
+  foodTransactions FoodTransaction[]
+
+  @@index([walletAddress])
+  @@index([socialProviderId])
+  @@map("users")
 }
 
+// Sprout NFTs - on-chain + off-chain data
+// ONE SPROUT PER GOAL CATEGORY (e.g., one for Fitness, one for Finance)
+model Sprout {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Category - 'starter' for first Sprout, then goal categories
+  category String // 'starter', 'fitness', 'finance', 'education', 'faith', 'screentime', 'work'
+
+  // NFT/Blockchain data
+  nftAddress          String @unique // On-chain NFT address
+  tokenId             String @unique
+  mintTransactionHash String
+
+  // Sprout attributes
+  name    String
+  species String // 'Dragon', 'Elephant', 'Tiger', 'Cat', 'Bird', 'Phoenix', etc.
+  rarity  String // 'Common', 'Rare', 'Epic', 'Legendary'
+  grade   String @default("Normal") // Normal, Elite, Knight, Commander, Marshal
+
+  // Stats
+  level      Int @default(1)
+  experience Int @default(0)
+
+  // NEW: Core needs system (0-100 each, decay over time)
+  restScore  Int      @default(100) // Decays 2 points/hour - represents sleep/rest
+  waterScore Int      @default(100) // Decays 1.5 points/hour - represents hydration
+  foodScore  Int      @default(100) // Decays 1 point/hour - represents hunger/nutrition
+  lastStatDecay DateTime @default(now()) // Track last decay calculation
+
+  // Mood (derived from needs) - 'happy', 'content', 'neutral', 'sad', 'distressed'
+  mood String @default("happy")
+
+  // Overall health (derived from 3 needs average)
+  healthPoints    Int      @default(100) // 0-100
+  lastInteraction DateTime @default(now())
+
+  // Death/revival system
+  isDead       Boolean   @default(false)
+  diedAt       DateTime?
+  revivalCount Int       @default(0)
+
+  // Growth state
+  growthStage    String  @default("Egg") // Egg, Sprout, Seedling, Plant, Tree
+  sizeMultiplier Float   @default(1.0)
+  isWithering    Boolean @default(false)
+
+  // Accessories earned by completing goals
+  equippedAccessories String[] @default([]) // Array of accessory IDs currently equipped
+
+  // Visuals
+  imagePath   String?
+  modelPath   String?
+  colorScheme String?
+
+  // Relations
+  goals            Goal[]            // All goals linked to this Sprout
+  userAccessories  UserAccessory[]   // All accessories earned by this Sprout
+  foodTransactions FoodTransaction[] // Food allocation history
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([category])
+  @@index([nftAddress])
+  @@index([isDead])
+  @@map("sprouts")
+}
+
+// Goals - Multiple goals per Sprout category
+model Goal {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Linked to Sprout category
+  sproutId String
+  sprout   Sprout @relation(fields: [sproutId], references: [id], onDelete: Cascade)
+
+  // Goal basics
+  title       String
+  description String?
+  category    String // Must match sprout.category: 'fitness', 'finance', 'education', 'faith', 'screentime', 'work'
+  subcategory String? // e.g., 'running', 'savings', 'courses', 'prayer', 'reduction', 'productivity'
+
+  // Target metrics
+  targetValue  Float // e.g., 1000 (dollars), 50 (miles), 10 (workouts)
+  currentValue Float  @default(0)
+  unit         String // 'USD', 'miles', 'count', 'minutes', 'hours', 'courses'
+
+  // Time frame
+  frequency String // 'daily', 'weekly', 'monthly', 'one-time'
+  startDate DateTime  @default(now())
+  endDate   DateTime?
+
+  // Status
+  isActive    Boolean   @default(true)
+  isCompleted Boolean   @default(false)
+  isFailed    Boolean   @default(false)
+  completedAt DateTime?
+  failedAt    DateTime?
+
+  // Rewards
+  experienceReward Int     @default(10)
+  foodReward       Int     @default(10) // Food earned on completion
+  accessoryReward  String? // Accessory ID unlocked on completion
+
+  // Data source
+  integrationId String?
+  integration   Integration? @relation(fields: [integrationId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  activities       Activity[]
+  foodTransactions FoodTransaction[]
+
+  @@index([userId])
+  @@index([sproutId])
+  @@index([category])
+  @@index([isActive])
+  @@map("goals")
+}
+
+// Integration with external services
 model Integration {
-  id          String   @id @default(uuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  // Integration details
-  provider    String   // "strava", "apple_health", "duolingo", etc.
-  providerId  String   // External user ID from the provider
-  accessToken String?  // OAuth access token (encrypted)
-  refreshToken String? // OAuth refresh token (encrypted)
-  
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Provider info
+  provider          String // 'strava', 'plaid', 'apple_health'
+  providerId        String // External user ID
+  providerAccountId String? // For Plaid: account_id, item_id
+
+  // Tokens
+  accessToken  String? // Encrypted
+  refreshToken String? // Encrypted
+  expiresAt    DateTime?
+
   // Metadata
-  isActive    Boolean  @default(true)
-  lastSync    DateTime?
-  syncFrequency String? // "daily", "weekly", etc.
-  
-  // Provider-specific data (JSON)
-  metadata    Json?    // Store provider-specific settings/data
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
-  @@unique([userId, provider]) // One integration per provider per user
+  isActive      Boolean   @default(true)
+  lastSync      DateTime?
+  syncFrequency String?   @default("daily")
+  metadata      Json? // Provider-specific data
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  goals      Goal[]
+  activities Activity[]
+
+  @@unique([userId, provider])
+  @@index([provider])
   @@map("integrations")
+}
+
+// Activity log (fitness + financial events)
+model Activity {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  goalId String?
+  goal   Goal?   @relation(fields: [goalId], references: [id], onDelete: SetNull)
+
+  integrationId String?
+  integration   Integration? @relation(fields: [integrationId], references: [id], onDelete: SetNull)
+
+  // Activity details
+  type     String // 'workout', 'transaction', 'milestone'
+  category String? // 'run', 'ride', 'purchase', 'deposit'
+
+  // Metrics
+  value Float? // Distance, amount, duration
+  unit  String? // 'miles', 'USD', 'minutes'
+
+  // Impact on goals
+  contributesToGoal Boolean @default(false)
+  impactType        String? // 'positive', 'negative'
+  pointsEarned      Int     @default(0)
+  experienceEarned  Int     @default(0)
+
+  // Metadata
+  externalId String? // ID from Strava/Plaid
+  metadata   Json? // Raw data from provider
+
+  activityDate DateTime @default(now())
+  createdAt    DateTime @default(now())
+
+  @@index([userId])
+  @@index([goalId])
+  @@index([type])
+  @@index([activityDate])
+  @@map("activities")
+}
+
+// Achievements/Badges
+model Achievement {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  title       String
+  description String
+  type        String // 'streak', 'level', 'goal_completion', 'special'
+  tier        String // 'bronze', 'silver', 'gold', 'platinum'
+
+  imageUrl   String?
+  nftAddress String? // If minted as NFT
+
+  unlockedAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([type])
+  @@map("achievements")
+}
+
+// Accessories - Cosmetic items earned by completing goals
+model Accessory {
+  id String @id @default(cuid())
+
+  name        String
+  description String
+  category    String // Which Sprout category: 'fitness', 'finance', etc.
+  rarity      String // 'Common', 'Rare', 'Epic', 'Legendary'
+
+  imageUrl String
+  modelUrl String? // 3D model for AR
+
+  // Unlock criteria
+  requirementType  String // 'first_goal', 'goal_count', 'streak', 'total_value'
+  requirementValue Float  @default(1) // e.g., 1 goal, 10 goals, 30 days, $10000
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  userAccessories UserAccessory[]
+
+  @@index([category])
+  @@index([rarity])
+  @@map("accessories")
+}
+
+// User's earned accessories
+model UserAccessory {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  accessoryId String
+  accessory   Accessory @relation(fields: [accessoryId], references: [id], onDelete: Cascade)
+
+  sproutId String
+  sprout   Sprout @relation(fields: [sproutId], references: [id], onDelete: Cascade)
+
+  isEquipped Boolean @default(false) // Currently equipped on Sprout?
+
+  unlockedAt DateTime @default(now())
+
+  @@unique([userId, accessoryId])
+  @@index([userId])
+  @@index([sproutId])
+  @@index([accessoryId])
+  @@map("user_accessories")
+}
+
+// Food Inventory - User's consumable resource earned from goals
+model Food {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  amount Int @default(0) // Total food balance
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("food_inventory")
+}
+
+// Food Transaction Log - Track all food earned/spent
+model FoodTransaction {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  sproutId String?
+  sprout   Sprout? @relation(fields: [sproutId], references: [id], onDelete: SetNull)
+
+  goalId String?
+  goal   Goal?   @relation(fields: [goalId], references: [id], onDelete: SetNull)
+
+  amount   Int     // Positive = earned, Negative = spent
+  statType String? // 'rest', 'water', 'food' (if allocated to stat)
+  source   String  // 'goal_completion', 'daily_bonus', 'purchase', 'apt_purchase', 'allocation'
+
+  // APT payment details (for apt_purchase source)
+  txHash    String? @unique // Aptos transaction hash
+  aptAmount Float? // Amount paid in APT tokens
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([sproutId])
+  @@index([goalId])
+  @@index([txHash])
+  @@map("food_transactions")
+}
+
+// Hatch Day Waitlist - Pre-launch feature
+model HatchWaitlist {
+  id     String @id @default(cuid())
+  userId String @unique
+
+  joinedAt DateTime @default(now())
+
+  // Pre-launch action tracking
+  stravaConnected   Boolean   @default(false)
+  stravaConnectedAt DateTime?
+  hasPrism          Boolean   @default(false)
+  hasPremium        Boolean   @default(false)
+
+  // Rewards granted
+  eggsGranted Int @default(1) // Everyone gets 1 egg on signup
+  feedGranted Int @default(0) // Feed earned from actions
+
+  // Referral system
+  referralCode  String @unique
+  referralCount Int    @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([referralCode])
+  @@map("hatch_waitlist")
 }

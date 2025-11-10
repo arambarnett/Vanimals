@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../theme/app_theme.dart';
 import '../../data/services/user_preferences.dart';
+import '../../data/services/web3auth_service.dart';
+import '../../core/constants/app_constants.dart';
 import 'egg_hatching_screen.dart';
 import 'vanimal_detail_screen.dart';
 
@@ -14,11 +18,14 @@ class EggsNurseryScreen extends StatefulWidget {
 class _EggsNurseryScreenState extends State<EggsNurseryScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  int foodBalance = 0;
+  bool isLoadingFood = false;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
+    _loadFoodBalance();
   }
 
   @override
@@ -27,11 +34,33 @@ class _EggsNurseryScreenState extends State<EggsNurseryScreen>
     super.dispose();
   }
 
+  Future<void> _loadFoodBalance() async {
+    try {
+      final userId = await Web3AuthService.getUserId();
+      if (userId == null) return;
+
+      final response = await http.get(
+        Uri.parse('${AppConstants.baseUrl}/api/food/$userId'),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (mounted) {
+          setState(() {
+            foodBalance = data['foodBalance'] ?? 0;
+          });
+        }
+      }
+    } catch (e) {
+      print('Error loading food balance: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Eggs & Nursery'),
+        title: const Text('Store'),
         backgroundColor: AppTheme.vanimalPurple,
         foregroundColor: Colors.white,
         elevation: 0,
@@ -41,6 +70,10 @@ class _EggsNurseryScreenState extends State<EggsNurseryScreen>
           labelColor: Colors.white,
           unselectedLabelColor: Colors.white70,
           tabs: const [
+            Tab(
+              icon: Icon(Icons.restaurant),
+              text: 'Food',
+            ),
             Tab(
               icon: Icon(Icons.egg),
               text: 'Eggs',
@@ -68,12 +101,399 @@ class _EggsNurseryScreenState extends State<EggsNurseryScreen>
         child: TabBarView(
           controller: _tabController,
           children: [
+            _buildFoodTab(),
             _buildEggsTab(),
             _buildNurseryTab(),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildFoodTab() {
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Current Balance Card
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  const Color(0xFF4CAF50).withOpacity(0.3),
+                  const Color(0xFF8BC34A).withOpacity(0.3),
+                ],
+              ),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(
+                color: const Color(0xFF4CAF50).withOpacity(0.5),
+              ),
+            ),
+            child: Row(
+              children: [
+                const Text('🍎', style: TextStyle(fontSize: 40)),
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Current Balance',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Text(
+                      '$foodBalance Food',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+
+          const SizedBox(height: 24),
+
+          const Text(
+            'Buy Food Packages',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
+          const Text(
+            'Feed your Sprouts to keep them happy and healthy!',
+            style: TextStyle(
+              color: Colors.white70,
+              fontSize: 14,
+            ),
+          ),
+
+          const SizedBox(height: 20),
+
+          // Small Package
+          _buildFoodPackageCard(
+            name: 'Small Package',
+            foodAmount: 50,
+            pointsCost: 100,
+            color: const Color(0xFF4CAF50),
+            icon: '🥗',
+            description: 'Perfect for a quick snack',
+          ),
+
+          const SizedBox(height: 16),
+
+          // Medium Package
+          _buildFoodPackageCard(
+            name: 'Medium Package',
+            foodAmount: 150,
+            pointsCost: 250,
+            color: const Color(0xFF8BC34A),
+            icon: '🍱',
+            description: 'Great value for regular feeding',
+            isPopular: true,
+          ),
+
+          const SizedBox(height: 16),
+
+          // Large Package
+          _buildFoodPackageCard(
+            name: 'Large Package',
+            foodAmount: 500,
+            pointsCost: 750,
+            color: const Color(0xFF66BB6A),
+            icon: '🍜',
+            description: 'Best deal for serious trainers',
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFoodPackageCard({
+    required String name,
+    required int foodAmount,
+    required int pointsCost,
+    required Color color,
+    required String icon,
+    required String description,
+    bool isPopular = false,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            color.withOpacity(0.3),
+            Colors.black.withOpacity(0.8),
+          ],
+        ),
+        border: Border.all(
+          color: isPopular ? Colors.amber : color.withOpacity(0.5),
+          width: isPopular ? 3 : 2,
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Text(icon, style: const TextStyle(fontSize: 32)),
+                    const SizedBox(width: 12),
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                if (isPopular)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Text(
+                      'POPULAR',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              description,
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '+$foodAmount Food',
+                      style: TextStyle(
+                        color: color,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '$pointsCost Points',
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                  ],
+                ),
+                ElevatedButton.icon(
+                  onPressed: isLoadingFood
+                      ? null
+                      : () => _purchaseFood(foodAmount, pointsCost, name),
+                  icon: const Icon(Icons.shopping_cart, size: 18),
+                  label: const Text('Buy'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: color,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 12,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _purchaseFood(int foodAmount, int pointsCost, String packageName) async {
+    // Show confirmation dialog
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1a1a2e),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: const Text(
+          'Confirm Purchase',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Purchase $packageName?',
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'You will receive:',
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.7),
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                const Text('🍎', style: TextStyle(fontSize: 24)),
+                const SizedBox(width: 8),
+                Text(
+                  '+$foodAmount Food',
+                  style: const TextStyle(
+                    color: Color(0xFF4CAF50),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Text(
+              'Cost:',
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.7),
+                fontSize: 14,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Row(
+              children: [
+                const Text('⭐', style: TextStyle(fontSize: 24)),
+                const SizedBox(width: 8),
+                Text(
+                  '$pointsCost Points',
+                  style: const TextStyle(
+                    color: Colors.amber,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text(
+              'Cancel',
+              style: TextStyle(color: Colors.white70),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF4CAF50),
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Confirm'),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed != true) return;
+
+    setState(() {
+      isLoadingFood = true;
+    });
+
+    try {
+      final userId = await Web3AuthService.getUserId();
+      if (userId == null) {
+        throw Exception('Not logged in');
+      }
+
+      final response = await http.post(
+        Uri.parse('${AppConstants.baseUrl}/api/food/purchase'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'userId': userId,
+          'foodAmount': foodAmount,
+          'pointsCost': pointsCost,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        await _loadFoodBalance();
+
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('✅ Purchased $foodAmount food for $pointsCost points!'),
+              backgroundColor: const Color(0xFF4CAF50),
+              duration: const Duration(seconds: 2),
+            ),
+          );
+        }
+      } else {
+        final errorData = jsonDecode(response.body);
+        throw Exception(errorData['error'] ?? 'Failed to purchase food');
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Error: $e'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoadingFood = false;
+        });
+      }
+    }
   }
 
   Widget _buildEggsTab() {

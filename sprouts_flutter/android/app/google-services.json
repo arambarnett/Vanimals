@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "564219513849",
+    "project_id": "sprouts-dd497",
+    "storage_bucket": "sprouts-dd497.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564219513849:android:3a7d12ce6a3512153b8b28",
+        "android_client_info": {
+          "package_name": "com.sprouts.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564219513849-7c9d7dk01ifkuvvd17t79gdgd83s4ab0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR7Tl3vJYzeStD0Kpg1Vg_jFM7-6xWHUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564219513849-7c9d7dk01ifkuvvd17t79gdgd83s4ab0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "564219513849-pb2k660kk2vlpmeqi5msm04nosa0c7de.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sprouts.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

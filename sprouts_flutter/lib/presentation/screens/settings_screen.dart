@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../theme/app_theme.dart';
 import '../../data/repositories/breeding_repository.dart';
 import '../../data/services/api_service.dart';
 import '../../data/services/user_preferences.dart';
-import '../../data/services/privy_auth_service.dart';
+import '../../data/services/web3auth_service.dart';
 import '../../data/services/strava_auth_service.dart';
 import '../../data/repositories/user_repository.dart';
 import 'strava_activities_screen.dart';
@@ -24,6 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Map<String, dynamic>? userProfile;
   bool isTestingBackend = false;
   String? backendTestResult;
+  String? walletAddress;
 
   @override
   void initState() {
@@ -34,10 +36,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Future<void> _loadUserData() async {
     try {
       final balance = await BreedingRepository.getUserBalance();
+      final address = await Web3AuthService.getWalletAddress();
       setState(() {
         userBalance = balance;
+        walletAddress = address;
       });
-      
+
       // Check if Strava is already connected
       await _checkStravaConnection();
     } catch (e) {
@@ -117,6 +121,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 
   Future<void> _logout() async {
+    final navigator = Navigator.of(context);
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -133,24 +139,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
           TextButton(
             onPressed: () async {
+              // Close confirmation dialog first
               Navigator.of(context).pop();
-              
-              // Clear authentication data
-              await PrivyAuthService.logout();
-              await StravaAuthService.disconnectStrava();
-              UserPreferences.reset();
-              
-              // Navigate back to the get started page
-              Navigator.of(context).pushAndRemoveUntil(
+
+              // Show loading indicator
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (context) => WillPopScope(
+                  onWillPop: () async => false,
+                  child: const Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                    ),
+                  ),
+                ),
+              );
+
+              try {
+                // Clear authentication data
+                await Web3AuthService.signOut();
+                await StravaAuthService.disconnectStrava();
+                UserPreferences.reset();
+              } catch (e) {
+                print('Error during logout: $e');
+                // Continue with navigation even if logout fails
+              }
+
+              // Use the navigator reference captured at the beginning
+              // Close loading dialog and navigate to home screen
+              navigator.pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) => const VanimalHomeScreen()),
                 (route) => false,
-              );
-              
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('Logged out successfully'),
-                  backgroundColor: Colors.green,
-                ),
               );
             },
             child: const Text('Logout', style: TextStyle(color: Colors.red)),
@@ -298,6 +318,68 @@ class _SettingsScreenState extends State<SettingsScreen> {
               fontSize: 14,
             ),
           ),
+          if (walletAddress != null) ...[
+            const SizedBox(height: 16),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: Colors.white.withOpacity(0.3),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Icon(Icons.account_balance_wallet, color: Colors.white70, size: 16),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Wallet Address',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.copy, size: 16, color: Colors.white70),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () async {
+                          // Copy to clipboard
+                          await Clipboard.setData(ClipboardData(text: walletAddress!));
+                          if (mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Wallet address copied to clipboard'),
+                                duration: Duration(seconds: 2),
+                                backgroundColor: Colors.green,
+                              ),
+                            );
+                          }
+                        },
+                        tooltip: 'Copy address',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${walletAddress!.substring(0, 6)}...${walletAddress!.substring(walletAddress!.length - 4)}',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'monospace',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ],
       ),
     );

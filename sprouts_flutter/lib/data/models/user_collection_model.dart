@@ -5,6 +5,12 @@ class UserCollectionItem {
   final int level;
   final String rarity;
   final String? imagePath;
+  final String? category;
+  final int? healthPoints;
+  final int? restScore;
+  final int? waterScore;
+  final int? foodScore;
+  final String? mood;
 
   UserCollectionItem({
     required this.id,
@@ -13,6 +19,12 @@ class UserCollectionItem {
     required this.level,
     required this.rarity,
     this.imagePath,
+    this.category,
+    this.healthPoints,
+    this.restScore,
+    this.waterScore,
+    this.foodScore,
+    this.mood,
   });
 
   factory UserCollectionItem.fromHabit(dynamic habit) {
@@ -62,6 +74,12 @@ class UserCollectionItem {
       'level': level,
       'rarity': rarity,
       'imagePath': imagePath,
+      'category': category,
+      'healthPoints': healthPoints,
+      'restScore': restScore,
+      'waterScore': waterScore,
+      'foodScore': foodScore,
+      'mood': mood,
     };
   }
 }

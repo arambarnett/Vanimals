@@ -502,11 +502,14 @@ class _HatchingScreenState extends State<HatchingScreen>
             // Action buttons
             Padding(
               padding: const EdgeInsets.all(20),
-              child: Row(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: _viewVanimalDetails,
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      onPressed: _showNameDialog,
+                      icon: const Icon(Icons.edit, size: 20),
+                      label: const Text('Give it a Name!'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: hatchedVanimal!.color,
                         foregroundColor: Colors.white,
@@ -515,23 +518,41 @@ class _HatchingScreenState extends State<HatchingScreen>
                           borderRadius: BorderRadius.circular(15),
                         ),
                       ),
-                      child: const Text('View Details'),
                     ),
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: _returnToCollection,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppTheme.vanimalPurple,
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _viewVanimalDetails,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white.withOpacity(0.1),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          child: const Text('View Details'),
                         ),
                       ),
-                      child: const Text('Add to Collection'),
-                    ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: _returnToCollection,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppTheme.vanimalPurple,
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          child: const Text('Add to Collection'),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -584,11 +605,130 @@ class _HatchingScreenState extends State<HatchingScreen>
     );
   }
 
+  Future<void> _showNameDialog() async {
+    final TextEditingController nameController = TextEditingController();
+
+    final newName = await showDialog<String>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1a1a2e),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: Column(
+          children: [
+            Text(
+              hatchedVanimal!.species,
+              style: TextStyle(
+                color: hatchedVanimal!.color,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Give your Sprout a name!',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: nameController,
+              autofocus: true,
+              maxLength: 20,
+              style: const TextStyle(color: Colors.white, fontSize: 18),
+              decoration: InputDecoration(
+                hintText: 'Enter a name...',
+                hintStyle: TextStyle(color: Colors.white.withOpacity(0.5)),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: hatchedVanimal!.color),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: hatchedVanimal!.color, width: 2),
+                ),
+                counterStyle: const TextStyle(color: Colors.white70),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              'You can always change this later!',
+              style: TextStyle(
+                color: Colors.white.withOpacity(0.6),
+                fontSize: 12,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text(
+              'Skip',
+              style: TextStyle(color: Colors.white70),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              final name = nameController.text.trim();
+              if (name.isNotEmpty) {
+                Navigator.of(context).pop(name);
+              } else {
+                // Show error if empty
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Please enter a name'),
+                    backgroundColor: Colors.red,
+                    duration: Duration(seconds: 1),
+                  ),
+                );
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: hatchedVanimal!.color,
+              foregroundColor: Colors.white,
+            ),
+            child: const Text('Confirm'),
+          ),
+        ],
+      ),
+    );
+
+    if (newName != null && newName.isNotEmpty) {
+      setState(() {
+        hatchedVanimal = HatchedVanimal(
+          name: newName,
+          species: hatchedVanimal!.species,
+          level: hatchedVanimal!.level,
+          rarity: hatchedVanimal!.rarity,
+          color: hatchedVanimal!.color,
+          imagePath: hatchedVanimal!.imagePath,
+        );
+      });
+
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('✨ Your Sprout is now named "$newName"!'),
+            backgroundColor: Colors.green,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      }
+    }
+  }
+
   void _returnToCollection() {
     // Pop back to the collection screen (2 levels: this screen + shop screen)
     Navigator.of(context).pop(); // Pop hatching screen
     Navigator.of(context).pop(); // Pop shop screen
-    
+
     // Show success message
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(

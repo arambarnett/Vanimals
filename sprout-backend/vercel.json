@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/index.ts"
+    }
+  ],
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "POSTGRES_PRISMA_URL": "@postgres_prisma_url",
+    "SUPABASE_URL": "@supabase_url",
+    "SUPABASE_ANON_KEY": "@supabase_anon_key",
+    "SUPABASE_SERVICE_ROLE_KEY": "@supabase_service_role_key",
+    "SUPABASE_JWT_SECRET": "@supabase_jwt_secret",
+    "STRAVA_CLIENT_ID": "@strava_client_id",
+    "STRAVA_CLIENT_SECRET": "@strava_client_secret"
+  }
+}
