@@ -411,3 +411,13 @@ docker-compose.yml
 
 notes.txt
 
+
+# Environment files with secrets
+**/_env
+**/.env
+**/.env.*
+!**/.env.example
+
+# Deployment docs with credentials
+DEPLOYMENT_STEPS.md
+**/migrations/README.md
